@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 public class Item implements Serializable {
-	private static Integer istances;
+	private static Integer istances = 0;
 	private String name, description;
 	private Integer id;
 	private Set<String> alias;
