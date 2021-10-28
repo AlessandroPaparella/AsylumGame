@@ -1471,7 +1471,6 @@ public class Asylum extends GameDescription implements Serializable {
 			}
 		});
 
-
 		//set mappa
         setMap(m);
 	}
