@@ -105,11 +105,11 @@ public class ParserIT implements Parser{
 			}
         	else if (checkForSingleCommand(tokens[0], walk) == 0 && whitespace.contains(tokens[2]))  {
     			return new ParserOutput(walk, tokens[1] + " " + tokens[2]);
-		}
+        	}
 
         	int com3 = checkForCommand(tokens[0], commands);
         	if(com3 > -1) {
-        		if(articles.contains(tokens[1])) {
+        		if(articles.contains(tokens[1]) || prepositions.contains(tokens[1])) {
         			int obj3 = checkForObject(tokens[2], objects);
 	            	if(obj3 != -1) return new ParserOutput(commands.get(com3), objects.get(obj3));
 	            	int inv3= checkForObject(tokens[2], inv.getList());

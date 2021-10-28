@@ -102,7 +102,7 @@ public class ParserEN implements Parser{
         	}
 			int com3 = checkForCommand(tokens[0], commands);
 			if(com3 > -1) {
-				if(articles.contains(tokens[1])) {
+				if(articles.contains(tokens[1]) || prepositions.contains(tokens[1])) {
 					int obj3 = checkForObject(tokens[2], objects);
 			    	if(obj3 != -1) return new ParserOutput(commands.get(com3), objects.get(obj3));
 			    	int inv3= checkForObject(tokens[2], inv.getList());
