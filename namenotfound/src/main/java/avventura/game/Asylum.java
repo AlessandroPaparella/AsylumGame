@@ -240,17 +240,24 @@ public class Asylum extends GameDescription implements Serializable {
 				                 "Senti dei lamenti mostruosi provenienti dalla porta di fronte a te. Puoi andare nel corridoio 2 o entrare nel dormitorio 1, 2, 5, o 6.",
 				                 "corridoio 1");
         m.insNode(hallway);
-        
+<<<<<<< Updated upstream
+        //Sei in un corridoio con numerose tracce di sangue. Qualcuno si sar√† trascinato per provare a scappare?
+        Room hallway2 = new Room("Non appena apri la porta, un umano insanguinato con la faccia sfigurata si scaglia contro di te",
+				                  "Il sangue √® dappertutto. Puoi tornare indietro nel corridoio 1, proseguire per il corridoio 3, entrare nella lavanderia o nel dormitorio 4, 7, 8.",
+				                  "corridoio 2");
+        m.insNode(hallway2);
+        Room hallway3 = new Room("Sei in un corridoio con quadri raffiguranti scheletri in azioni quotidiane. In un angolo c'√® una statua della Santua Muerte. Forse sei in un luogo di culto?",
+=======
+        //Sei in un corridoio con numerose tracce di sangue. Qualcuno si sar‡ trascinato per provare a scappare?
         Room hallway2 = new Room("Sei in un corridoio in cui i muri sono pieni di simboli macabri disegnati col sangue.",
 				                  "Il sangue Ë dappertutto. Puoi tornare indietro nel corridoio 1, proseguire per il corridoio 3, entrare nella lavanderia o nel dormitorio 4, 7, 8.",
 				                  "corridoio 2");
         m.insNode(hallway2);
-        
         Room hallway3 = new Room("Sei in un corridoio pieno di quadri raffiguranti scheletri in azioni quotidiane. In un angolo c'Ë una statua della Santa Muerte. Forse sei in un luogo di culto?",
+>>>>>>> Stashed changes
 				                  "Vedi scheletri ovunque. Puoi tornare indietro nel corridoio 2, entrare nel bagno, o prendere le scale per il piano inferiore.",
 				                  "corridoio 3");
         m.insNode(hallway3);
-        
         Room bathroom = new Room("",
 				                  "L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro nel corridoio 3.",
 				                  "bagno");
@@ -274,15 +281,23 @@ public class Asylum extends GameDescription implements Serializable {
 					                  "Puoi tornare nel corridoio 4 o proseguire verso la cella imbottita",
 					                  "sorveglianza");
   		m.insNode(surveillance);
-
+<<<<<<< Updated upstream
+  		Room paddedCell = new Room("La scarsa illuminazione della stanza non ti permette di vedere bene. Dovresti utilizzare qualcosa per illuminare.", "Non riesci a vedere nulla, √® troppo buio", "cella imbottita");
+=======
   		Room paddedCell = new Room("La scarsa illuminazione della stanza non ti permette di vedere bene. Dovresti utilizzare qualcosa per illuminare.", "Non riesci a vedere nulla, Ë troppo buio. Puoi solo tornare indietro nella sorveglianza.", "cella imbottita");
-
+>>>>>>> Stashed changes
   		paddedCell.setLight(false);
-  		
+  		/*Room paddedCell = new Room("Sei nella stanza imbottita. Questa √® usata per rinchiudere i pazienti in preda a forti crisi, in modo che non danneggino s√® stessi.",
+					                "In fondo alla stanza vedi uno specchio. Apparentemente, puoi solo tornare indietro nella sorveglianza.",
+					                "Cella imbottita");*/
   		m.insNode(paddedCell);
-  		
+<<<<<<< Updated upstream
+  		Room office = new Room("Sei nell'ufficio del direttore del manicomio. Dai quadri posti lungo le pareti √® possibile ripercorrere questi anni di esperimenti e gli effetti delle mutazioni nel corso del tempo. Hai di fronte la mente dietro tutto ci√≤, il direttore.",
+					            "Vedi delle scale che conducono all'uscita della struttura, ma il passaggio √® bloccato dal direttore. Puoi tornare indietro nella cella imbottita.",
+=======
   		Room office = new Room("Sei nell'ufficio del direttore del manicomio. Dai quadri posti lungo le pareti Ë possibile ripercorrere questi anni di esperimenti e gli effetti delle mutazioni nel corso del tempo.",
 					            "Vedi delle scale che conducono all'uscita della struttura, ma il passaggio Ë bloccato dal direttore. Puoi tornare indietro nella cella imbottita.",
+>>>>>>> Stashed changes
 					            "ufficio");
   		m.insNode(office);
 
@@ -404,7 +419,13 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							System.out.println("Stai indossando correttamente la maschera!");
 							((Asylum) t).gasVuln = false;
-
+<<<<<<< Updated upstream
+							bathroom.setDescription("Non appena entri nella stanza, i gas tossici iniziano a circolare nell'aria, ma la maschera ti protegge.");
+					     	if(!compassUsed) bathroom.setLook("Potresti sfruttare il gabinetto  per...no, meglio evitare. Puoi solo tornare indietro nel corridoio 3.");
+					     	else bathroom.setLook("Potresti sfruttare il gabinetto per...no, meglio evitare. Puoi solo tornare indietro a sud nel corridoio 3.");
+					     	surgery.setDescription("Sei nella stanza dove i pazienti sono sottoposti alle operazioni. Chiss√† a questo punto di che operazioni si tratta...");
+							surgery.setLook("Puoi solo tornare indietro nel corridoio 4.");
+=======
 							bathroom.setDescription("Non appena entri nella stanza, i gas tossici iniziano a circolare nell'aria, ma la maschera ti protegge. Sei nel bagno.");
 					     	surgery.setDescription("Non appena entri nella stanza, i gas tossici iniziano a circolare nell'aria, ma la maschera ti protegge. Sei nella stanza dove i pazienti sono sottoposti alle operazioni. Chiss‡ a questo punto di che operazioni si tratta...");
 					     	if(!compassUsed) {
@@ -416,6 +437,7 @@ public class Asylum extends GameDescription implements Serializable {
 					     		bathroom.setLook("Potresti sfruttare il gabinetto per...no, meglio evitare. Puoi solo tornare indietro a sud nel corridoio 3.");
 							 	surgery.setLook("Puoi solo tornare indietro nel corridoio 4 a ovest.");
 						}
+>>>>>>> Stashed changes
 						}
 					};
 				case PICK_UP:
@@ -1344,9 +1366,15 @@ public class Asylum extends GameDescription implements Serializable {
 
 		final Enemy assistant = new Enemy(100, "assistente", "√à l'assistente del direttore, o per lo meno ci√≤ che rimane di lui, visto il suo corpo sensibilmente ingigantito dopo le mutazioni a cui si √® sottoposto. Deve aver aiutato il direttore nel portare avanti questi folli esperimenti.",
 				"Ancora tu? Pensavo che dopo quel forte colpo alla testa non ti saresti svegliato per un po'. Beh, il prossimo paziente sei proprio tu, quindi ti ringrazio per avermi risparmiato la fatica di salire al pieno superiore per prenderti. Non opporre resistenza e preparati ad accogliere nel tuo corpo i poteri del virus!",
+<<<<<<< Updated upstream
+				new Inventory(), null,5,20);
+		final Enemy director = new Enemy(100, "direttore", "√à il direttore, nonch√® la mente contorta dietro tutto questo. I segni del virus sembrano meno evidenti su di lui. Avr√† furbamente aspettato pi√π miglioramenti possibili al virus prima di sottoporsi lui stesso ad esso. Eppure ti √® sempre sembrato un tipo perbene...",
+				"Muahahah! Eccoti qua agente. Dopo aver sentito gli spari dalla cella, ti aspettavo. Sei sopreso dopo aver scoperto i miei piani? Lo sarai di pi√π dopo aver visto i poteri che acquisirai tramite il virus! Non prendermi per pazzo, grazie a questo virus non esisteranno mai pi√π deboli in questo mondo. Io render√≤ l'essere umano la creatura pi√π potente che sia mai esistita sulla Terra! Si parler√† di me per milioni e milioni di anni! Ma se non vuoi aiutarmi, non preoccuparti. Ci servono delle vittime sacrificali in onore della Santa Muerte che ci supporta in tutto questo. Dunque preparati a morire!",
+=======
 				new Inventory(), key_1,5,20);
 		final Enemy director = new Enemy(100, "direttore", "» il direttore, nonchË la mente contorta dietro tutto questo. I segni del virus sembrano meno evidenti su di lui. Avr‡ furbamente aspettato pi˘ miglioramenti possibili al virus prima di sottoporsi lui stesso ad esso. Eppure ti Ë sempre sembrato un tipo perbene...",
 				"Muahahah! Eccoti qua agente. Dopo aver sentito gli spari dalla cella, ti aspettavo. Sei sopreso dopo aver scoperto i miei piani? Lo sarai di pi˘ dopo aver visto i poteri che acquisirai tramite il virus! Non prendermi per pazzo, grazie a questo virus non esisteranno mai pi˘ deboli in questo mondo. Io renderÚ l'essere umano la creatura pi˘ potente che sia mai esistita sulla Terra! Si parler‡ di me per milioni e milioni di anni! Ma se non vuoi aiutarmi, non preoccuparti. Ci servono delle vittime sacrificali in onore della Santa Muerte che ci supporta in tutto questo. Dunque preparati a morire!",
+>>>>>>> Stashed changes
 				new Inventory(), key_2,5,20);
 
 
@@ -1475,11 +1503,13 @@ public class Asylum extends GameDescription implements Serializable {
 			}
 		});
 
+<<<<<<< Updated upstream
 		//stanza iniziale
 		setCurrentRoom(room1);
 		System.out.println("Ti svegli confuso in una stanza...cerchi di ricordare cosa ti ha portato qui. Stavi indagando su qualcosa ma non riesci a ricordare...hai un forte dolore alla testa. Un odore nauseabondo √® nell'aria...");
 
-
+=======
+>>>>>>> Stashed changes
 		paddedCell.setTrap(new EventHandler() {
 
 			@Override
@@ -1512,14 +1542,12 @@ public class Asylum extends GameDescription implements Serializable {
 				if (getCurrentEnemy()!=null) {
 					try {
 						System.out.println("Hai di fronte la mente dietro tutto ciÚ, il direttore.");
+					office.setLook("Puoi salire le scale che conducono all'uscita della struttura oppure puoi tornare indietro nella cella imbottita.");
 					
 				}
 			 catch (Exception e) {}
 		}
-				if (getCurrentEnemy()==null) {
 
-				office.setLook("Puoi salire le scale che conducono all'uscita della struttura oppure puoi tornare indietro nella cella imbottita.");
-				}
 			}
 		});
 		
