@@ -516,7 +516,7 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							if(t.getInventory().getList().contains(pills)) {
 								System.out.println("L'effetto delle pillole ti rende temporaneamente immune ai gas tossici!");
-								breathedGas=false;	
+								breathedGas=false;
 								t.getInventory().remove(pills);
 							} else System.out.println("L'oggetto non è presente nell'inventario!");
 						}
@@ -572,7 +572,7 @@ public class Asylum extends GameDescription implements Serializable {
 							if(t.getInventory().getList().contains(adrenaline)) {
 								System.out.println("L'effetto dell'adrenalina incrementa la tua salute:");
 								((Asylum) t).health += 20;
-								System.out.println("+20 salute");	
+								System.out.println("+20 salute");
 								t.getInventory().remove(adrenaline);
 							} else System.out.println("L'oggetto non è presente nell'inventario!");
 						}
@@ -769,7 +769,7 @@ public class Asylum extends GameDescription implements Serializable {
 										chest.setOpened(false);
 									}
 								}
-								
+
 					};
 				default:
 					return invalidCommand;
@@ -1446,7 +1446,7 @@ public class Asylum extends GameDescription implements Serializable {
 			@Override
 			public void accept(GameDescription t) {
 				// TODO Auto-generated method stub
-				checkpoint(t);
+				checkpoint((Asylum)t);
 			}
 		});
 
@@ -1492,6 +1492,7 @@ public class Asylum extends GameDescription implements Serializable {
 		this.setCurrentEnemy(save.getCurrentEnemy());
 		this.setCommandTarget(save.getCommandTarget());
 		this.setCommands(save.getCommands());
+		System.out.println(this.health);
 	}
 
 	private Room searchDirection(Direction d) throws Exception {
@@ -1530,10 +1531,15 @@ public class Asylum extends GameDescription implements Serializable {
 		}
 	}
 
-	private void checkpoint(GameDescription t) {
+	private void checkpoint(Asylum t) {
 		try {
 			db = new HandleDB();
 			this.setCurrentRoom(t.getCurrentRoom());
+			this.health=t.health;
+			this.breathedGas=t.breathedGas;
+			this.compassUsed=t.compassUsed;
+			this.gasVuln=t.gasVuln;
+			this.maxMoves=t.maxMoves;
 			db.updateTuple(player, this);
 			db.closeConnection();
 			System.out.println("Partita salvata!");
