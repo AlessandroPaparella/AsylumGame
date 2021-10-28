@@ -323,7 +323,7 @@ public class Asylum extends GameDescription implements Serializable {
 						@Override
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
-							if(t.getCurrentEnemy()!=null) {
+							if(t.getCurrentEnemy()!=null && t.getCurrentRoom().hasLight()) {
 								if(screwdriver.getShots() != 0) {
 									t.getCurrentEnemy().setHealth(t.getCurrentEnemy().getHealth()-screwdriver.getDamage());
 									screwdriver.setShots(screwdriver.getShots() - 1);
@@ -837,7 +837,7 @@ public class Asylum extends GameDescription implements Serializable {
 						@Override
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
-							if(t.getCurrentEnemy()!=null) {
+							if(t.getCurrentEnemy()!=null && t.getCurrentRoom().hasLight()) {
 								if(scalpel.getShots() != 0) {
 									t.getCurrentEnemy().setHealth(t.getCurrentEnemy().getHealth()-scalpel.getDamage());
 									scalpel.setShots(scalpel.getShots() - 1);
@@ -905,7 +905,7 @@ public class Asylum extends GameDescription implements Serializable {
 						@Override
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
-							if(t.getCurrentEnemy()!=null) {
+							if(t.getCurrentEnemy()!=null && t.getCurrentRoom().hasLight()) {
 								if(gun.getShots() != 0) {
 									t.getCurrentEnemy().setHealth(t.getCurrentEnemy().getHealth()-gun.getDamage());
 									gun.setShots(gun.getShots() - 1);
