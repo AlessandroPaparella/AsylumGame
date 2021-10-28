@@ -38,7 +38,7 @@ public class Room implements Serializable {
 		this.description = description;
 		this.look = look;
 		this.name = name;
-		this.hasLight = true;
+		this.hasLight = false;
 		id = istances;
 		istances++;
 		trap = null;
