@@ -174,10 +174,10 @@ public class Asylum extends GameDescription implements Serializable {
         walk_to.setAlias(new String[]{"entra"});
         getCommands().add(walk_to);
         Command up = new Command(CommandType.UP, "su");
-        up.setAlias(new String[]{"sopra"});
+        up.setAlias(new String[]{"sopra","sali"});
         getCommands().add(up);
-        Command down = new Command(CommandType.DOWN, "gi√π");
-        down.setAlias(new String[]{"sotto"});
+        Command down = new Command(CommandType.DOWN, "giu");
+        down.setAlias(new String[]{"sotto","scendi"});
         getCommands().add(down);
         Command give = new Command(CommandType.GIVE, "dai");
         give.setAlias(new String[]{});
@@ -236,16 +236,16 @@ public class Asylum extends GameDescription implements Serializable {
 				                 "Senti dei lamenti mostruosi provenienti dalla porta di fronte a te. Puoi andare nel corridoio 2 o entrare nel dormitorio 1, 2, 5, o 6.",
 				                 "corridoio 1");
         m.insNode(hallway);
-        //Sei in un corridoio con numerose tracce di sangue. Qualcuno si sar√† trascinato per provare a scappare?
-        Room hallway2 = new Room("Non appena apri la porta, un umano insanguinato con la faccia sfigurata si scaglia contro di te",
-				                  "Il sangue √® dappertutto. Puoi tornare indietro nel corridoio 1, proseguire per il corridoio 3, entrare nella lavanderia o nel dormitorio 4, 7, 8.",
-				                  "corridoio 2");
+        
+        Room hallway2 = new Room("Sei in un corridoio in cui i muri sono pieni di simboli macabri disegnati col sangue.",
+                "Il sangue Ë dappertutto. Puoi tornare indietro nel corridoio 1, proseguire per il corridoio 3, entrare nella lavanderia o nel dormitorio 4, 7, 8.",
+                "corridoio 2");
         m.insNode(hallway2);
-        Room hallway3 = new Room("Sei in un corridoio con quadri raffiguranti scheletri in azioni quotidiane. In un angolo c'√® una statua della Santua Muerte. Forse sei in un luogo di culto?",
+        Room hallway3 = new Room("Sei in un corridoio pieno di quadri raffiguranti scheletri in azioni quotidiane. In un angolo c'Ë una statua della Santa Muerte. Forse sei in un luogo di culto?",
 				                  "Vedi scheletri ovunque. Puoi tornare indietro nel corridoio 2, entrare nel bagno, o prendere le scale per il piano inferiore.",
 				                  "corridoio 3");
         m.insNode(hallway3);
-        Room bathroom = new Room("Non appena entri nella stanza, nell'aria inizia a circolare del gas tossico. Se vuoi sopravvivere, forse dovresti scappare da qui e trovare qualcosa con cui proteggerti!",
+        Room bathroom = new Room("",
 				                  "L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro nel corridoio 3.",
 				                  "bagno");
         m.insNode(bathroom);
@@ -260,7 +260,7 @@ public class Asylum extends GameDescription implements Serializable {
 					               "Puoi solo tornare indietro nel corridoio 4.",
 					               "infermeria");
   		m.insNode(infirmary);
-  		Room surgery = new Room("Non appena entri nella stanza, nell'aria inizia a circolare del gas tossico. Se vuoi sopravvivere, forse dovresti scappare da qui e trovare qualcosa con cui proteggerti!",
+  		Room surgery = new Room("",
 					             "L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro nel corridoio 4.",
 					             "sala operatoria");
   		m.insNode(surgery);
@@ -268,14 +268,11 @@ public class Asylum extends GameDescription implements Serializable {
 					                  "Puoi tornare nel corridoio 4 o proseguire verso la cella imbottita",
 					                  "sorveglianza");
   		m.insNode(surveillance);
-  		Room paddedCell = new Room("La scarsa illuminazione della stanza non ti permette di vedere bene. Dovresti utilizzare qualcosa per illuminare.", "Non riesci a vedere nulla, √® troppo buio", "cella imbottita");
+  		Room paddedCell = new Room("La scarsa illuminazione della stanza non ti permette di vedere bene. Dovresti utilizzare qualcosa per illuminare.", "Non riesci a vedere nulla, Ë troppo buio. Puoi solo tornare indietro nella sorveglianza.", "cella imbottita");
   		paddedCell.setLight(false);
-  		/*Room paddedCell = new Room("Sei nella stanza imbottita. Questa √® usata per rinchiudere i pazienti in preda a forti crisi, in modo che non danneggino s√® stessi.",
-					                "In fondo alla stanza vedi uno specchio. Apparentemente, puoi solo tornare indietro nella sorveglianza.",
-					                "Cella imbottita");*/
-  		m.insNode(paddedCell);
-  		Room office = new Room("Sei nell'ufficio del direttore del manicomio. Dai quadri posti lungo le pareti √® possibile ripercorrere questi anni di esperimenti e gli effetti delle mutazioni nel corso del tempo. Hai di fronte la mente dietro tutto ci√≤, il direttore.",
-					            "Vedi delle scale che conducono all'uscita della struttura, ma il passaggio √® bloccato dal direttore. Puoi tornare indietro nella cella imbottita.",
+  		
+  		Room office = new Room("Sei nell'ufficio del direttore del manicomio. Dai quadri posti lungo le pareti Ë possibile ripercorrere questi anni di esperimenti e gli effetti delle mutazioni nel corso del tempo.",
+	            "Vedi delle scale che conducono all'uscita della struttura, ma il passaggio Ë bloccato dal direttore. Puoi tornare indietro nella cella imbottita.",
 					            "ufficio");
   		m.insNode(office);
 
@@ -397,11 +394,17 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							System.out.println("Stai indossando correttamente la maschera!");
 							((Asylum) t).gasVuln = false;
-							bathroom.setDescription("Non appena entri nella stanza, i gas tossici iniziano a circolare nell'aria, ma la maschera ti protegge.");
-					     	if(!compassUsed) bathroom.setLook("Potresti sfruttare il gabinetto  per...no, meglio evitare. Puoi solo tornare indietro nel corridoio 3.");
-					     	else bathroom.setLook("Potresti sfruttare il gabinetto per...no, meglio evitare. Puoi solo tornare indietro a sud nel corridoio 3.");
-					     	surgery.setDescription("Sei nella stanza dove i pazienti sono sottoposti alle operazioni. Chiss√† a questo punto di che operazioni si tratta...");
-							surgery.setLook("Puoi solo tornare indietro nel corridoio 4.");
+							bathroom.setDescription("Non appena entri nella stanza, i gas tossici iniziano a circolare nell'aria, ma la maschera ti protegge. Sei nel bagno.");
+					     	surgery.setDescription("Non appena entri nella stanza, i gas tossici iniziano a circolare nell'aria, ma la maschera ti protegge. Sei nella stanza dove i pazienti sono sottoposti alle operazioni. Chiss‡ a questo punto di che operazioni si tratta...");
+					     	if(!compassUsed) {
+					     		bathroom.setLook("Potresti sfruttare il gabinetto  per...no, meglio evitare. Puoi solo tornare indietro nel corridoio 3.");
+							 	surgery.setLook("Puoi solo tornare indietro nel corridoio 4.");
+
+					     	}
+					     	else {
+					     		bathroom.setLook("Potresti sfruttare il gabinetto per...no, meglio evitare. Puoi solo tornare indietro a sud nel corridoio 3.");
+							 	surgery.setLook("Puoi solo tornare indietro nel corridoio 4 a ovest.");
+						}
 						}
 					};
 				case PICK_UP:
@@ -426,6 +429,16 @@ public class Asylum extends GameDescription implements Serializable {
 							EventHandler.drop(gasmask, t);
 							((Asylum) t).gasVuln = true;
 							System.out.println("Hai lasciato la maschera!");
+							bathroom.setDescription("");
+					        surgery.setDescription("");
+							if(compassUsed) {
+								bathroom.setLook("L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro a sud nel corridoio 3."); 
+						        surgery.setLook("L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro nel corridoio 4 a ovest.");
+						        }       
+							else {
+								bathroom.setLook("L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro nel corridoio 3.");   
+						        surgery.setLook("L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro nel corridoio 4."); 
+						}
 						}
 					};
 				default:
@@ -672,7 +685,12 @@ public class Asylum extends GameDescription implements Serializable {
 							hallway.setLook("Puoi proseguire a est per il corridoio 2 o entrare nel dormitorio 1 a nord-ovest, 2 a nord-est, 5 a sud-ovest, o 6 a sud-est.");
 							hallway2.setLook("Il sangue √® dappertutto. Puoi tornare indietro ad ovest nel corridoio 1, proseguire ad est per il corridoio 3, entrare nella lavanderia a nord-ovest o entrare nel dormitorio 4 a nord-est, 7 a sud-ovest, 8 a sud-est.");
 							hallway3.setLook("Vedi scheletri ovunque. Puoi tornare indietro ad ovest nel corridoio 2, entrare nel bagno a nord, o prendere le scale per scendere al piano inferiore");
-							bathroom.setLook("L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro a sud nel corridoio 3.");
+							if (((Asylum) t).gasVuln == true) {
+								bathroom.setLook("L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro a sud nel corridoio 3.");
+									}
+							else {
+								bathroom.setLook("Potresti sfruttare il gabinetto per...no, meglio evitare. Puoi solo tornare indietro a sud nel corridoio 3.");
+									}
 							hallway4.setLook("Puoi tornare a nord verso il piano superiore o accedere all'infermeria a nord-est, alla sala operatoria a sud-est e alla sorveglianza ad ovest.");
 							infirmary.setLook("Puoi solo tornare indietro nel corridoio 4 ad ovest.");
 							surgery.setLook("Puoi solo tornare indietro nel corridoio 4 ad ovest.");
@@ -1084,6 +1102,7 @@ public class Asylum extends GameDescription implements Serializable {
 									} else System.out.println("Codice errato!");
 								} else System.out.println("Trappola gia' disattivata");
 							}else System.out.println("Trappola gia' disattivata!");
+							
 						}
 					};
 				default:
@@ -1210,7 +1229,7 @@ public class Asylum extends GameDescription implements Serializable {
 											m.readArc(t.getCurrentRoom(), a).setLocked(false);
 										}
 									}
-									System.out.println("La chiave sembra entrare perfettamente nella serratura della porta che conduce nell'ufficio del direttore!");
+									System.out.println("La chiave sembra entrare perfettamente nella serratura della porta che conduce nella sorveglianza!");
 								} catch (Exception e) {
 									System.out.println(e.getMessage());
 								}
@@ -1274,7 +1293,7 @@ public class Asylum extends GameDescription implements Serializable {
 											m.readArc(t.getCurrentRoom(), a).setLocked(false);
 										}
 									}
-									System.out.println("La chiave sembra entrare perfettamente nella serratura della porta che conduce nell'ufficio del direttore!");
+									System.out.println("La chiave sembra entrare perfettamente nella serratura della porta che conduce all'uscita!");
 								} catch (Exception e) {
 									System.out.println(e.getMessage());
 								}
@@ -1314,9 +1333,10 @@ public class Asylum extends GameDescription implements Serializable {
 
 		final Enemy assistant = new Enemy(100, "assistente", "√à l'assistente del direttore, o per lo meno ci√≤ che rimane di lui, visto il suo corpo sensibilmente ingigantito dopo le mutazioni a cui si √® sottoposto. Deve aver aiutato il direttore nel portare avanti questi folli esperimenti.",
 				"Ancora tu? Pensavo che dopo quel forte colpo alla testa non ti saresti svegliato per un po'. Beh, il prossimo paziente sei proprio tu, quindi ti ringrazio per avermi risparmiato la fatica di salire al pieno superiore per prenderti. Non opporre resistenza e preparati ad accogliere nel tuo corpo i poteri del virus!",
-				new Inventory(), null,5,20);
-		final Enemy director = new Enemy(100, "direttore", "√à il direttore, nonch√® la mente contorta dietro tutto questo. I segni del virus sembrano meno evidenti su di lui. Avr√† furbamente aspettato pi√π miglioramenti possibili al virus prima di sottoporsi lui stesso ad esso. Eppure ti √® sempre sembrato un tipo perbene...",
-				"Muahahah! Eccoti qua agente. Dopo aver sentito gli spari dalla cella, ti aspettavo. Sei sopreso dopo aver scoperto i miei piani? Lo sarai di pi√π dopo aver visto i poteri che acquisirai tramite il virus! Non prendermi per pazzo, grazie a questo virus non esisteranno mai pi√π deboli in questo mondo. Io render√≤ l'essere umano la creatura pi√π potente che sia mai esistita sulla Terra! Si parler√† di me per milioni e milioni di anni! Ma se non vuoi aiutarmi, non preoccuparti. Ci servono delle vittime sacrificali in onore della Santa Muerte che ci supporta in tutto questo. Dunque preparati a morire!",
+				new Inventory(),key_1,5,20);
+		
+		final Enemy director = new Enemy(100, "direttore", "» il direttore, nonchË la mente contorta dietro tutto questo. I segni del virus sembrano meno evidenti su di lui. Avr‡ furbamente aspettato pi˘ miglioramenti possibili al virus prima di sottoporsi lui stesso ad esso. Eppure ti Ë sempre sembrato un tipo perbene...",
+				"Muahahah! Eccoti qua agente. Dopo aver sentito gli spari dalla cella, ti aspettavo. Sei sopreso dopo aver scoperto i miei piani? Lo sarai di pi˘ dopo aver visto i poteri che acquisirai tramite il virus! Non prendermi per pazzo, grazie a questo virus non esisteranno mai pi˘ deboli in questo mondo. Io renderÚ l'essere umano la creatura pi˘ potente che sia mai esistita sulla Terra! Si parler‡ di me per milioni e milioni di anni! Ma se non vuoi aiutarmi, non preoccuparti. Ci servono delle vittime sacrificali in onore della Santa Muerte che ci supporta in tutto questo. Dunque preparati a morire!",
 				new Inventory(), key_2,5,20);
 
 
@@ -1399,6 +1419,8 @@ public class Asylum extends GameDescription implements Serializable {
 		m.insArc(surveillance, paddedCell, new Gateway(Direction.SOUTH));
 		m.insArc(paddedCell, surveillance, new Gateway(Direction.NORTH));
 		m.insArc(office, exit, new Gateway(Direction.SOUTH, key_2.getId(), true));
+		m.insArc(exit, office, new Gateway(Direction.NORTH));
+		m.insArc(office, paddedCell, new Gateway(Direction.NORTH));
 
 
 		//traps
@@ -1422,7 +1444,7 @@ public class Asylum extends GameDescription implements Serializable {
 				if(g.gasVuln && !g.breathedGas) {
 					g.breathedGas = true;
 					g.maxMoves = 4;
-					System.out.println("Stai respirando del gas! Non ti rimane molto tempo prima di perdere coscienza, devi fare subito qualcosa!");
+					System.out.println("Stai respirando del gas tossico! Non ti rimane molto tempo prima di perdere coscienza, devi fare subito qualcosa!");
 				}
 			}
 		};
@@ -1469,6 +1491,33 @@ public class Asylum extends GameDescription implements Serializable {
 						System.out.println("Sei in trappola! ......");
 					} catch (Exception e) {}
 				}
+				if (t.getCurrentRoom().hasLight() && getCurrentEnemy()==null) {
+					try {
+					paddedCell.setDescription("Sei nella stanza imbottita. Questa Ë usata per rinchiudere i pazienti in preda a forti crisi, in modo che non danneggino sË stessi.");					
+				}
+			 catch (Exception e) {}
+		}
+			}
+		});
+		
+		office.setTrap(new EventHandler() {
+
+			@Override
+			public void accept(GameDescription t) {
+				// TODO Auto-generated method stub
+				if (getCurrentEnemy()!=null) {
+					try {
+						System.out.println("Hai di fronte la mente dietro tutto ciÚ, il direttore.");
+					office.setLook("Puoi salire le scale che conducono all'uscita della struttura oppure puoi tornare indietro nella cella imbottita.");
+
+				}
+			 catch (Exception e) {}
+		}
+				if (getCurrentEnemy()==null) {
+
+					office.setLook("Puoi salire le scale che conducono all'uscita della struttura oppure puoi tornare indietro nella cella imbottita.");
+					}
+
 			}
 		});
 
@@ -1734,13 +1783,13 @@ public class Asylum extends GameDescription implements Serializable {
 		if(this.breathedGas) {
 			switch(maxMoves) {
 				case 4:
-					out.println("il gas inizia ad entrare in circolo nell'organismo");
+					out.println("Il gas inizia ad entrare in circolo nell'organismo");
 					break;
 				case 3:
-					out.println("il gas sta iniziando a fere il suo effetto, sintomi indolenzimento e debolezza");
+					out.println("Il gas sta iniziando a fere il suo effetto, sintomi indolenzimento e debolezza");
 					break;
 				case 2:
-					out.println("il gas sta iniziando a ofuscarti le idee e non riesci pi√π a ragionare, devi fare in fretta");
+					out.println("Il gas sta iniziando a ofuscarti le idee e non riesci pi√π a ragionare, devi fare in fretta");
 					break;
 				case 1:
 					out.println("La vista si offusca, la tua fine √® vicina ");
