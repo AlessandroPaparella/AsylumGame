@@ -1436,6 +1436,16 @@ public class Asylum extends GameDescription implements Serializable {
 			}
 		});
 
+		//checkpoint
+		hallway4.setTrap(new EventHandler() {
+
+			@Override
+			public void accept(GameDescription t) {
+				// TODO Auto-generated method stub
+				checkpoint(t);
+			}
+		});
+
 		//stanza iniziale
 		setCurrentRoom(room1);
 		System.out.println("Ti svegli confuso in una stanza...cerchi di ricordare cosa ti ha portato qui. Stavi indagando su qualcosa ma non riesci a ricordare...hai un forte dolore alla testa. Un odore nauseabondo è nell'aria...");
@@ -1513,6 +1523,18 @@ public class Asylum extends GameDescription implements Serializable {
 			return Direction.DOWN;
 		default:
 			return null;
+		}
+	}
+
+	private void checkpoint(GameDescription t) {
+		try {
+			db = new HandleDB();
+			this.setCurrentRoom(t.getCurrentRoom());
+			db.updateTuple(player, this);
+			db.closeConnection();
+			System.out.println("Partita salvata!");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -1735,14 +1757,6 @@ public class Asylum extends GameDescription implements Serializable {
 				getCurrentEnemy().setDroppable(null);
 			}
 			setCurrentEnemy(null);
-			try {
-				db = new HandleDB();
-				db.updateTuple(player, this);
-				db.closeConnection();
-				out.println("Partita salvata!");
-			} catch (Exception e) {
-				out.println(e.getMessage());
-			}
 		}
 
 		if(health==0) {
