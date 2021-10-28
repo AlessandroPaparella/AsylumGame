@@ -1071,14 +1071,19 @@ public class Asylum extends GameDescription implements Serializable {
 						@Override
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
-							Scanner scan = new Scanner(System.in);
-							System.out.println(":");
-							String codEntered = scan.nextLine();
-							String[] tokens = codePaper.getDescription().split("\\s+");
-							if(codEntered.equals(tokens[3])) {
-								hallway3.setTrap(null);
-								System.out.println("Codice esatto! La trappola Ã¨ stata disattivata!");
-							} else System.out.println("Codice errato!");
+							if (hallway3.getTrap()!=null){
+								if(!keypad.isPushed()) {
+									Scanner scan = new Scanner(System.in);
+									System.out.println(":");
+									String codEntered = scan.nextLine();
+									String[] tokens = codePaper.getDescription().split("\\s+");
+									if(codEntered.equals(tokens[3])) {
+										hallway3.setTrap(null);
+										System.out.println("Codice esatto! La trappola è stata disattivata!");
+										keypad.setPushed(true);
+									} else System.out.println("Codice errato!");
+								} else System.out.println("Trappola gia' disattivata");
+							}else System.out.println("Trappola gia' disattivata!");
 						}
 					};
 				default:
