@@ -1475,7 +1475,9 @@ public class Asylum extends GameDescription implements Serializable {
 			}
 		});
 
-		
+		//stanza iniziale
+		setCurrentRoom(room1);
+		System.out.println("Ti svegli confuso in una stanza...cerchi di ricordare cosa ti ha portato qui. Stavi indagando su qualcosa ma non riesci a ricordare...hai un forte dolore alla testa. Un odore nauseabondo è nell'aria...");
 
 
 		paddedCell.setTrap(new EventHandler() {
