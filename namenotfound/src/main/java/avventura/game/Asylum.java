@@ -27,9 +27,6 @@ import engine.Weapon;
 import hashedGraph.WeightedHashedGraph;
 
 public class Asylum extends GameDescription implements Serializable {
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = -78135229798072209L;
 	private static Object lock = new Object();
 	private static Manager frame;
@@ -39,7 +36,6 @@ public class Asylum extends GameDescription implements Serializable {
 	//game params
 	Integer health, maxMoves;
 	Boolean gasVuln, breathedGas, compassUsed;
-
 
 	final EventHandler invalidCommand = new EventHandler() {
 
@@ -1471,11 +1467,8 @@ public class Asylum extends GameDescription implements Serializable {
 			}
 		});
 
-
 		//set mappa
         setMap(m);
-
-
 	}
 
 	// CLOSE, PULL, WALK_TO,  TALK_TO, GIVE, USE, TURN_ON, TURN_OFF
