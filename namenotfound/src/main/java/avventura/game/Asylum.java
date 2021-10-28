@@ -208,7 +208,7 @@ public class Asylum extends GameDescription implements Serializable {
 				               "Puoi solo tornare indietro nel corridoio 1.",
 				               "dormitorio 2");
         m.insNode(room2);
-        Room room3 = new Room("Sei in una stanza piena di vestiti sparsi sul pavimento ed una lavatrice. Ci saranno momenti più adatti per aggiornare il tuo guardaroba!",
+        Room room3 = new Room("Sei in una stanza piena di vestiti sparsi sul pavimento ed una lavatrice. Ci saranno momenti piu' adatti per aggiornare il tuo guardaroba!",
 				               "Non vedi altre porte. Puoi solo tornare indietro nel corridoio 2. ",
 				               "lavanderia");
         m.insNode(room3);
@@ -252,7 +252,7 @@ public class Asylum extends GameDescription implements Serializable {
 
 
       //second floor
-        Room hallway4 = new Room("Sei nel corridoio del piano inferiore. L'atmosfera è più cupa, avverti un cattivo presentimento, sei vicino alla resa dei conti?",
+        Room hallway4 = new Room("Sei nel corridoio del piano inferiore. L'atmosfera e' piu' cupa, avverti un cattivo presentimento, sei vicino alla resa dei conti?",
 				   	              "Vedi delle porte che consentono l'accesso all'infermeria, alla sala operatoria e alla sorveglianza. Puoi entrare in queste stanze o risalire nel corridoio 3.",
 					              "corridoio 4");
   		m.insNode(hallway4);
@@ -276,7 +276,7 @@ public class Asylum extends GameDescription implements Serializable {
 					            "ufficio");
   		m.insNode(office);
 
-  		Room exit = new Room("Sei finalmente uscito dal manicomio! Non puoi ancora credere a quello che ti è successo, sei ancora stordito, ma decidi di andare subito in ufficio a riferire tutto l'accaduto al tuo capo. Dopo aver risolto un caso del genere sarai sicuramente l'eroe della città!",
+  		Room exit = new Room("Sei finalmente uscito dal manicomio! Non puoi ancora credere a quello che ti e' successo, sei ancora stordito, ma decidi di andare subito in ufficio a riferire tutto l'accaduto al tuo capo. Dopo aver risolto un caso del genere sarai sicuramente l'eroe della città!",
   				              "Sei all'esterno della struttura",
   				              "uscita");
 
@@ -329,7 +329,7 @@ public class Asylum extends GameDescription implements Serializable {
 									screwdriver.setShots(screwdriver.getShots() - 1);
 									switch(screwdriver.getShots()) {
 									case 0:
-										System.out.println("E' andato, ormai è inutilizzabile");
+										System.out.println("E' andato, ormai e' inutilizzabile");
 										break;
 									case 1:
 										System.out.println("E' quasi totalmente distrutto il cacciavite");
@@ -341,7 +341,7 @@ public class Asylum extends GameDescription implements Serializable {
 										System.out.println("Il cacciavite si sta iniziando a dannegiare");
 										break;
 									}
-								} else System.out.println("Il cacciavite è ormai distrutto, non farebbe nessun danno");
+								} else System.out.println("Il cacciavite e' ormai distrutto, non farebbe nessun danno");
 							} else System.out.println("Non sembra esserci nessuno da colpire!");
 						}
 					};
@@ -527,7 +527,7 @@ public class Asylum extends GameDescription implements Serializable {
 								System.out.println("L'effetto delle pillole ti rende temporaneamente immune ai gas tossici!");
 								breathedGas=false;
 								t.getInventory().remove(pills);
-							} else System.out.println("L'oggetto non è presente nell'inventario!");
+							} else System.out.println("L'oggetto non e' presente nell'inventario!");
 						}
 					};
 				case LOOK_AT:
@@ -583,7 +583,7 @@ public class Asylum extends GameDescription implements Serializable {
 								((Asylum) t).health += 20;
 								System.out.println("+20 salute");
 								t.getInventory().remove(adrenaline);
-							} else System.out.println("L'oggetto non è presente nell'inventario!");
+							} else System.out.println("L'oggetto non e' presente nell'inventario!");
 						}
 					};
 				case LOOK_AT:
@@ -673,7 +673,7 @@ public class Asylum extends GameDescription implements Serializable {
 					return new EventHandler() {
 						@Override
 						public void accept(GameDescription t) {
-							System.out.println("Grazie all'utilizzo della bussola ora sai in che direzione sono le porte e ti è possibile spostarti utilizzando i punti cardinali come comandi!");
+							System.out.println("Grazie all'utilizzo della bussola ora sai in che direzione sono le porte e ti e' possibile spostarti utilizzando i punti cardinali come comandi!");
 							room1.setLook("Vedi una porta a sud che conduce nel corridoio 1.");
 							room2.setLook("Puoi solo tornare indietro nel corridoio 1 a sud.");
 							room3.setLook("Non vedi altre porte. Puoi solo tornare nel corridoio 2 a sud.");
@@ -683,7 +683,7 @@ public class Asylum extends GameDescription implements Serializable {
 							room7.setLook("Puoi solo tornare indietro nel corridoio 2 a nord.");
 							room8.setLook("Non vedi altre porte, puoi solo tornare indietro nel corridoio 2 a nord.");
 							hallway.setLook("Puoi proseguire a est per il corridoio 2 o entrare nel dormitorio 1 a nord-ovest, 2 a nord-est, 5 a sud-ovest, o 6 a sud-est.");
-							hallway2.setLook("Il sangue è dappertutto. Puoi tornare indietro ad ovest nel corridoio 1, proseguire ad est per il corridoio 3, entrare nella lavanderia a nord-ovest o entrare nel dormitorio 4 a nord-est, 7 a sud-ovest, 8 a sud-est.");
+							hallway2.setLook("Il sangue e' dappertutto. Puoi tornare indietro ad ovest nel corridoio 1, proseguire ad est per il corridoio 3, entrare nella lavanderia a nord-ovest o entrare nel dormitorio 4 a nord-est, 7 a sud-ovest, 8 a sud-est.");
 							hallway3.setLook("Vedi scheletri ovunque. Puoi tornare indietro ad ovest nel corridoio 2, entrare nel bagno a nord, o prendere le scale per scendere al piano inferiore");
 							if (((Asylum) t).gasVuln == true) {
 								bathroom.setLook("L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro a sud nel corridoio 3.");
@@ -696,7 +696,7 @@ public class Asylum extends GameDescription implements Serializable {
 							surgery.setLook("Puoi solo tornare indietro nel corridoio 4 ad ovest.");
 							surveillance.setLook("Puoi tornare nel corridoio 4 ad est o proseguire a sud verso la cella imbottita.");
 							paddedCell.setLook("Apparentemente, puoi solo tornare indietro nella sorveglianza a nord.");
-							office.setLook("Vedi delle scale a sud che conducono all'esterno della struttura, ma il passaggio è bloccato dal direttore. Puoi tornare indietro a nord nella cella imbottita.");
+							office.setLook("Vedi delle scale a sud che conducono all'esterno della struttura, ma il passaggio e' bloccato dal direttore. Puoi tornare indietro a nord nella cella imbottita.");
 							((Asylum) t).compassUsed = true;
 
 						}
@@ -843,16 +843,16 @@ public class Asylum extends GameDescription implements Serializable {
 									scalpel.setShots(scalpel.getShots() - 1);
 									switch(scalpel.getShots()) {
 									case 0:
-										System.out.println("Noo! la lama del bisturi si è rotta");
+										System.out.println("Noo! la lama del bisturi si e' rotta");
 										break;
 									case 1:
 										System.out.println("La lama se ne sta venendo");
 										break;
 									case 4:
-										System.out.println("IL bisturi è molto fragile si danneggia molto facilmente");
+										System.out.println("IL bisturi e' molto fragile si danneggia molto facilmente");
 										break;
 									}
-								} else System.out.println("Questo bisturi ha perso la lama, non ti potrà più essere d'aiuto");
+								} else System.out.println("Questo bisturi ha perso la lama, non ti potrà piu' essere d'aiuto");
 							}else System.out.println("Non sembra esserci nessuno da colpire!");
 						}
 					};
@@ -886,7 +886,7 @@ public class Asylum extends GameDescription implements Serializable {
 		});
 
 
-		final Weapon gun = new Weapon("pistola", "Una pistola probabilmente utilizzata contro i pazienti più inquieti e difficili da controllare.", null, 7, 30, 70);
+		final Weapon gun = new Weapon("pistola", "Una pistola probabilmente utilizzata contro i pazienti piu' inquieti e difficili da controllare.", null, 7, 30, 70);
 		gun.setHandler(new CommandHandler() {
 			@Override
 			public EventHandler apply(CommandType t) {
@@ -911,7 +911,7 @@ public class Asylum extends GameDescription implements Serializable {
 									gun.setShots(gun.getShots() - 1);
 									switch(gun.getShots()) {
 									case 0:
-										System.out.println("Il caricatore è finito, munizioni esaurite");
+										System.out.println("Il caricatore e' finito, munizioni esaurite");
 										break;
 									case 1:
 										System.out.println("Ultimo colpo usalo bene");
@@ -1028,7 +1028,7 @@ public class Asylum extends GameDescription implements Serializable {
 				}};
 		});
 
-		final Item blockNotes = new Item("blocco-note", "Un quaderno di appunti che a giudicare dalla grafia sembra proprio essere il tuo. A quanto pare stavi raccogliendo dati su questa struttura e indizi per la risoluzione di un caso, ma non riesci a ricordare bene. Avevi sottolineato più volte \"DEVO ROMPERE LO SPECCHIO PER PROSEGUIRE\"...", null);
+		final Item blockNotes = new Item("blocco-note", "Un quaderno di appunti che a giudicare dalla grafia sembra proprio essere il tuo. A quanto pare stavi raccogliendo dati su questa struttura e indizi per la risoluzione di un caso, ma non riesci a ricordare bene. Avevi sottolineato piu' volte \"DEVO ROMPERE LO SPECCHIO PER PROSEGUIRE\"...", null);
 		blockNotes.setHandler(new CommandHandler() {
 
 			@Override
@@ -1159,13 +1159,13 @@ public class Asylum extends GameDescription implements Serializable {
 										}
 									}
 									//if(!in_inv) {
-									//	System.out.println("L'oggetto non è presente nell'inventario!");
+									//	System.out.println("L'oggetto non e' presente nell'inventario!");
 									//}
 								} catch (Exception e) {
 									System.out.println(e.getMessage());
 								}
 							}else {
-								System.out.println("Non c'è niente da aprire con questa chiave nella stanza!");
+								System.out.println("Non c'e' niente da aprire con questa chiave nella stanza!");
 							}
 						}
 					};
@@ -1234,7 +1234,7 @@ public class Asylum extends GameDescription implements Serializable {
 									System.out.println(e.getMessage());
 								}
 							}else {
-								System.out.println("Non c'è niente da aprire con questa chiave!");
+								System.out.println("Non c'e' niente da aprire con questa chiave!");
 							}
 						}
 					};
@@ -1298,7 +1298,7 @@ public class Asylum extends GameDescription implements Serializable {
 									System.out.println(e.getMessage());
 								}
 							}else {
-								System.out.println("Non c'è niente da aprire con questa chiave!");
+								System.out.println("Non c'e' niente da aprire con questa chiave!");
 							}
 						}
 					};
@@ -1331,7 +1331,7 @@ public class Asylum extends GameDescription implements Serializable {
 		});
 
 
-		final Enemy assistant = new Enemy(100, "assistente", "È l'assistente del direttore, o per lo meno ciò che rimane di lui, visto il suo corpo sensibilmente ingigantito dopo le mutazioni a cui si è sottoposto. Deve aver aiutato il direttore nel portare avanti questi folli esperimenti.",
+		final Enemy assistant = new Enemy(100, "assistente", "È l'assistente del direttore, o per lo meno ciò che rimane di lui, visto il suo corpo sensibilmente ingigantito dopo le mutazioni a cui si e' sottoposto. Deve aver aiutato il direttore nel portare avanti questi folli esperimenti.",
 				"Ancora tu? Pensavo che dopo quel forte colpo alla testa non ti saresti svegliato per un po'. Beh, il prossimo paziente sei proprio tu, quindi ti ringrazio per avermi risparmiato la fatica di salire al pieno superiore per prenderti. Non opporre resistenza e preparati ad accogliere nel tuo corpo i poteri del virus!",
 				new Inventory(),key_1,5,20);
 		
@@ -1475,7 +1475,7 @@ public class Asylum extends GameDescription implements Serializable {
 
 		//stanza iniziale
 		setCurrentRoom(room1);
-		System.out.println("Ti svegli confuso in una stanza...cerchi di ricordare cosa ti ha portato qui. Stavi indagando su qualcosa ma non riesci a ricordare...hai un forte dolore alla testa. Un odore nauseabondo è nell'aria...");
+		System.out.println("Ti svegli confuso in una stanza...cerchi di ricordare cosa ti ha portato qui. Stavi indagando su qualcosa ma non riesci a ricordare...hai un forte dolore alla testa. Un odore nauseabondo e' nell'aria...");
 
 		paddedCell.setTrap(new EventHandler() {
 
@@ -1486,7 +1486,7 @@ public class Asylum extends GameDescription implements Serializable {
 					try {
 						t.getMap().readArc(paddedCell, surveillance).setLockedBy(key_1.getId());
 						t.getMap().readArc(paddedCell, surveillance).setLocked(true);
-						paddedCell.setDescription("Sei nella stanza imbottita. Questa è usata per rinchiudere i pazienti in preda a forti crisi, in modo che non danneggino sè stessi. Davanti a te vedi un essere mastodontico, è l'assistente del direttore.");
+						paddedCell.setDescription("Sei nella stanza imbottita. Questa e' usata per rinchiudere i pazienti in preda a forti crisi, in modo che non danneggino se' stessi. Davanti a te vedi un essere mastodontico, e' l'assistente del direttore.");
 						paddedCell.setLook("Apparentemente, puoi solo tornare indietro nella sorveglianza.");
 						System.out.println("Sei in trappola! ......");
 					} catch (Exception e) {}
@@ -1729,7 +1729,7 @@ public class Asylum extends GameDescription implements Serializable {
 				out.println(p.getEnemy().getTalk());
 				}
 				else {
-					out.println("Il nemico è ormai deceduto, potrai parlargli con calma al cimitero...");
+					out.println("Il nemico e' ormai deceduto, potrai parlargli con calma al cimitero...");
 				}
 				break;
 			case BREAK:
@@ -1789,10 +1789,10 @@ public class Asylum extends GameDescription implements Serializable {
 					out.println("Il gas sta iniziando a fere il suo effetto, sintomi indolenzimento e debolezza");
 					break;
 				case 2:
-					out.println("Il gas sta iniziando a ofuscarti le idee e non riesci più a ragionare, devi fare in fretta");
+					out.println("Il gas sta iniziando a ofuscarti le idee e non riesci piu' a ragionare, devi fare in fretta");
 					break;
 				case 1:
-					out.println("La vista si offusca, la tua fine è vicina ");
+					out.println("La vista si offusca, la tua fine e' vicina ");
 					break;
 				case 0:
 					out.println("Sei morto per asfissia");
