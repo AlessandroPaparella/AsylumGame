@@ -36,7 +36,7 @@ public class Asylum extends GameDescription implements Serializable {
 	//game params
 	Integer health, maxMoves;
 	Boolean gasVuln, breathedGas, compassUsed;
-
+	transient WeightedHashedGraph<Room, Gateway> m = new WeightedHashedGraph<Room, Gateway>();
 	final EventHandler invalidCommand = new EventHandler() {
 
 		@Override
@@ -115,7 +115,6 @@ public class Asylum extends GameDescription implements Serializable {
 		maxMoves = 3;
 		compassUsed = false;
 
-		WeightedHashedGraph<Room, Gateway> m = new WeightedHashedGraph<Room, Gateway>();
 		Command nord = new Command(CommandType.NORD, "nord");
         nord.setAlias(new String[]{"n", "N", "Nord", "NORD"});
         getCommands().add(nord);
@@ -525,7 +524,7 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							if(t.getInventory().getList().contains(pills)) {
 								System.out.println("L'effetto delle pillole ti rende temporaneamente immune ai gas tossici!");
-								breathedGas=false;
+								((Asylum) t).breathedGas = false;
 								t.getInventory().remove(pills);
 							} else System.out.println("L'oggetto non e' presente nell'inventario!");
 						}
@@ -1474,7 +1473,7 @@ public class Asylum extends GameDescription implements Serializable {
 		});
 
 		//stanza iniziale
-		setCurrentRoom(room1);
+		setCurrentRoom(room3);
 		System.out.println("Ti svegli confuso in una stanza...cerchi di ricordare cosa ti ha portato qui. Stavi indagando su qualcosa ma non riesci a ricordare...hai un forte dolore alla testa. Un odore nauseabondo e' nell'aria...");
 
 		paddedCell.setTrap(new EventHandler() {
