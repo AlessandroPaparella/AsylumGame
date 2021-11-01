@@ -1137,36 +1137,24 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							WeightedHashedGraph<Room, Gateway> m = t.getMap();
-							if(t.getCurrentRoom().getName().equals("dormitorio 1")) {
-								try {
-									Boolean in_inv=false;
-									for(Room a : m.getAdjacents(t.getCurrentRoom())) {
-										if(m.readArc(t.getCurrentRoom(), a).getLockedBy()==key.getId()) {
-											for (Item i : t.getInventory().getList()) {
-												if (i.equals(key)) {
-													if (!m.readArc(t.getCurrentRoom(), a).isLocked()) {
-														System.out.println("La porta e' gia' aperta!");
-													}
-													else {
+							if(t.getInventory().getList().contains(key)) {
+								if(t.getCurrentRoom().equals(room1)) {
+									try {
+										for(Room a : m.getAdjacents(t.getCurrentRoom())) {
+											if(m.readArc(t.getCurrentRoom(), a).getLockedBy()==key.getId()) {
+												if (!m.readArc(t.getCurrentRoom(), a).isLocked()) System.out.println("La porta e' gia' aperta!");
+												else {
 													m.readArc(t.getCurrentRoom(), a).setLocked(false);
-													System.out.println("La chiave sembra entrare perfettamente nella serratura della porta che conduce nel corridoio 1!");
-													EventHandler.drop(key, t);
-													in_inv=true;
+													System.out.println("La chiave sembra entrare perfettamente nella serratura della porta che conduce nel corridoio 1!");												EventHandler.drop(key, t);
 													break;
-													}
 												}
 											}
 										}
+									} catch (Exception e) {
+										System.out.println(e.getMessage());
 									}
-									//if(!in_inv) {
-									//	System.out.println("L'oggetto non e' presente nell'inventario!");
-									//}
-								} catch (Exception e) {
-									System.out.println(e.getMessage());
-								}
-							}else {
-								System.out.println("Non c'e' niente da aprire con questa chiave nella stanza!");
-							}
+								}else System.out.println("Non c'e' niente da aprire con questa chiave nella stanza!");
+							} else System.out.println("Prendi la chiave per usarla");
 						}
 					};
 				case PICK_UP:
@@ -1222,20 +1210,25 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							WeightedHashedGraph<Room, Gateway> m = t.getMap();
-							if(t.getCurrentRoom().equals(paddedCell)) {
-								try {
-									for(Room a : m.getAdjacents(t.getCurrentRoom())) {
-										if(m.readArc(t.getCurrentRoom(), a).getLockedBy()==key_1.getId()) {
-											m.readArc(t.getCurrentRoom(), a).setLocked(false);
+							if(t.getInventory().getList().contains(key_1)) {
+								if(t.getCurrentRoom().equals(paddedCell)) {
+									try {
+										for(Room a : m.getAdjacents(t.getCurrentRoom())) {
+											if(m.readArc(t.getCurrentRoom(), a).getLockedBy()==key_1.getId()) {
+												if (!m.readArc(t.getCurrentRoom(), a).isLocked()) System.out.println("La porta e' gia' aperta!");
+												else {
+													m.readArc(t.getCurrentRoom(), a).setLocked(false);
+													System.out.println("La chiave sembra entrare perfettamente nella serratura della porta che conduce alla sorveglianza");
+													EventHandler.drop(key_1, t);
+													break;
+												}
+											}
 										}
+									} catch (Exception e) {
+										System.out.println(e.getMessage());
 									}
-									System.out.println("La chiave sembra entrare perfettamente nella serratura della porta che conduce nella sorveglianza!");
-								} catch (Exception e) {
-									System.out.println(e.getMessage());
-								}
-							}else {
-								System.out.println("Non c'e' niente da aprire con questa chiave!");
-							}
+								}else System.out.println("Non c'e' niente da aprire con questa chiave nella stanza!");
+							} else System.out.println("Prendi la chiave per usarla");
 						}
 					};
 				case PICK_UP:
@@ -1286,20 +1279,25 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							WeightedHashedGraph<Room, Gateway> m = t.getMap();
-							if(t.getCurrentRoom().equals(office)) {
-								try {
-									for(Room a : m.getAdjacents(t.getCurrentRoom())) {
-										if(m.readArc(t.getCurrentRoom(), a).getLockedBy()==key_2.getId()) {
-											m.readArc(t.getCurrentRoom(), a).setLocked(false);
+							if(t.getInventory().getList().contains(key_2)) {
+								if(t.getCurrentRoom().equals(office)) {
+									try {
+										for(Room a : m.getAdjacents(t.getCurrentRoom())) {
+											if(m.readArc(t.getCurrentRoom(), a).getLockedBy()==key_2.getId()) {
+												if (!m.readArc(t.getCurrentRoom(), a).isLocked()) System.out.println("La porta e' gia' aperta!");
+												else {
+													m.readArc(t.getCurrentRoom(), a).setLocked(false);
+													System.out.println("La chiave sembra entrare perfettamente nella serratura della porta che conduce all'uscita!");
+													EventHandler.drop(key_2, t);
+													break;
+												}
+											}
 										}
+									} catch (Exception e) {
+										System.out.println(e.getMessage());
 									}
-									System.out.println("La chiave sembra entrare perfettamente nella serratura della porta che conduce all'uscita!");
-								} catch (Exception e) {
-									System.out.println(e.getMessage());
-								}
-							}else {
-								System.out.println("Non c'e' niente da aprire con questa chiave!");
-							}
+								}else System.out.println("Non c'e' niente da aprire con questa chiave nella stanza!");
+							} else System.out.println("Prendi la chiave per usarla");
 						}
 					};
 				case PICK_UP:
