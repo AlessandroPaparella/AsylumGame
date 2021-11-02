@@ -6,6 +6,8 @@ import java.io.PrintStream;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import engine.AdventureCharacter;
@@ -28,6 +30,7 @@ import hashedGraph.WeightedHashedGraph;
 
 public class Asylum extends GameDescription implements Serializable {
 	private static final long serialVersionUID = -78135229798072209L;
+	private transient Locale lang= Locale.getDefault();
 	private static Object lock = new Object();
 	private static Manager frame;
 	private String player;
@@ -42,7 +45,7 @@ public class Asylum extends GameDescription implements Serializable {
 		@Override
 		public void accept(GameDescription t) {
 			// TODO Auto-generated method stub
-			System.out.println("I am not sure this is possible!");
+			System.out.println(ResourceBundle.getBundle("InvalidCommandException", lang).getString("standard"));
 		}
 	};
 
@@ -219,7 +222,7 @@ public class Asylum extends GameDescription implements Serializable {
 				               "Puoi solo tornare indietro nel corridoio 1.",
 				               "dormitorio 5");
         m.insNode(room5);
-        Room room6 = new Room("Sei in una stanza piena di buchi sul muro, chissa'  come sono stati fatti...",
+        Room room6 = new Room("Sei in una stanza piena di buchi sul muro, chissa'ï¿½ come sono stati fatti...",
 				               "Qualche paziente sperava forse che bastasse fare qualche buco per crearsi una via di fuga...Puoi solo tornare indietro nel corridoio 1.",
 				               "dormitorio 6");
         m.insNode(room6);
@@ -235,7 +238,7 @@ public class Asylum extends GameDescription implements Serializable {
 				                 "Senti dei lamenti mostruosi provenienti dalla porta di fronte a te. Puoi andare nel corridoio 2 o entrare nel dormitorio 1, 2, 5, o 6.",
 				                 "corridoio 1");
         m.insNode(hallway);
-        
+
         Room hallway2 = new Room("Sei in un corridoio in cui i muri sono pieni di simboli macabri disegnati col sangue.",
                 "Il sangue e' dappertutto. Puoi tornare indietro nel corridoio 1, proseguire per il corridoio 3, entrare nella lavanderia o nel dormitorio 4, 7, 8.",
                 "corridoio 2");
@@ -269,7 +272,7 @@ public class Asylum extends GameDescription implements Serializable {
   		m.insNode(surveillance);
   		Room paddedCell = new Room("La scarsa illuminazione della stanza non ti permette di vedere bene. Dovresti utilizzare qualcosa per illuminare.", "Non riesci a vedere nulla, e' troppo buio. Puoi solo tornare indietro nella sorveglianza.", "cella imbottita");
   		paddedCell.setLight(false);
-  		
+
   		Room office = new Room("Sei nell'ufficio del direttore del manicomio. Dai quadri posti lungo le pareti e' possibile ripercorrere questi anni di esperimenti e gli effetti delle mutazioni nel corso del tempo.",
 	            "Vedi delle scale che conducono all'uscita della struttura, ma il passaggio e' bloccato dal direttore. Puoi tornare indietro nella cella imbottita.",
 					            "ufficio");
@@ -394,7 +397,7 @@ public class Asylum extends GameDescription implements Serializable {
 							System.out.println("Stai indossando correttamente la maschera!");
 							((Asylum) t).gasVuln = false;
 							bathroom.setDescription("Non appena entri nella stanza, i gas tossici iniziano a circolare nell'aria, ma la maschera ti protegge. Sei nel bagno.");
-					     	surgery.setDescription("Non appena entri nella stanza, i gas tossici iniziano a circolare nell'aria, ma la maschera ti protegge. Sei nella stanza dove i pazienti sono sottoposti alle operazioni. Chissa'  a questo punto di che operazioni si tratta...");
+					     	surgery.setDescription("Non appena entri nella stanza, i gas tossici iniziano a circolare nell'aria, ma la maschera ti protegge. Sei nella stanza dove i pazienti sono sottoposti alle operazioni. Chissa'ï¿½ a questo punto di che operazioni si tratta...");
 					     	if(!compassUsed) {
 					     		bathroom.setLook("Potresti sfruttare il gabinetto  per...no, meglio evitare. Puoi solo tornare indietro nel corridoio 3.");
 							 	surgery.setLook("Puoi solo tornare indietro nel corridoio 4.");
@@ -431,12 +434,12 @@ public class Asylum extends GameDescription implements Serializable {
 							bathroom.setDescription("");
 					        surgery.setDescription("");
 							if(compassUsed) {
-								bathroom.setLook("L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro a sud nel corridoio 3."); 
+								bathroom.setLook("L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro a sud nel corridoio 3.");
 						        surgery.setLook("L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro nel corridoio 4 a ovest.");
-						        }       
+						        }
 							else {
-								bathroom.setLook("L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro nel corridoio 3.");   
-						        surgery.setLook("L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro nel corridoio 4."); 
+								bathroom.setLook("L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro nel corridoio 3.");
+						        surgery.setLook("L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro nel corridoio 4.");
 						}
 						}
 					};
@@ -760,7 +763,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							if(chest.isOpened()) {
-								System.out.println("Cassa gia'  aperta");
+								System.out.println("Cassa gia'ï¿½ aperta");
 							}else if(!chest.isOpened() && !chest.isLocked()) {
 									System.out.println("Hai aperto la cassa!");
 									chest.setOpened(true);
@@ -851,7 +854,7 @@ public class Asylum extends GameDescription implements Serializable {
 										System.out.println("Il bisturi e' molto fragile si danneggia molto facilmente");
 										break;
 									}
-								} else System.out.println("Questo bisturi ha perso la lama, non ti potra'  piu' essere d'aiuto");
+								} else System.out.println("Questo bisturi ha perso la lama, non ti potra'ï¿½ piu' essere d'aiuto");
 							}else System.out.println("Non sembra esserci nessuno da colpire!");
 						}
 					};
@@ -1102,7 +1105,7 @@ public class Asylum extends GameDescription implements Serializable {
 									} else System.out.println("Codice errato!");
 								} else System.out.println("Trappola gia' disattivata");
 							}else System.out.println("Trappola gia' disattivata!");
-							
+
 						}
 					};
 				default:
@@ -1332,9 +1335,9 @@ public class Asylum extends GameDescription implements Serializable {
 		final Enemy assistant = new Enemy(100, "assistente", "E' l'assistente del direttore, o per lo meno cio' che rimane di lui, visto il suo corpo sensibilmente ingigantito dopo le mutazioni a cui si e' sottoposto. Deve aver aiutato il direttore nel portare avanti questi folli esperimenti.",
 				"Ancora tu? Pensavo che dopo quel forte colpo alla testa non ti saresti svegliato per un po'. Beh, il prossimo paziente sei proprio tu, quindi ti ringrazio per avermi risparmiato la fatica di salire al pieno superiore per prenderti. Non opporre resistenza e preparati ad accogliere nel tuo corpo i poteri del virus!",
 				new Inventory(),key_1,5,20);
-		
-		final Enemy director = new Enemy(100, "direttore", "E' il direttore, nonche' la mente contorta dietro tutto questo. I segni del virus sembrano meno evidenti su di lui. Avra' furbamente aspettato piu' miglioramenti possibili nei test del virus prima di sottoporsi lui stesso ad esso. Eppure ti e' sempre sembrato un tipo perbene...",
-				"Muahahah! Eccoti qua agente. Dopo aver sentito gli spari dalla cella, ti aspettavo. Sei sopreso dopo aver scoperto i miei piani? Lo sarai di piu' dopo aver visto i poteri che acquisirai tramite il virus! Non prendermi per pazzo, grazie a questo virus non esisteranno mai piu' deboli in questo mondo. Io rendero' l'essere umano la creatura piu' potente che sia mai esistita sulla Terra! Si parlera' di me per milioni e milioni di anni! Ma se non vuoi aiutarmi, non preoccuparti. Ci servono delle vittime sacrificali in onore della Santa Muerte che ci supporta in tutto questo. Dunque, preparati a morire!",
+
+		final Enemy director = new Enemy(100, "direttore", "E' il direttore, nonche' la mente contorta dietro tutto questo. I segni del virus sembrano meno evidenti su di lui. Avra'ï¿½furbamente aspettato piu' miglioramenti possibili nei test del virus prima di sottoporsi lui stesso ad esso. Eppure ti e' sempre sembrato un tipo perbene...",
+				"Muahahah! Eccoti qua agente. Dopo aver sentito gli spari dalla cella, ti aspettavo. Sei sopreso dopo aver scoperto i miei piani? Lo sarai di piu' dopo aver visto i poteri che acquisirai tramite il virus! Non prendermi per pazzo, grazie a questo virus non esisteranno mai piu' deboli in questo mondo. Io rendero' l'essere umano la creatura piu' potente che sia mai esistita sulla Terra! Si parlera'ï¿½di me per milioni e milioni di anni! Ma se non vuoi aiutarmi, non preoccuparti. Ci servono delle vittime sacrificali in onore della Santa Muerte che ci supporta in tutto questo. Dunque, preparati a morire!",
 				new Inventory(), key_2,5,20);
 
 
@@ -1491,13 +1494,13 @@ public class Asylum extends GameDescription implements Serializable {
 				}
 				if (t.getCurrentRoom().hasLight() && getCurrentEnemy()==null) {
 					try {
-					paddedCell.setDescription("Sei nella stanza imbottita. Questa e' usata per rinchiudere i pazienti in preda a forti crisi, in modo che non danneggino se' stessi.");					
+					paddedCell.setDescription("Sei nella stanza imbottita. Questa e' usata per rinchiudere i pazienti in preda a forti crisi, in modo che non danneggino se' stessi.");
 				}
 			 catch (Exception e) {}
 		}
 			}
 		});
-		
+
 		office.setTrap(new EventHandler() {
 
 			@Override
@@ -1715,7 +1718,7 @@ public class Asylum extends GameDescription implements Serializable {
 				}
 				break;
 			default:
-				out.println("Credo che tu sia un po' confuso...");
+				out.println(ResourceBundle.getBundle("InvalidCommandException", lang).getString("standard"));
 
 			}
 		} else if(p.getObject()!=null && p.getTarget()==null) {
@@ -1748,7 +1751,7 @@ public class Asylum extends GameDescription implements Serializable {
 				}
 				break;
 			default:
-				out.println("Credo che tu sia un po' confuso...");
+				out.println(ResourceBundle.getBundle("InvalidCommandException", lang).getString("standard"));
 				break;
 			}
 		} else if(p.getObject()!=null && p.getTarget()!=null) {
@@ -1759,7 +1762,7 @@ public class Asylum extends GameDescription implements Serializable {
 					getCurrentRoom().getObjects().remove(p.getObject());
 					((ItemContainer) p.getTarget()).add(p.getObject());
 				}else {
-					out.println("Credo che tu sia un po' confuso...");
+					out.println(ResourceBundle.getBundle("InvalidCommandException", lang).getString("standard"));
 				}
 				break;
 			case BREAK:
@@ -1768,11 +1771,11 @@ public class Asylum extends GameDescription implements Serializable {
 					Integer s = ((Weapon) p.getTarget()).getShots();
 					((Weapon) p.getTarget()).setShots(s-1);
 				}else {
-					out.println("Credo che tu sia un po' confuso...");
+					out.println(ResourceBundle.getBundle("InvalidCommandException", lang).getString("standard"));
 				}
 				break;
 			default:
-				out.println("Credo che tu sia un po' confuso...");
+				out.println(ResourceBundle.getBundle("InvalidCommandException", lang).getString("standard"));
 				break;
 			}
 		}
