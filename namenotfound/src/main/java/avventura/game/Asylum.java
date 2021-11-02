@@ -115,7 +115,7 @@ public class Asylum extends GameDescription implements Serializable {
 		health = 100;
 		gasVuln = true;
 		breathedGas = false;
-		maxMoves = 3;
+		maxMoves = 4;
 		compassUsed = false;
 
 		Command nord = new Command(CommandType.NORD, "nord");
