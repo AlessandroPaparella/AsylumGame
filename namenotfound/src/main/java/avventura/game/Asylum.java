@@ -514,7 +514,7 @@ public class Asylum extends GameDescription implements Serializable {
 			}
 		});
 
-		final Item pills = new Item("pillole", "Delle pillole che ti rendono immune temporaneamente ai gas tossici.", null);
+		final Item pills = new Item("pillole", "Delle pillole che ti rendono immune ai gas tossici.", null);
 		pills.setHandler(new CommandHandler() {
 			@Override
 			public EventHandler apply(CommandType t) {
@@ -526,7 +526,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							if(t.getInventory().getList().contains(pills)) {
-								System.out.println("L'effetto delle pillole ti rende temporaneamente immune ai gas tossici!");
+								System.out.println("L'effetto delle pillole ti rende immune ai gas tossici!");
 								((Asylum) t).breathedGas = false;
 								t.getInventory().remove(pills);
 							} else System.out.println("L'oggetto non e' presente nell'inventario!");
@@ -888,7 +888,7 @@ public class Asylum extends GameDescription implements Serializable {
 		});
 
 
-		final Weapon gun = new Weapon("pistola", "Una pistola probabilmente utilizzata contro i pazienti piu' inquieti e difficili da controllare.", null, 7, 30, 70);
+		final Weapon gun = new Weapon("pistola", "Una pistola probabilmente utilizzata contro i pazienti piu' inquieti e difficili da controllare.", null, 7, 20, 40);
 		gun.setHandler(new CommandHandler() {
 			@Override
 			public EventHandler apply(CommandType t) {
@@ -1117,7 +1117,7 @@ public class Asylum extends GameDescription implements Serializable {
 		Inventory corpseInv = new Inventory();
 
 		final AdventureCharacter corpse = new AdventureCharacter(0, "cadavere", "Un corpo esanime dall'odore stomachevole. Deve essere li' da tanto tempo. Dalla tasca della sua giacca sembra spuntare una chiave.", null, corpseInv, null);
-		final Enemy mutant = new Enemy(55, "mutante", "Un mutante dal viso fortemente sfigurato. Sara' mica Deadpool?", "Anche tu sei uno di loro?! Non ti lascero' farmi del male!", null, codePaper,5,20);
+		final Enemy mutant = new Enemy(55, "mutante", "Un mutante dal viso fortemente sfigurato. Sara' mica Deadpool?", "Anche tu sei uno di loro?! Non ti lascero' farmi del male!", null, codePaper,5,10);
 
 
 		final Item key = new Item("chiave", "Una chiave che potrebbe tornare utile per aprire qualcosa.", null);
@@ -1334,13 +1334,11 @@ public class Asylum extends GameDescription implements Serializable {
 
 		final Enemy assistant = new Enemy(100, "assistente", "E' l'assistente del direttore, o per lo meno cio' che rimane di lui, visto il suo corpo sensibilmente ingigantito dopo le mutazioni a cui si e' sottoposto. Deve aver aiutato il direttore nel portare avanti questi folli esperimenti.",
 				"Ancora tu? Pensavo che dopo quel forte colpo alla testa non ti saresti svegliato per un po'. Beh, il prossimo paziente sei proprio tu, quindi ti ringrazio per avermi risparmiato la fatica di salire al pieno superiore per prenderti. Non opporre resistenza e preparati ad accogliere nel tuo corpo i poteri del virus!",
-				new Inventory(),key_1,5,20);
+				new Inventory(),key_1,5,10);
 
 		final Enemy director = new Enemy(100, "direttore", "E' il direttore, nonche' la mente contorta dietro tutto questo. I segni del virus sembrano meno evidenti su di lui. Avra' furbamente aspettato piu' miglioramenti possibili nei test del virus prima di sottoporsi lui stesso ad esso. Eppure ti e' sempre sembrato un tipo perbene...",
 				"Muahahah! Eccoti qua agente. Dopo aver sentito gli spari dalla cella, ti aspettavo. Sei sopreso dopo aver scoperto i miei piani? Lo sarai di piu' dopo aver visto i poteri che acquisirai tramite il virus! Non prendermi per pazzo, grazie a questo virus non esisteranno mai piu' deboli in questo mondo. Io rendero' l'essere umano la creatura piu' potente che sia mai esistita sulla Terra! Si parlera' di me per milioni e milioni di anni! Ma se non vuoi aiutarmi, non preoccuparti. Ci servono delle vittime sacrificali in onore della Santa Muerte che ci supporta in tutto questo. Dunque, preparati a morire!",
 				new Inventory(), key_2,5,20);
-
-
 
 
 		assistant.getInv().add(key_1);
@@ -1377,7 +1375,16 @@ public class Asylum extends GameDescription implements Serializable {
 		paddedCell.getEnemies().add(assistant);
 		office.getEnemies().add(director);
 
-
+		
+		//da cancellare dopo
+		getInventory().add(compass);
+		getInventory().add(torch);
+		getInventory().add(adrenaline);
+		getInventory().add(adrenaline);
+		getInventory().add(screwdriver);
+		getInventory().add(gun);
+		getInventory().add(scalpel);
+		
 
 		//doors
 		m.insArc(room1, hallway, new Gateway(Direction.SOUTH, key.getId(), true));
@@ -1475,7 +1482,7 @@ public class Asylum extends GameDescription implements Serializable {
 		});
 
 		//stanza iniziale
-		setCurrentRoom(room1);
+		setCurrentRoom(hallway);
 		System.out.println("Ti svegli confuso in una stanza...cerchi di ricordare cosa ti ha portato qui. Stavi indagando su qualcosa ma non riesci a ricordare...hai un forte dolore alla testa. Un odore nauseabondo e' nell'aria...");
 
 		paddedCell.setTrap(new EventHandler() {
