@@ -222,7 +222,7 @@ public class Asylum extends GameDescription implements Serializable {
 				               "Puoi solo tornare indietro nel corridoio 1.",
 				               "dormitorio 5");
         m.insNode(room5);
-        Room room6 = new Room("Sei in una stanza piena di buchi sul muro, chissa'� come sono stati fatti...",
+        Room room6 = new Room("Sei in una stanza piena di buchi sul muro, chissa' come sono stati fatti...",
 				               "Qualche paziente sperava forse che bastasse fare qualche buco per crearsi una via di fuga...Puoi solo tornare indietro nel corridoio 1.",
 				               "dormitorio 6");
         m.insNode(room6);
@@ -397,7 +397,7 @@ public class Asylum extends GameDescription implements Serializable {
 							System.out.println("Stai indossando correttamente la maschera!");
 							((Asylum) t).gasVuln = false;
 							bathroom.setDescription("Non appena entri nella stanza, i gas tossici iniziano a circolare nell'aria, ma la maschera ti protegge. Sei nel bagno.");
-					     	surgery.setDescription("Non appena entri nella stanza, i gas tossici iniziano a circolare nell'aria, ma la maschera ti protegge. Sei nella stanza dove i pazienti sono sottoposti alle operazioni. Chissa'� a questo punto di che operazioni si tratta...");
+					     	surgery.setDescription("Non appena entri nella stanza, i gas tossici iniziano a circolare nell'aria, ma la maschera ti protegge. Sei nella stanza dove i pazienti sono sottoposti alle operazioni. Chissa' a questo punto di che operazioni si tratta...");
 					     	if(!compassUsed) {
 					     		bathroom.setLook("Potresti sfruttare il gabinetto  per...no, meglio evitare. Puoi solo tornare indietro nel corridoio 3.");
 							 	surgery.setLook("Puoi solo tornare indietro nel corridoio 4.");
@@ -763,7 +763,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							if(chest.isOpened()) {
-								System.out.println("Cassa gia'� aperta");
+								System.out.println("Cassa gia' aperta");
 							}else if(!chest.isOpened() && !chest.isLocked()) {
 									System.out.println("Hai aperto la cassa!");
 									chest.setOpened(true);
@@ -854,7 +854,7 @@ public class Asylum extends GameDescription implements Serializable {
 										System.out.println("Il bisturi e' molto fragile si danneggia molto facilmente");
 										break;
 									}
-								} else System.out.println("Questo bisturi ha perso la lama, non ti potra'� piu' essere d'aiuto");
+								} else System.out.println("Questo bisturi ha perso la lama, non ti potra' piu' essere d'aiuto");
 							}else System.out.println("Non sembra esserci nessuno da colpire!");
 						}
 					};
@@ -1336,8 +1336,8 @@ public class Asylum extends GameDescription implements Serializable {
 				"Ancora tu? Pensavo che dopo quel forte colpo alla testa non ti saresti svegliato per un po'. Beh, il prossimo paziente sei proprio tu, quindi ti ringrazio per avermi risparmiato la fatica di salire al pieno superiore per prenderti. Non opporre resistenza e preparati ad accogliere nel tuo corpo i poteri del virus!",
 				new Inventory(),key_1,5,20);
 
-		final Enemy director = new Enemy(100, "direttore", "E' il direttore, nonche' la mente contorta dietro tutto questo. I segni del virus sembrano meno evidenti su di lui. Avra'�furbamente aspettato piu' miglioramenti possibili nei test del virus prima di sottoporsi lui stesso ad esso. Eppure ti e' sempre sembrato un tipo perbene...",
-				"Muahahah! Eccoti qua agente. Dopo aver sentito gli spari dalla cella, ti aspettavo. Sei sopreso dopo aver scoperto i miei piani? Lo sarai di piu' dopo aver visto i poteri che acquisirai tramite il virus! Non prendermi per pazzo, grazie a questo virus non esisteranno mai piu' deboli in questo mondo. Io rendero' l'essere umano la creatura piu' potente che sia mai esistita sulla Terra! Si parlera'�di me per milioni e milioni di anni! Ma se non vuoi aiutarmi, non preoccuparti. Ci servono delle vittime sacrificali in onore della Santa Muerte che ci supporta in tutto questo. Dunque, preparati a morire!",
+		final Enemy director = new Enemy(100, "direttore", "E' il direttore, nonche' la mente contorta dietro tutto questo. I segni del virus sembrano meno evidenti su di lui. Avra' furbamente aspettato piu' miglioramenti possibili nei test del virus prima di sottoporsi lui stesso ad esso. Eppure ti e' sempre sembrato un tipo perbene...",
+				"Muahahah! Eccoti qua agente. Dopo aver sentito gli spari dalla cella, ti aspettavo. Sei sopreso dopo aver scoperto i miei piani? Lo sarai di piu' dopo aver visto i poteri che acquisirai tramite il virus! Non prendermi per pazzo, grazie a questo virus non esisteranno mai piu' deboli in questo mondo. Io rendero' l'essere umano la creatura piu' potente che sia mai esistita sulla Terra! Si parlera' di me per milioni e milioni di anni! Ma se non vuoi aiutarmi, non preoccuparti. Ci servono delle vittime sacrificali in onore della Santa Muerte che ci supporta in tutto questo. Dunque, preparati a morire!",
 				new Inventory(), key_2,5,20);
 
 
