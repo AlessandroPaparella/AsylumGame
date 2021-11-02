@@ -2,7 +2,10 @@ package game;
 
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -17,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
 import engine.GameDescription;
+import engine.launcher.Launcher;
 
 public class Manager extends JFrame {
 	private final Action newGameAction = new NewGame();
@@ -28,9 +32,12 @@ public class Manager extends JFrame {
 	private HandleDB db;
 	private GameDescription selected = null;
 	private final Action deleteAction = new Delete();
+	public static Locale locale = Launcher.locale;
+	ResourceBundle bundle;
 
 	JPanel newGamePanel = new JPanel();
 	JPanel mainPanel = new JPanel();
+	JPanel langPanel = new JPanel();
 	String player;
 
 
@@ -38,6 +45,12 @@ public class Manager extends JFrame {
 	 * Create the panel.
 	 */
 	public Manager() throws Exception{
+		try {
+			bundle = ResourceBundle.getBundle("manager", locale);
+
+		}catch (MissingResourceException e) {
+			bundle = ResourceBundle.getBundle("manager", Locale.ENGLISH);
+		}
 
 		db = new HandleDB();
 		saves = db.recoveryTuple();
@@ -46,7 +59,7 @@ public class Manager extends JFrame {
 		getContentPane().add(layeredPane);
 
 		//init mainPanel
-		this.setTitle("Salvataggi Asylum Game");
+		this.setTitle(bundle.getString("manager.title"));
 		mainPanel.setSize(414, 239);
 		mainPanel.setLocation(10, 11);
 		layeredPane.setLayer(mainPanel, 1);
@@ -54,19 +67,19 @@ public class Manager extends JFrame {
 		mainPanel.setLayout(null);
 
 
-		JButton btnNewButton = new JButton("New Game");
+		JButton btnNewButton = new JButton(bundle.getString("manager.newgame"));
 		btnNewButton.setAction(newGameAction);
-		btnNewButton.setBounds(62, 205, 93, 23);
+		btnNewButton.setBounds(24, 205, 93, 23);
 		mainPanel.add(btnNewButton);
 
-		JButton btnNewButton_1 = new JButton("Load");
+		JButton btnNewButton_1 = new JButton(bundle.getString("manager.load"));
 		btnNewButton_1.setAction(loadAction);
-		btnNewButton_1.setBounds(176, 205, 67, 23);
+		btnNewButton_1.setBounds(127, 205, 67, 23);
 		mainPanel.add(btnNewButton_1);
 
-		JButton btnNewButton_2 = new JButton("Delete");
+		JButton btnNewButton_2 = new JButton(bundle.getString("manager.delete"));
 		btnNewButton_2.setAction(deleteAction);
-		btnNewButton_2.setBounds(262, 205, 89, 23);
+		btnNewButton_2.setBounds(204, 205, 89, 23);
 		mainPanel.add(btnNewButton_2);
 
 		//init lista dei salvataggi
@@ -86,6 +99,11 @@ public class Manager extends JFrame {
 		thumb.setBounds(52,0,299,41);
 		mainPanel.add(thumb);
 
+		JButton lang = new JButton(bundle.getString("manager.lang"));
+		lang.setBounds(303, 205, 93, 23);
+		mainPanel.add(lang);
+		lang.addActionListener(new Language());
+
 		//init newGamePanel
 		layeredPane.add(newGamePanel);
 		newGamePanel.setSize(250, 200);
@@ -98,39 +116,69 @@ public class Manager extends JFrame {
 		textField.setBounds(100, 20, 133, 20);
 		newGamePanel.add(textField);
 		textField.setColumns(10);
-		JButton startButton = new JButton("Start");
-		JButton backButton = new JButton("Indietro");
+		JButton startButton = new JButton(bundle.getString("manager.start"));
+		JButton backButton = new JButton(bundle.getString("manager.back"));
 		startButton.setBounds(50, 90, 80, 23);
 		backButton.setBounds(160, 90, 71, 23);
 		newGamePanel.add(backButton);
 		backButton.setAction(actionBack);
 		startButton.setAction(actionStart);
 
+
 		newGamePanel.add(startButton);
 		newGamePanel.setVisible(false);
+
+		//lang panel
+		layeredPane.add(langPanel);
+		langPanel.setSize(250, 200);
+		langPanel.setLocation(10, 11);
+		langPanel.setLayout(null);
+		langPanel.setVisible(false);
+		JList langs = new JList();
+		langs.setBounds(52, 40, 299, 157);
+		langs.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		langs.setModel(new DefaultListModel<String>());
+		DefaultListModel<String> ml = (DefaultListModel) langs.getModel();
+		langPanel.add(langs);
+		ml.addElement("Italiano");
+		ml.addElement("Inglese");
 
 
 	}
 
 	private class NewGame extends AbstractAction {
 		public NewGame() {
-			putValue(NAME, "NewGame");
-			putValue(SHORT_DESCRIPTION, "Start a new game");
+			putValue(NAME, bundle.getString("manager.nameNew"));
+			putValue(SHORT_DESCRIPTION, bundle.getString("manager.descrNew"));
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//Crea pannello per la creazione del giocatore
 			setBounds(100, 100, 300, 230);
 			mainPanel.setVisible(false);
-			newGamePanel.setVisible(true);
+			langPanel.setVisible(true);
+		}
+	}
+
+	private class Language extends AbstractAction {
+		public Language() {
+			putValue(NAME, bundle.getString("manager.langName"));
+			putValue(SHORT_DESCRIPTION, bundle.getString("manager.descrLang"));
+		}
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//Crea pannello per la creazione del giocatore
+			setBounds(100, 100, 300, 230);
+			mainPanel.setVisible(false);
+			langPanel.setVisible(true);
 		}
 	}
 
 	//usata nel button new game
 	private class Start extends AbstractAction {
 		public Start() {
-			putValue(NAME, "Start");
-			putValue(SHORT_DESCRIPTION, "Start the game");
+			putValue(NAME, bundle.getString("manager.start"));
+			putValue(SHORT_DESCRIPTION, bundle.getString("manager.descrStart"));
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -143,8 +191,8 @@ public class Manager extends JFrame {
 
 	private class Load extends AbstractAction {
 		public Load() {
-			putValue(NAME, "Load");
-			putValue(SHORT_DESCRIPTION, "Loading a save");
+			putValue(NAME, bundle.getString("manager.load"));
+			putValue(SHORT_DESCRIPTION, bundle.getString("manager.descrLoad"));
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -166,8 +214,8 @@ public class Manager extends JFrame {
 
 	private class Back extends AbstractAction {
 		public Back() {
-			putValue(NAME, "Back");
-			putValue(SHORT_DESCRIPTION, "Go back to main panel");
+			putValue(NAME, bundle.getString("manager.back"));
+			putValue(SHORT_DESCRIPTION, bundle.getString("manager.descrBack"));
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -190,8 +238,8 @@ public class Manager extends JFrame {
 	private class Delete extends AbstractAction {
 
 		public Delete() {
-			putValue(NAME, "Delete");
-			putValue(SHORT_DESCRIPTION, "Delete the selected save");
+			putValue(NAME, bundle.getString("manager.delete"));
+			putValue(SHORT_DESCRIPTION, bundle.getString("manager.descrDelete"));
 		}
 
 		@Override
