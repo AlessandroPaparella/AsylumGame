@@ -23,15 +23,15 @@ import engine.GameDescription;
 import engine.launcher.Launcher;
 
 public class Manager extends JFrame {
-	private final Action newGameAction = new NewGame();
-	private final Action loadAction = new Load();
-	private final Action actionStart = new Start();
-	private final Action actionBack = new Back();
+	private final Action newGameAction;
+	private final Action loadAction;
+	private final Action actionStart;
+	private final Action actionBack;
 	private JLayeredPane layeredPane = new JLayeredPane();
 	private Map<String, GameDescription> saves = new HashMap<String, GameDescription>();
 	private HandleDB db;
 	private GameDescription selected = null;
-	private final Action deleteAction = new Delete();
+	private final Action deleteAction;
 	public static Locale locale = Launcher.locale;
 	ResourceBundle bundle;
 
@@ -45,12 +45,19 @@ public class Manager extends JFrame {
 	 * Create the panel.
 	 */
 	public Manager() throws Exception{
+		ResourceBundle b;
 		try {
-			bundle = ResourceBundle.getBundle("manager", locale);
+			b = ResourceBundle.getBundle("manager", locale);
 
 		}catch (MissingResourceException e) {
-			bundle = ResourceBundle.getBundle("manager", Locale.ENGLISH);
+			b = ResourceBundle.getBundle("manager", Locale.ENGLISH);
 		}
+		this.bundle = b;
+		this.newGameAction = new NewGame();
+		this.loadAction = new Load();
+		this.actionStart = new Start();
+		this.actionBack = new Back();
+		this.deleteAction = new Delete();
 
 		db = new HandleDB();
 		saves = db.recoveryTuple();
@@ -59,7 +66,7 @@ public class Manager extends JFrame {
 		getContentPane().add(layeredPane);
 
 		//init mainPanel
-		this.setTitle(bundle.getString("manager.title"));
+		this.setTitle(bundle.getString("title"));
 		mainPanel.setSize(414, 239);
 		mainPanel.setLocation(10, 11);
 		layeredPane.setLayer(mainPanel, 1);
@@ -67,17 +74,17 @@ public class Manager extends JFrame {
 		mainPanel.setLayout(null);
 
 
-		JButton btnNewButton = new JButton(bundle.getString("manager.newgame"));
+		JButton btnNewButton = new JButton(bundle.getString("newgame"));
 		btnNewButton.setAction(newGameAction);
 		btnNewButton.setBounds(24, 205, 93, 23);
 		mainPanel.add(btnNewButton);
 
-		JButton btnNewButton_1 = new JButton(bundle.getString("manager.load"));
+		JButton btnNewButton_1 = new JButton(bundle.getString("load"));
 		btnNewButton_1.setAction(loadAction);
 		btnNewButton_1.setBounds(127, 205, 67, 23);
 		mainPanel.add(btnNewButton_1);
 
-		JButton btnNewButton_2 = new JButton(bundle.getString("manager.delete"));
+		JButton btnNewButton_2 = new JButton(bundle.getString("delete"));
 		btnNewButton_2.setAction(deleteAction);
 		btnNewButton_2.setBounds(204, 205, 89, 23);
 		mainPanel.add(btnNewButton_2);
@@ -99,7 +106,7 @@ public class Manager extends JFrame {
 		thumb.setBounds(52,0,299,41);
 		mainPanel.add(thumb);
 
-		JButton lang = new JButton(bundle.getString("manager.lang"));
+		JButton lang = new JButton(bundle.getString("lang"));
 		lang.setBounds(303, 205, 93, 23);
 		mainPanel.add(lang);
 		lang.addActionListener(new Language());
@@ -116,8 +123,8 @@ public class Manager extends JFrame {
 		textField.setBounds(100, 20, 133, 20);
 		newGamePanel.add(textField);
 		textField.setColumns(10);
-		JButton startButton = new JButton(bundle.getString("manager.start"));
-		JButton backButton = new JButton(bundle.getString("manager.back"));
+		JButton startButton = new JButton(bundle.getString("start"));
+		JButton backButton = new JButton(bundle.getString("back"));
 		startButton.setBounds(50, 90, 80, 23);
 		backButton.setBounds(160, 90, 71, 23);
 		newGamePanel.add(backButton);
@@ -148,8 +155,8 @@ public class Manager extends JFrame {
 
 	private class NewGame extends AbstractAction {
 		public NewGame() {
-			putValue(NAME, bundle.getString("manager.nameNew"));
-			putValue(SHORT_DESCRIPTION, bundle.getString("manager.descrNew"));
+			putValue(NAME, bundle.getString("nameNew"));
+			putValue(SHORT_DESCRIPTION, bundle.getString("descrNew"));
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -162,8 +169,8 @@ public class Manager extends JFrame {
 
 	private class Language extends AbstractAction {
 		public Language() {
-			putValue(NAME, bundle.getString("manager.langName"));
-			putValue(SHORT_DESCRIPTION, bundle.getString("manager.descrLang"));
+			putValue(NAME, bundle.getString("langName"));
+			putValue(SHORT_DESCRIPTION, bundle.getString("descrLang"));
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -177,8 +184,8 @@ public class Manager extends JFrame {
 	//usata nel button new game
 	private class Start extends AbstractAction {
 		public Start() {
-			putValue(NAME, bundle.getString("manager.start"));
-			putValue(SHORT_DESCRIPTION, bundle.getString("manager.descrStart"));
+			putValue(NAME, bundle.getString("start"));
+			putValue(SHORT_DESCRIPTION, bundle.getString("descrStart"));
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -191,8 +198,8 @@ public class Manager extends JFrame {
 
 	private class Load extends AbstractAction {
 		public Load() {
-			putValue(NAME, bundle.getString("manager.load"));
-			putValue(SHORT_DESCRIPTION, bundle.getString("manager.descrLoad"));
+			putValue(NAME, bundle.getString("load"));
+			putValue(SHORT_DESCRIPTION, bundle.getString("descrLoad"));
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -214,8 +221,8 @@ public class Manager extends JFrame {
 
 	private class Back extends AbstractAction {
 		public Back() {
-			putValue(NAME, bundle.getString("manager.back"));
-			putValue(SHORT_DESCRIPTION, bundle.getString("manager.descrBack"));
+			putValue(NAME, bundle.getString("back"));
+			putValue(SHORT_DESCRIPTION, bundle.getString("descrBack"));
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -238,8 +245,8 @@ public class Manager extends JFrame {
 	private class Delete extends AbstractAction {
 
 		public Delete() {
-			putValue(NAME, bundle.getString("manager.delete"));
-			putValue(SHORT_DESCRIPTION, bundle.getString("manager.descrDelete"));
+			putValue(NAME, bundle.getString("delete"));
+			putValue(SHORT_DESCRIPTION, bundle.getString("descrDelete"));
 		}
 
 		@Override
