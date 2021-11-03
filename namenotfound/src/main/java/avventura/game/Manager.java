@@ -23,47 +23,34 @@ import engine.GameDescription;
 import engine.launcher.Launcher;
 
 public class Manager extends JFrame {
-	private final Action newGameAction;
-	private final Action loadAction;
-	private final Action actionStart;
-	private final Action actionBack;
+	private  Action newGameAction;
+	private  Action loadAction;
+	private  Action actionStart;
+	private  Action actionBack;
 	private JLayeredPane layeredPane = new JLayeredPane();
 	private Map<String, GameDescription> saves = new HashMap<String, GameDescription>();
 	private HandleDB db;
 	private GameDescription selected = null;
-	private final Action deleteAction;
+	private  Action deleteAction;
 	public static Locale locale = Launcher.locale;
-	ResourceBundle bundle;
+	static ResourceBundle bundle;
 
 	JPanel newGamePanel = new JPanel();
 	JPanel mainPanel = new JPanel();
 	JPanel langPanel = new JPanel();
 	String player;
 
-
-	/**
-	 * Create the panel.
-	 */
-	public Manager() throws Exception{
-		ResourceBundle b;
-		try {
-			b = ResourceBundle.getBundle("manager", locale);
-
-		}catch (MissingResourceException e) {
-			b = ResourceBundle.getBundle("manager", Locale.ENGLISH);
-		}
-		this.bundle = b;
+	private void init() throws Exception {
 		this.newGameAction = new NewGame();
 		this.loadAction = new Load();
 		this.actionStart = new Start();
 		this.actionBack = new Back();
 		this.deleteAction = new Delete();
 
-		db = new HandleDB();
-		saves = db.recoveryTuple();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 475, 300);
 		getContentPane().add(layeredPane);
+
 
 		//init mainPanel
 		this.setTitle(bundle.getString("title"));
@@ -74,15 +61,18 @@ public class Manager extends JFrame {
 		mainPanel.setLayout(null);
 
 
+
 		JButton btnNewButton = new JButton(bundle.getString("newgame"));
 		btnNewButton.setAction(newGameAction);
 		btnNewButton.setBounds(24, 205, 93, 23);
 		mainPanel.add(btnNewButton);
 
+
 		JButton btnNewButton_1 = new JButton(bundle.getString("load"));
 		btnNewButton_1.setAction(loadAction);
 		btnNewButton_1.setBounds(127, 205, 67, 23);
 		mainPanel.add(btnNewButton_1);
+
 
 		JButton btnNewButton_2 = new JButton(bundle.getString("delete"));
 		btnNewButton_2.setAction(deleteAction);
@@ -102,6 +92,7 @@ public class Manager extends JFrame {
 		for(String k : saves.keySet())
 			m.addElement(k);
 
+
 		JLabel thumb = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/header_manager.png")));
 		thumb.setBounds(52,0,299,41);
 		mainPanel.add(thumb);
@@ -110,6 +101,7 @@ public class Manager extends JFrame {
 		lang.setBounds(303, 205, 93, 23);
 		mainPanel.add(lang);
 		lang.addActionListener(new Language());
+
 
 		//init newGamePanel
 		layeredPane.add(newGamePanel);
@@ -132,23 +124,53 @@ public class Manager extends JFrame {
 		startButton.setAction(actionStart);
 
 
+
 		newGamePanel.add(startButton);
 		newGamePanel.setVisible(false);
 
 		//lang panel
+		langPanel = new JPanel();
 		layeredPane.add(langPanel);
-		langPanel.setSize(250, 200);
+		langPanel.setSize(250,200);
 		langPanel.setLocation(10, 11);
 		langPanel.setLayout(null);
 		langPanel.setVisible(false);
 		JList langs = new JList();
-		langs.setBounds(52, 40, 299, 157);
+		langs.setBounds(30, 25, 100, 80);
+		JButton selectBtn = new JButton(bundle.getString("apply"));
+		selectBtn.addActionListener(new selectLang());
+		selectBtn.setBounds(150, 25, 93, 23);
+		JButton backBtn = new JButton(bundle.getString("back"));
+		backBtn.addActionListener(actionBack);
+		backBtn.setBounds(150, 65, 93, 23);
+		langPanel.add(selectBtn);
+		langPanel.add(backBtn);
 		langs.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		langs.setModel(new DefaultListModel<String>());
 		DefaultListModel<String> ml = (DefaultListModel) langs.getModel();
 		langPanel.add(langs);
-		ml.addElement("Italiano");
-		ml.addElement("Inglese");
+		ml.addElement(bundle.getString("it"));
+		ml.addElement(bundle.getString("en"));
+
+
+	}
+
+
+	/**
+	 * Create the panel.
+	 */
+	public Manager() throws Exception{
+		ResourceBundle b;
+		try {
+			b = ResourceBundle.getBundle("manager", locale);
+
+		}catch (MissingResourceException e) {
+			b = ResourceBundle.getBundle("manager", Locale.ENGLISH);
+		}
+		db = new HandleDB();
+		this.bundle = b;
+		saves = db.recoveryTuple();
+		init();
 
 
 	}
@@ -163,7 +185,7 @@ public class Manager extends JFrame {
 			//Crea pannello per la creazione del giocatore
 			setBounds(100, 100, 300, 230);
 			mainPanel.setVisible(false);
-			langPanel.setVisible(true);
+			newGamePanel.setVisible(true);
 		}
 	}
 
@@ -229,6 +251,35 @@ public class Manager extends JFrame {
 			//ripristina pannello principale
 			setBounds(100, 100, 450, 300);
 			newGamePanel.setVisible(false);
+			langPanel.setVisible(false);
+			mainPanel.setVisible(true);
+		}
+	}
+
+	private class selectLang extends AbstractAction {
+		public selectLang() {
+			putValue(NAME, bundle.getString("apply"));
+			putValue(SHORT_DESCRIPTION, bundle.getString("descrApply"));
+		}
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//ripristina pannello principale
+			setBounds(100, 100, 450, 300);
+			langPanel.setVisible(false);
+			String selectedlang = ((JList<String>) langPanel.getComponent(2)).getSelectedValue();
+			if(selectedlang==bundle.getString("it")) {
+				locale=Locale.ITALIAN;
+			}else {
+				locale=Locale.ENGLISH;
+			}
+			Manager.bundle = ResourceBundle.getBundle("manager", locale);
+			mainPanel.removeAll();
+			try {
+				init();
+			} catch (Exception ex) {
+				// TODO: handle exception
+				System.err.println(ex.getMessage());
+			}
 			mainPanel.setVisible(true);
 		}
 	}
