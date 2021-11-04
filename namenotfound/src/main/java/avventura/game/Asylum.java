@@ -1374,16 +1374,6 @@ public class Asylum extends GameDescription implements Serializable {
 		paddedCell.getObjects().add(mirrorCell);
 		paddedCell.getEnemies().add(assistant);
 		office.getEnemies().add(director);
-
-		
-		//da cancellare dopo
-		getInventory().add(compass);
-		getInventory().add(torch);
-		getInventory().add(adrenaline);
-		getInventory().add(adrenaline);
-		getInventory().add(screwdriver);
-		getInventory().add(gun);
-		getInventory().add(scalpel);
 		
 
 		//doors
@@ -1482,7 +1472,7 @@ public class Asylum extends GameDescription implements Serializable {
 		});
 
 		//stanza iniziale
-		setCurrentRoom(hallway);
+		setCurrentRoom(room1);
 		System.out.println("Ti svegli confuso in una stanza...cerchi di ricordare cosa ti ha portato qui. Stavi indagando su qualcosa ma non riesci a ricordare...hai un forte dolore alla testa. Un odore nauseabondo e' nell'aria...");
 
 		paddedCell.setTrap(new EventHandler() {
@@ -1547,7 +1537,6 @@ public class Asylum extends GameDescription implements Serializable {
 		this.setCurrentEnemy(save.getCurrentEnemy());
 		this.setCommandTarget(save.getCommandTarget());
 		this.setCommands(save.getCommands());
-		System.out.println(this.health);
 	}
 
 	private Room searchDirection(Direction d) throws Exception {
@@ -1804,7 +1793,7 @@ public class Asylum extends GameDescription implements Serializable {
 					break;
 				case 0:
 					out.println("Sei morto per asfissia");
-					System.exit(0);
+					health = 0;
 					break;
 				}
 				maxMoves--;
