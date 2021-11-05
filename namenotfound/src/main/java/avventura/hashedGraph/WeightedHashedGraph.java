@@ -3,8 +3,11 @@ package hashedGraph;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class WeightedHashedGraph<T, W> implements Serializable {
 
@@ -120,6 +123,23 @@ public class WeightedHashedGraph<T, W> implements Serializable {
 			throw new hashedGraphException("Arc doesn't exists!");
 		}
 		return weight;
+	}
+
+	public void BFS(Consumer<T> c, T source) throws Exception{
+		Queue<T> q = new LinkedList<T>();
+		Set<T> visited = new HashSet<T>();
+		q.add(source);
+		visited.add(source);
+		while(!q.isEmpty()) {
+			source = q.poll();
+			c.accept(source);
+			for(T n: this.getAdjacents(source)){
+				if(!visited.contains(n)) {
+					visited.add(n);
+					q.add(n);
+				}
+			}
+		}
 	}
 
 }

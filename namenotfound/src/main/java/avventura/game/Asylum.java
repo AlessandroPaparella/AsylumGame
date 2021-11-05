@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 import engine.AdventureCharacter;
 import engine.Command;
@@ -104,7 +105,6 @@ public class Asylum extends GameDescription implements Serializable {
 		}
 		if(Manager.locale.equals(Locale.ITALIAN) || Manager.locale.equals(Locale.ITALY)) {
 			Engine.parser = new ParserIT();
-			//Engine.parser = new ParserIT();
 		}else {
 			Engine.parser = new ParserEN();
 		}
@@ -114,6 +114,7 @@ public class Asylum extends GameDescription implements Serializable {
 	        this.db.insertionTuple(this.player, this);
 		}else {
 			initFromSave((Asylum) frame.getSave());
+			loadLocales();
 		}
 		db.closeConnection();
 	}
@@ -1831,6 +1832,72 @@ public class Asylum extends GameDescription implements Serializable {
 			return;
 		}
 
+	}
+
+	private void loadLocales() {
+
+		//consumer used for bfs
+		Consumer<Room> c = new Consumer<Room>() {
+
+			@Override
+			public void accept(Room t) {
+				// TODO Auto-generated method stub
+
+				//loading bundles for room, items, trap and adventurecharacter
+				ResourceBundle r = ResourceBundle.getBundle("room", Manager.locale);
+				ResourceBundle i = ResourceBundle.getBundle("item", Manager.locale);
+				ResourceBundle tr = ResourceBundle.getBundle("trap", Manager.locale);
+				ResourceBundle e = ResourceBundle.getBundle("enemy", Manager.locale);
+				//edit room info
+				t.setDescription(r.getString("descr_room_".concat(t.getId().toString())));
+				t.setLook(r.getString("look_room_".concat(t.getId().toString())));
+				t.setName(r.getString("name_room_".concat(t.getId().toString())));
+				//edit items info of current room
+				for(Item it : t.getObjects()) {
+					it.setName(i.getString("name_item_".concat(it.getId().toString())));
+					it.setDescription(i.getString("descr_item_".concat(it.getId().toString())));
+					//check for containers ("recursive")
+					if(it instanceof ItemContainer) {
+						for(Item k : ((ItemContainer) it).getContent()) {
+							k.setName(i.getString("name_item_".concat(it.getId().toString())));
+							k.setDescription(i.getString("descr_item_".concat(it.getId().toString())));
+						}
+					}
+				}
+				//edit character info
+				for(AdventureCharacter a : t.getEnemies()) {
+					a.setDescription(e.getString("descr_enemy_".concat(a.getId().toString())));
+					a.setName(e.getString("name_enemy_".concat(a.getId().toString())));
+					a.setTalk(e.getString("descr_enemy_".concat(a.getId().toString())));
+					//edit character inventory
+					for(Item it: a.getInv().getList()) {
+						it.setName(i.getString("name_item_".concat(it.getId().toString())));
+						it.setDescription(i.getString("descr_item_".concat(it.getId().toString())));
+					}
+					//check for droppable
+					if(a.getDroppable()!=null) {
+						Item it = a.getDroppable();
+						a.getDroppable().setName(i.getString("name_item_".concat(it.getId().toString())));
+						a.getDroppable().setDescription(i.getString("descr_item_".concat(it.getId().toString())));
+					}
+				}
+
+			}
+
+		};
+		try {
+			//perform BFS with the above declared consumer starting from the current room
+			this.getMap().BFS(c, getCurrentRoom());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		//edit info on your inventory
+		ResourceBundle i = ResourceBundle.getBundle("item", Manager.locale);
+		for(Item it: getInventory().getList()) {
+			it.setName(i.getString("name_item_".concat(it.getId().toString())));
+			it.setDescription(i.getString("descr_item_".concat(it.getId().toString())));
+		}
 	}
 
 
