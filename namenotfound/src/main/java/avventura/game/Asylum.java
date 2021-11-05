@@ -16,6 +16,7 @@ import engine.CommandHandler;
 import engine.CommandType;
 import engine.Direction;
 import engine.Enemy;
+import engine.Engine;
 import engine.EventHandler;
 import engine.GameDescription;
 import engine.Gateway;
@@ -100,6 +101,12 @@ public class Asylum extends GameDescription implements Serializable {
 			Thread.currentThread().interrupt();
 			db.closeConnection();
 			return;
+		}
+		if(Manager.locale.equals(Locale.ITALIAN) || Manager.locale.equals(Locale.ITALY)) {
+			Engine.parser = new ParserIT();
+			//Engine.parser = new ParserIT();
+		}else {
+			Engine.parser = new ParserEN();
 		}
 		if(frame.getSave()==null) {
 			initNew();
