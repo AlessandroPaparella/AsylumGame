@@ -16,7 +16,6 @@ import engine.CommandHandler;
 import engine.CommandType;
 import engine.Direction;
 import engine.Enemy;
-import engine.Engine;
 import engine.EventHandler;
 import engine.GameDescription;
 import engine.Gateway;
@@ -97,11 +96,6 @@ public class Asylum extends GameDescription implements Serializable {
 		db = new HandleDB();
 		t.join();
 		player=frame.getPlayer();
-		if(Manager.locale.equals(Locale.ITALIAN) || Manager.locale.equals(Locale.ITALY)) {
-			Engine.parser = new ParserIT();
-		}else {
-			Engine.parser = new ParserEN();
-		}
 		if(player==null) {
 			Thread.currentThread().interrupt();
 			db.closeConnection();
@@ -1515,7 +1509,6 @@ public class Asylum extends GameDescription implements Serializable {
 				if (getCurrentEnemy()!=null) {
 					try {
 						System.out.println("Hai di fronte la mente dietro tutto cio', il direttore.");
-					office.setLook("Puoi salire le scale che conducono all'uscita della struttura oppure puoi tornare indietro nella cella imbottita.");
 
 				}
 			 catch (Exception e) {}
