@@ -1897,6 +1897,14 @@ public class Asylum extends GameDescription implements Serializable {
 		for(Item it: getInventory().getList()) {
 			it.setName(i.getString("name_item_".concat(it.getId().toString())));
 			it.setDescription(i.getString("descr_item_".concat(it.getId().toString())));
+			//if compass used, update look_at of all rooms
+			if(it.getName().equals("compass") || it.getName().equals("bussola") && this.compassUsed) {
+				it.getHandler().apply(CommandType.USE).accept(this);
+			}
+			//if gasmask used, update look_at of regarding rooms
+			if(it.getName().equals("gas-mask") || it.getName().equals("maschera-gas") && !this.gasVuln) {
+				it.getHandler().apply(CommandType.USE).accept(this);
+			}
 		}
 	}
 
