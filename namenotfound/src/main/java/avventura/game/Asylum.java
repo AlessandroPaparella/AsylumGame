@@ -259,9 +259,9 @@ public class Asylum extends GameDescription implements Serializable {
   		Room exit = new Room(r.getString("descr_room_19"), r.getString("look_room_19"), r.getString("name_room_19"));
 
 
-
-
-		final Item bed = new Item("letto", "Un letto nel quale dormono i pazienti.", null);
+  		//item
+        ResourceBundle i = ResourceBundle.getBundle("item", lang);
+        Item bed = new Item(i.getString("name_item_1"), i.getString("descr_item_1"), null);
 		bed.setHandler(new CommandHandler() {
 
 			@Override
