@@ -128,169 +128,135 @@ public class Asylum extends GameDescription implements Serializable {
 		maxMoves = 4;
 		compassUsed = false;
 
-		Command nord = new Command(CommandType.NORD, "nord");
-        nord.setAlias(new String[]{"n", "N", "Nord", "NORD"});
+
+		ResourceBundle com = ResourceBundle.getBundle("command", lang);
+		Command nord = new Command(CommandType.NORD, com.getString("name_command_nord"));
+        nord.setAlias(com.getString("alias_command_nord").split(" "));
         getCommands().add(nord);
-        Command inventory = new Command(CommandType.INVENTORY, "inventario");
-        inventory.setAlias(new String[]{"inv", "i", "I"});
+        Command inventory = new Command(CommandType.INVENTORY, com.getString("name_command_inventory"));
+        inventory.setAlias(com.getString("alias_command_inventory").split(" "));
         getCommands().add(inventory);
-        Command sud = new Command(CommandType.SOUTH, "sud");
-        sud.setAlias(new String[]{"s", "S", "Sud", "SUD"});
+        Command sud = new Command(CommandType.SOUTH, com.getString("name_command_south"));
+        sud.setAlias(com.getString("alias_command_south").split(" "));
         getCommands().add(sud);
-        Command est = new Command(CommandType.EAST, "est");
-        est.setAlias(new String[]{"e", "E", "Est", "EST"});
+        Command est = new Command(CommandType.EAST, com.getString("name_command_east"));
+        est.setAlias(com.getString("alias_command_east").split(" "));
         getCommands().add(est);
-        Command ovest = new Command(CommandType.WEST, "ovest");
-        ovest.setAlias(new String[]{"o", "O", "Ovest", "OVEST"});
+        Command ovest = new Command(CommandType.WEST, com.getString("name_command_west"));
+        ovest.setAlias(com.getString("alias_command_west").split(" "));
         getCommands().add(ovest);
-        Command nord_est = new Command(CommandType.NORTH_EAST, "nord_est");
-        nord_est.setAlias(new String[]{"ne", "NE", "Ne", "nE", "Nord_est", "Nord_Est", "nord_Est", "NORD_EST"});
+        Command nord_est = new Command(CommandType.NORTH_EAST, com.getString("name_command_north_east"));
+        nord_est.setAlias(com.getString("alias_command_north_east").split(" "));
         getCommands().add(nord_est);
-        Command nord_ovest = new Command(CommandType.NORTH_WEST, "nord_ovest");
-        nord_ovest.setAlias(new String[]{"no", "NO", "No", "nO", "Nord_ovest", "Nord_Ovest", "nord_Ovest", "NORD_OVEST"});
+        Command nord_ovest = new Command(CommandType.NORTH_WEST, com.getString("name_command_north_west"));
+        nord_ovest.setAlias(com.getString("alias_command_north_west").split(" "));
         getCommands().add(nord_ovest);
-        Command sud_est = new Command(CommandType.SOUTH_EAST, "sud_est");
-        sud_est.setAlias(new String[]{"se", "SE", "Se", "sE", "Sud_est", "Sud_Est", "sud_Est", "SUD_EST"});
+        Command sud_est = new Command(CommandType.SOUTH_EAST, com.getString("name_command_south_east"));
+        sud_est.setAlias(com.getString("alias_command_south_east").split(" "));
         getCommands().add(sud_est);
-        Command sud_ovest = new Command(CommandType.SOUTH_WEST, "sud_ovest");
-        sud_ovest.setAlias(new String[]{"so", "SO", "So", "sO", "Sud_ovest", "Sud_Ovest", "sud_Ovest", "SUD_OVEST"});
+        Command sud_ovest = new Command(CommandType.SOUTH_WEST, com.getString("name_command_south_west"));
+        sud_ovest.setAlias(com.getString("alias_command_south_west").split(" "));
         getCommands().add(sud_ovest);
-        Command end = new Command(CommandType.END, "end");
-        end.setAlias(new String[]{"end", "fine", "esci", "muori", "ammazzati", "ucciditi", "suicidati","exit"});
+        Command end = new Command(CommandType.END, com.getString("name_command_end"));
+        end.setAlias(com.getString("alias_command_end").split(" "));
         getCommands().add(end);
-        Command look = new Command(CommandType.LOOK_AT, "osserva");
-        look.setAlias(new String[]{"guarda", "vedi", "trova", "cerca", "descrivi"});
+        Command look = new Command(CommandType.LOOK_AT, com.getString("name_command_look_at"));
+        look.setAlias(com.getString("alias_command_look_at").split(" "));
         getCommands().add(look);
-        Command pickup = new Command(CommandType.PICK_UP, "raccogli");
-        pickup.setAlias(new String[]{"prendi"});
+        Command pickup = new Command(CommandType.PICK_UP, com.getString("name_command_pick_up"));
+        pickup.setAlias(com.getString("alias_command_pick_up").split(" "));
         getCommands().add(pickup);
-        Command open = new Command(CommandType.OPEN, "apri");
+        Command open = new Command(CommandType.OPEN, com.getString("name_command_open"));
         open.setAlias(new String[]{});
         getCommands().add(open);
-        Command close = new Command(CommandType.CLOSE, "chiudi");
+        Command close = new Command(CommandType.CLOSE, com.getString("name_command_close"));
         close.setAlias(new String[]{});
         getCommands().add(close);
-        Command push = new Command(CommandType.PUSH, "premi");
-        push.setAlias(new String[]{"spingi","attiva"});
+        Command push = new Command(CommandType.PUSH, com.getString("name_command_push"));
+        push.setAlias(com.getString("alias_command_push").split(" "));
         getCommands().add(push);
-        Command pull = new Command(CommandType.PULL, "tira");
+        Command pull = new Command(CommandType.PULL, com.getString("name_command_pull"));
         pull.setAlias(new String[]{});
         getCommands().add(pull);
-        Command _break = new Command(CommandType.BREAK, "rompi");
-        _break.setAlias(new String[]{"distruggi","spacca","colpisci", "attacca"});
+        Command _break = new Command(CommandType.BREAK, com.getString("name_command_break"));
+        _break.setAlias(com.getString("alias_command_break").split(" "));
         getCommands().add(_break);
-        Command talk_to = new Command(CommandType.TALK_TO, "parla");
-        talk_to.setAlias(new String[]{"dialoga","interagisci","comunica"});
+        Command talk_to = new Command(CommandType.TALK_TO, com.getString("name_command_talk_to"));
+        talk_to.setAlias(com.getString("alias_command_talk_to").split(" "));
         getCommands().add(talk_to);
-        Command walk_to = new Command(CommandType.WALK_TO, "vai");
-        walk_to.setAlias(new String[]{"entra"});
+        Command walk_to = new Command(CommandType.WALK_TO, com.getString("name_command_walk_to"));
+        walk_to.setAlias(com.getString("alias_command_walk_to").split(" "));
         getCommands().add(walk_to);
-        Command up = new Command(CommandType.UP, "su");
-        up.setAlias(new String[]{"sopra","sali"});
+        Command up = new Command(CommandType.UP, com.getString("name_command_up"));
+        up.setAlias(com.getString("alias_command_up").split(" "));
         getCommands().add(up);
-        Command down = new Command(CommandType.DOWN, "giu");
-        down.setAlias(new String[]{"sotto","scendi"});
+        Command down = new Command(CommandType.DOWN, com.getString("name_command_down"));
+        down.setAlias(com.getString("alias_command_down").split(" "));
         getCommands().add(down);
-        Command give = new Command(CommandType.GIVE, "dai");
+        Command give = new Command(CommandType.GIVE, com.getString("name_command_give"));
         give.setAlias(new String[]{});
         getCommands().add(give);
-        Command use = new Command(CommandType.USE, "usa");
-        use.setAlias(new String[]{"utilizza"});
+        Command use = new Command(CommandType.USE, com.getString("name_command_use"));
+        use.setAlias(com.getString("alias_command_use").split(" "));
         getCommands().add(use);
-        Command turn_on = new Command(CommandType.TURN_ON, "accendi");
+        Command turn_on = new Command(CommandType.TURN_ON, com.getString("name_command_turn_on"));
         turn_on.setAlias(new String[]{""});
         getCommands().add(turn_on);
-        Command turn_off = new Command(CommandType.TURN_OFF, "spegni");
+        Command turn_off = new Command(CommandType.TURN_OFF, com.getString("name_command_turn_off"));
         turn_off.setAlias(new String[]{""});
         getCommands().add(turn_off);
-        Command drop = new Command(CommandType.DROP, "lascia");
-        drop.setAlias(new String[]{"getta","scarta"});
+        Command drop = new Command(CommandType.DROP, com.getString("name_command_drop"));
+        drop.setAlias(com.getString("alias_command_drop").split(" "));
         getCommands().add(drop);
 
         //set inv
         setInventory(new Inventory());
 
       //Rooms
-
-        Room room1 = new Room("Sei nel dormitorio nr 1, una stanza piccola e puzzolente",
-			   	               "In un angolo giace un cadavere. Vedi una porta che conduce nel corridoio 1.",
-				               "dormitorio 1");
+        ResourceBundle r = ResourceBundle.getBundle("room", lang);
+        Room room1 = new Room(r.getString("descr_room_1"),r.getString("look_room_1"),r.getString("name_room_1"));
         m.insNode(room1);
-        Room room2 = new Room("Sei nel dormitorio nr 2",
-				               "Puoi solo tornare indietro nel corridoio 1.",
-				               "dormitorio 2");
+        Room room2 = new Room(r.getString("descr_room_2"),r.getString("look_room_2"),r.getString("name_room_2"));
         m.insNode(room2);
-        Room room3 = new Room("Sei in una stanza piena di vestiti sparsi sul pavimento ed una lavatrice. Ci saranno momenti piu' adatti per aggiornare il tuo guardaroba!",
-				               "Non vedi altre porte. Puoi solo tornare indietro nel corridoio 2. ",
-				               "lavanderia");
+        Room room3 = new Room(r.getString("descr_room_3"),r.getString("look_room_3"),r.getString("name_room_3"));
         m.insNode(room3);
-        Room room4 = new Room("Sei nel dormitorio nr 4",
-				               "Puoi solo tornare indietro nel corridoio 2.",
-				               "dormitorio 4");
+        Room room4 = new Room(r.getString("descr_room_4"),r.getString("look_room_4"),r.getString("name_room_4"));
         m.insNode(room4);
-        Room room5 = new Room("Sei nel dormitorio nr 5",
-				               "Puoi solo tornare indietro nel corridoio 1.",
-				               "dormitorio 5");
+        Room room5 = new Room(r.getString("descr_room_5"), r.getString("look_room_5"), r.getString("name_room_5"));
         m.insNode(room5);
-        Room room6 = new Room("Sei in una stanza piena di buchi sul muro, chissa' come sono stati fatti...",
-				               "Qualche paziente sperava forse che bastasse fare qualche buco per crearsi una via di fuga...Puoi solo tornare indietro nel corridoio 1.",
-				               "dormitorio 6");
+        Room room6 = new Room(r.getString("descr_room_6"),r.getString("look_room_6"),r.getString("name_room_6"));
         m.insNode(room6);
-        Room room7 = new Room("Sei nel dormitorio nr 7",
-				               "Puoi solo tornare indietro nel corridoio 2.",
-				               "dormitorio 7");
+        Room room7 = new Room(r.getString("descr_room_7"), r.getString("look_room_7"), r.getString("name_room_7"));
         m.insNode(room7);
-        Room room8 = new Room("Sei nel dormitorio nr 8",
-				               "Non vedi altre porte. Puoi solo tornare indietro nel corridoio 2.",
-				               "dormitorio 8");
+        Room room8 = new Room(r.getString("descr_room_8"), r.getString("look_room_8"), r.getString("name_room_8"));
         m.insNode(room8);
-        Room hallway = new Room("Sei in un corridoio macabro ornato con membra umane lungo le pareti. E' chiaro che non sei in un semplice manicomio...",
-				                 "Senti dei lamenti mostruosi provenienti dalla porta di fronte a te. Puoi andare nel corridoio 2 o entrare nel dormitorio 1, 2, 5, o 6.",
-				                 "corridoio 1");
+        Room hallway = new Room(r.getString("descr_room_9"), r.getString("look_room_9"), r.getString("name_room_9"));
         m.insNode(hallway);
 
-        Room hallway2 = new Room("Sei in un corridoio in cui i muri sono pieni di simboli macabri disegnati col sangue.",
-                "Il sangue e' dappertutto. Puoi tornare indietro nel corridoio 1, proseguire per il corridoio 3, entrare nella lavanderia o nel dormitorio 4, 7, 8.",
-                "corridoio 2");
+        Room hallway2 = new Room(r.getString("descr_room_10"), r.getString("look_room_10"), r.getString("name_room_10"));
         m.insNode(hallway2);
-        Room hallway3 = new Room("Sei in un corridoio pieno di quadri raffiguranti scheletri in azioni quotidiane. In un angolo c'e' una statua della Santa Muerte. Forse sei in un luogo di culto?",
-				                  "Vedi scheletri ovunque. Puoi tornare indietro nel corridoio 2, entrare nel bagno, o prendere le scale per il piano inferiore.",
-				                  "corridoio 3");
+        Room hallway3 = new Room(r.getString("descr_room_11"), r.getString("look_room_11"), r.getString("name_room_11"));
         m.insNode(hallway3);
-        Room bathroom = new Room("",
-				                  "L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro nel corridoio 3.",
-				                  "bagno");
+        Room bathroom = new Room("", r.getString("look_room_12"), r.getString("name_room_12"));
         m.insNode(bathroom);
 
 
       //second floor
-        Room hallway4 = new Room("Sei nel corridoio del piano inferiore. L'atmosfera e' piu' cupa, avverti un cattivo presentimento, sei vicino alla resa dei conti?",
-				   	              "Vedi delle porte che consentono l'accesso all'infermeria, alla sala operatoria e alla sorveglianza. Puoi entrare in queste stanze o risalire nel corridoio 3.",
-					              "corridoio 4");
+        Room hallway4 = new Room(r.getString("descr_room_13"), r.getString("look_room_13"), r.getString("name_room_13"));
   		m.insNode(hallway4);
-  		Room infirmary = new Room("Sei in una stanza con numerosi scaffali pieni di medicine. Qui dovrebbero essere 'medicati' i pazienti.",
-					               "Puoi solo tornare indietro nel corridoio 4.",
-					               "infermeria");
+  		Room infirmary = new Room(r.getString("descr_room_14"), r.getString("look_room_14"), r.getString("name_room_14"));
   		m.insNode(infirmary);
-  		Room surgery = new Room("",
-					             "L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro nel corridoio 4.",
-					             "sala operatoria");
+  		Room surgery = new Room("", r.getString("look_room_15"), r.getString("name_room_15"));
   		m.insNode(surgery);
-  		Room surveillance = new Room("Sei in una stanza stanza con numerosi schermi collegati alle telecamere di sicurezza per controllare l'edificio.",
-					                  "Puoi tornare nel corridoio 4 o proseguire verso la cella imbottita",
-					                  "sorveglianza");
+  		Room surveillance = new Room(r.getString("descr_room_16"), r.getString("look_room_16"), r.getString("name_room_16"));
   		m.insNode(surveillance);
-  		Room paddedCell = new Room("La scarsa illuminazione della stanza non ti permette di vedere bene. Dovresti utilizzare qualcosa per illuminare.", "Non riesci a vedere nulla, e' troppo buio. Puoi solo tornare indietro nella sorveglianza.", "cella imbottita");
+  		Room paddedCell = new Room(r.getString("descr_room_17"), r.getString("look_room_17"), r.getString("name_room_17"));
   		paddedCell.setLight(false);
 
-  		Room office = new Room("Sei nell'ufficio del direttore del manicomio. Dai quadri posti lungo le pareti e' possibile ripercorrere questi anni di esperimenti e gli effetti delle mutazioni nel corso del tempo.",
-	            "Vedi delle scale che conducono all'uscita della struttura, ma il passaggio e' bloccato dal direttore. Puoi tornare indietro nella cella imbottita.",
-					            "ufficio");
+  		Room office = new Room(r.getString("descr_room_18"), r.getString("look_room_18"), r.getString("name_room_18"));
   		m.insNode(office);
 
-  		Room exit = new Room("Sei finalmente uscito dal manicomio! Non puoi ancora credere a quello che ti e' successo, sei ancora stordito, ma decidi di andare subito in ufficio a riferire tutto l'accaduto al tuo capo. Dopo aver risolto un caso del genere sarai sicuramente l'eroe della citta'!",
-  				              "Sei all'esterno della struttura",
-  				              "uscita");
+  		Room exit = new Room(r.getString("descr_room_19"), r.getString("look_room_19"), r.getString("name_room_19"));
 
 
 
