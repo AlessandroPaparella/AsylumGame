@@ -130,8 +130,8 @@ public class Asylum extends GameDescription implements Serializable {
 
 
 		ResourceBundle com = ResourceBundle.getBundle("command", lang);
-		Command nord = new Command(CommandType.NORD, com.getString("name_command_nord"));
-        nord.setAlias(com.getString("alias_command_nord").split(" "));
+		Command nord = new Command(CommandType.NORD, com.getString("name_command_north"));
+        nord.setAlias(com.getString("alias_command_north").split(" "));
         getCommands().add(nord);
         Command inventory = new Command(CommandType.INVENTORY, com.getString("name_command_inventory"));
         inventory.setAlias(com.getString("alias_command_inventory").split(" "));
@@ -282,7 +282,7 @@ public class Asylum extends GameDescription implements Serializable {
 			}
 		});
 
-		final Weapon screwdriver = new Weapon("cacciavite", "Un cacciavite che potrebbe tornare utile.", null, 10, 5, 15);
+		final Weapon screwdriver = new Weapon(i.getString("item_2"), i.getString("item_2"), null, 10, 5, 15);
 		screwdriver.setHandler(new CommandHandler() {
 			@Override
 			public EventHandler apply(CommandType t) {
@@ -307,20 +307,20 @@ public class Asylum extends GameDescription implements Serializable {
 									screwdriver.setShots(screwdriver.getShots() - 1);
 									switch(screwdriver.getShots()) {
 									case 0:
-										System.out.println("E' andato, ormai e' inutilizzabile");
+										System.out.println(i.getString("case_0_item_2"));
 										break;
 									case 1:
-										System.out.println("E' quasi totalmente distrutto il cacciavite");
+										System.out.println(i.getString("case_1_item_2"));
 										break;
 									case 4:
-										System.out.println("Ti rimangono un altro paio di colpi prima che si rompa");
+										System.out.println(i.getString("case_4_item_2"));
 										break;
 									case 7:
-										System.out.println("Il cacciavite si sta iniziando a dannegiare");
+										System.out.println(i.getString("case_7_item_2"));
 										break;
 									}
-								} else System.out.println("Il cacciavite e' ormai distrutto, non farebbe nessun danno");
-							} else System.out.println("Non sembra esserci nessuno da colpire!");
+								} else System.out.println(i.getString("unusable_item_2"));
+							} else System.out.println(i.getString("no_target"));
 						}
 					};
 				case DROP:
@@ -329,7 +329,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							EventHandler.drop(screwdriver, t);
-							System.out.println("Hai lasciato il cacciavite!");
+							System.out.println(i.getString("drop_item_2"));
 						}
 					};
 				case PICK_UP:
@@ -339,10 +339,10 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(screwdriver, t);
-								System.out.println("Hai preso il cacciavite!");
+								System.out.println(i.getString("pick_item_2"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println("Oggetto non presente nella stanza");
+								System.out.println(i.getString("no_item_room"));
 							}
 						}
 					};
@@ -352,7 +352,7 @@ public class Asylum extends GameDescription implements Serializable {
 			}
 		});
 
-		final Item gasmask = new Item("maschera-gas", "Una maschera per proteggerti dai gas tossici.", null);
+		final Item gasmask = new Item(i.getString("name_item_3"), i.getString("descr_item_3"), null);
 		gasmask.setHandler(new CommandHandler() {
 			@Override
 			public EventHandler apply(CommandType t) {
@@ -370,18 +370,18 @@ public class Asylum extends GameDescription implements Serializable {
 						@Override
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
-							System.out.println("Stai indossando correttamente la maschera!");
+							System.out.println(i.getString("use_item_3"));
 							((Asylum) t).gasVuln = false;
-							bathroom.setDescription("Non appena entri nella stanza, i gas tossici iniziano a circolare nell'aria, ma la maschera ti protegge. Sei nel bagno.");
-					     	surgery.setDescription("Non appena entri nella stanza, i gas tossici iniziano a circolare nell'aria, ma la maschera ti protegge. Sei nella stanza dove i pazienti sono sottoposti alle operazioni. Chissa' a questo punto di che operazioni si tratta...");
+							bathroom.setDescription(i.getString("descr_bathroom_mask"));
+					     	surgery.setDescription(i.getString("descr_surgery_mask"));
 					     	if(!compassUsed) {
-					     		bathroom.setLook("Potresti sfruttare il gabinetto  per...no, meglio evitare. Puoi solo tornare indietro nel corridoio 3.");
-							 	surgery.setLook("Puoi solo tornare indietro nel corridoio 4.");
+					     		bathroom.setLook(i.getString("look_bathroom_mask_compass"));
+							 	surgery.setLook(i.getString("look_surgery_mask_compass"));
 
 					     	}
 					     	else {
-					     		bathroom.setLook("Potresti sfruttare il gabinetto per...no, meglio evitare. Puoi solo tornare indietro a sud nel corridoio 3.");
-							 	surgery.setLook("Puoi solo tornare indietro nel corridoio 4 a ovest.");
+					     		bathroom.setLook(i.getString("look_bathroom_mask"));
+							 	surgery.setLook(i.getString("look_surgery_mask"));
 						}
 						}
 					};
@@ -392,10 +392,10 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(gasmask, t);
-								System.out.println("Hai preso la maschera!");
+								System.out.println(i.getString("pick_item_3"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println("Oggetto non presente nella stanza");
+								System.out.println(i.getString("no_item_room"));
 							}
 						}
 					};
@@ -406,16 +406,16 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							EventHandler.drop(gasmask, t);
 							((Asylum) t).gasVuln = true;
-							System.out.println("Hai lasciato la maschera!");
-							bathroom.setDescription("");
-					        surgery.setDescription("");
+							System.out.println(i.getString("drop_item_3"));
+							bathroom.setDescription(i.getString("descr_bathroom_drop_mask"));
+					        surgery.setDescription(i.getString("descr_surgery_drop_mask"));
 							if(compassUsed) {
-								bathroom.setLook("L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro a sud nel corridoio 3.");
-						        surgery.setLook("L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro nel corridoio 4 a ovest.");
+								bathroom.setLook(i.getString("look_bathroom_drop_mask_compass"));
+						        surgery.setLook(i.getString("look_surgery_drop_mask_compass"));
 						        }
 							else {
-								bathroom.setLook("L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro nel corridoio 3.");
-						        surgery.setLook("L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro nel corridoio 4.");
+								bathroom.setLook(i.getString("look_bathroom_drop_mask"));
+						        surgery.setLook(i.getString("look_surgery_drop_mask"));
 						}
 						}
 					};
@@ -425,7 +425,7 @@ public class Asylum extends GameDescription implements Serializable {
 			}
 		});
 
-		final Item torch = new Item("torcia", "Una torcia utile per illuminare gli spazi bui.", null);
+		final Item torch = new Item(i.getString("name_item_4"), i.getString("descr_item_4"), null);
 		torch.setHandler(new CommandHandler() {
 			@Override
 			public EventHandler apply(CommandType t) {
@@ -437,7 +437,7 @@ public class Asylum extends GameDescription implements Serializable {
 						@Override
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
-							System.out.println("Hai acceso la torcia!");
+							System.out.println(i.getString("turn_on_item_4"));
 							t.getCurrentRoom().setLight(true);
 							if (t.getCurrentRoom().equals(paddedCell) && t.getCurrentRoom().getTrap()!= null) {
 								t.getCurrentRoom().getTrap().accept(t);
@@ -450,7 +450,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							t.getCurrentRoom().setVisible(t.getCurrentRoom().hasLight());
-							System.out.println("Hai spento la torcia!");
+							System.out.println(i.getString("turn_off_item_4"));
 						}
 					};
 				case LOOK_AT:
@@ -467,7 +467,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							EventHandler.drop(torch, t);
-							System.out.println("Hai lasciato la torcia!");
+							System.out.println(i.getString("drop_item_4"));
 						}
 					};
 				case PICK_UP:
@@ -477,10 +477,10 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(torch, t);
-								System.out.println("Hai preso la torcia!");
+								System.out.println(i.getString("pick_item_4"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println("Oggetto non presente nella stanza");
+								System.out.println(i.getString("no_item_room"));
 							}
 						}
 					};
@@ -490,7 +490,7 @@ public class Asylum extends GameDescription implements Serializable {
 			}
 		});
 
-		final Item pills = new Item("pillole", "Delle pillole che ti rendono immune temporaneamente ai gas tossici.", null);
+		final Item pills = new Item(i.getString("name_item_5"), i.getString("descr_item_5"), null);
 		pills.setHandler(new CommandHandler() {
 			@Override
 			public EventHandler apply(CommandType t) {
@@ -502,10 +502,10 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							if(t.getInventory().getList().contains(pills)) {
-								System.out.println("L'effetto delle pillole ti rende temporaneamente immune ai gas tossici!");
+								System.out.println(i.getString("use_item_5"));
 								((Asylum) t).breathedGas = false;
 								t.getInventory().remove(pills);
-							} else System.out.println("L'oggetto non e' presente nell'inventario!");
+							} else System.out.println(i.getString("no_item_inventory"));
 						}
 					};
 				case LOOK_AT:
@@ -522,7 +522,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							EventHandler.drop(pills, t);
-							System.out.println("Hai lasciato le pillole!");
+							System.out.println(i.getString("drop_item_5"));
 						}
 					};
 				case PICK_UP:
@@ -532,10 +532,10 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(pills, t);
-								System.out.println("Hai preso le pillole!");
+								System.out.println(i.getString("pick_item_5"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println("Oggetto non presente nella stanza");
+								System.out.println(i.getString("no_item_room"));
 							}
 						}
 					};
@@ -545,7 +545,7 @@ public class Asylum extends GameDescription implements Serializable {
 			}
 		});
 
-		final Item adrenaline = new Item("adrenalina", "Delle siringhe di adrenalina che ti incrementano la salute.", null);
+		final Item adrenaline = new Item(i.getString("name_item_6"), i.getString("descr_item_6"), null);
 		adrenaline.setHandler(new CommandHandler() {
 			@Override
 			public EventHandler apply(CommandType t) {
@@ -557,11 +557,11 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							if(t.getInventory().getList().contains(adrenaline)) {
-								System.out.println("L'effetto dell'adrenalina incrementa la tua salute:");
+								System.out.println(i.getString("use_item_6"));
 								((Asylum) t).health += 20;
-								System.out.println("+20 salute");
+								System.out.println(i.getString("show_health"));
 								t.getInventory().remove(adrenaline);
-							} else System.out.println("L'oggetto non e' presente nell'inventario!");
+							} else System.out.println(i.getString("no_item_inventory"));
 						}
 					};
 				case LOOK_AT:
@@ -578,7 +578,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							EventHandler.drop(adrenaline, t);
-							System.out.println("Hai lasciato l'adrenalina!");
+							System.out.println(i.getString("drop_item_6"));
 						}
 					};
 				case PICK_UP:
@@ -588,10 +588,10 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(adrenaline, t);
-								System.out.println("Hai preso l'adrenalina!");
+								System.out.println(i.getString("pick_item_6"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println("Oggetto non presente nella stanza");
+								System.out.println(i.getString("no_item_room"));
 							}
 						}
 					};
@@ -601,7 +601,7 @@ public class Asylum extends GameDescription implements Serializable {
 			}
 		});
 
-		final Item mirrorBathroom = new Item("specchio", "Uno specchio in cui viene riflessa la tua immagine. Mmm, non sei poi cosi' male.", null);
+		final Item mirrorBathroom = new Item(i.getString("name_item_7"), i.getString("descr_item_7"), null);
 		mirrorBathroom.setHandler(new CommandHandler() {
 			@Override
 			public EventHandler apply(CommandType t) {
@@ -623,7 +623,7 @@ public class Asylum extends GameDescription implements Serializable {
 							if(!mirrorBathroom.isPushed()) {
 								t.getCurrentRoom().getObjects().add(pills);
 								mirrorBathroom.setPushed(true);
-								System.out.println("Hai rotto lo specchio!");
+								System.out.println(i.getString("break_item_7"));
 							}
 						}
 					};
@@ -633,7 +633,7 @@ public class Asylum extends GameDescription implements Serializable {
 			}
 		});
 
-		final Item compass = new Item("bussola", "Una bussola utile per un miglior orientamento nella mappa.", null);
+		final Item compass = new Item(i.getString("name_item_8"), i.getString("descr_item_8"), null);
 		compass.setHandler(new CommandHandler() {
 			@Override
 			public EventHandler apply(CommandType t) {
@@ -651,30 +651,35 @@ public class Asylum extends GameDescription implements Serializable {
 					return new EventHandler() {
 						@Override
 						public void accept(GameDescription t) {
-							System.out.println("Grazie all'utilizzo della bussola ora sai in che direzione sono le porte e ti e' possibile spostarti utilizzando i punti cardinali come comandi!");
-							room1.setLook("Vedi una porta a sud che conduce nel corridoio 1.");
-							room2.setLook("Puoi solo tornare indietro nel corridoio 1 a sud.");
-							room3.setLook("Non vedi altre porte. Puoi solo tornare nel corridoio 2 a sud.");
-							room4.setLook("Puoi solo tornare indietro nel corridoio 2 a sud.");
-							room5.setLook("Puoi solo tornare indietro nel corridoio 1 a nord.");
-							room6.setLook("Qualche paziente sperava forse che bastasse fare qualche buco per crearsi una via di fuga...Puoi solo tornare indietro nel corridoio 1 a nord.");
-							room7.setLook("Puoi solo tornare indietro nel corridoio 2 a nord.");
-							room8.setLook("Non vedi altre porte, puoi solo tornare indietro nel corridoio 2 a nord.");
-							hallway.setLook("Puoi proseguire a est per il corridoio 2 o entrare nel dormitorio 1 a nord-ovest, 2 a nord-est, 5 a sud-ovest, o 6 a sud-est.");
-							hallway2.setLook("Il sangue e' dappertutto. Puoi tornare indietro ad ovest nel corridoio 1, proseguire ad est per il corridoio 3, entrare nella lavanderia a nord-ovest o entrare nel dormitorio 4 a nord-est, 7 a sud-ovest, 8 a sud-est.");
-							hallway3.setLook("Vedi scheletri ovunque. Puoi tornare indietro ad ovest nel corridoio 2, entrare nel bagno a nord, o prendere le scale per scendere al piano inferiore");
+							System.out.println(i.getString("use_item_8"));
+							room1.setLook(i.getString("look_room_1_compass"));
+							room2.setLook(i.getString("look_room_2_compass"));
+							room3.setLook(i.getString("look_room_3_compass"));
+							room4.setLook(i.getString("look_room_4_compass"));
+							room5.setLook(i.getString("look_room_5_compass"));
+							room6.setLook(i.getString("look_room_6_compass"));
+							room7.setLook(i.getString("look_room_7_compass"));
+							room8.setLook(i.getString("look_room_8_compass"));
+							hallway.setLook(i.getString("look_room_9_compass"));
+							hallway2.setLook(i.getString("look_room_10_compass"));
+							hallway3.setLook(i.getString("look_room_11_compass"));
 							if (((Asylum) t).gasVuln == true) {
-								bathroom.setLook("L'effetto del gas ti stordisce e non ti permette di vedere nulla. Puoi solo tornare indietro a sud nel corridoio 3.");
+								bathroom.setLook(i.getString("look_room_12_compass_no_mask"));
 									}
 							else {
-								bathroom.setLook("Potresti sfruttare il gabinetto per...no, meglio evitare. Puoi solo tornare indietro a sud nel corridoio 3.");
+								bathroom.setLook(i.getString("look_room_12_compass"));
 									}
-							hallway4.setLook("Puoi tornare a nord verso il piano superiore o accedere all'infermeria a nord-est, alla sala operatoria a sud-est e alla sorveglianza ad ovest.");
-							infirmary.setLook("Puoi solo tornare indietro nel corridoio 4 ad ovest.");
-							surgery.setLook("Puoi solo tornare indietro nel corridoio 4 ad ovest.");
-							surveillance.setLook("Puoi tornare nel corridoio 4 ad est o proseguire a sud verso la cella imbottita.");
-							paddedCell.setLook("Apparentemente, puoi solo tornare indietro nella sorveglianza a nord.");
-							office.setLook("Vedi delle scale a sud che conducono all'esterno della struttura, ma il passaggio e' bloccato dal direttore. Puoi tornare indietro a nord nella cella imbottita.");
+							hallway4.setLook(i.getString("look_room_13_compass"));
+							infirmary.setLook(i.getString("look_room_14_compass"));
+							if (((Asylum) t).gasVuln == true) {
+								surgery.setLook(i.getString("look_room_15_compass_no_mask"));
+									}
+							else {
+								surgery.setLook(i.getString("look_room_15_compass"));
+									}
+							surveillance.setLook(i.getString("look_room_16_compass"));
+							paddedCell.setLook(i.getString("look_room_17_compass"));
+							office.setLook(i.getString("look_room_18_compass"));
 							((Asylum) t).compassUsed = true;
 
 						}
@@ -685,7 +690,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							EventHandler.drop(compass, t);
-							System.out.println("Hai lasciato la bussola!");
+							System.out.println(i.getString("drop_item_8"));
 							((Asylum) t).compassUsed = false;
 						}
 					};
@@ -696,10 +701,10 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(compass, t);
-								System.out.println("Hai preso la bussola!");
+								System.out.println(i.getString("pick_item_8"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println("Oggetto non presente nella stanza");
+								System.out.println(i.getString("no_item_room"));
 							}
 						}
 					};
@@ -709,7 +714,7 @@ public class Asylum extends GameDescription implements Serializable {
 			}
 		});
 
-		final ItemContainer chest = new ItemContainer("cassa", "Una cassa che potrebbe contenere qualcosa al suo interno.", null);
+		final ItemContainer chest = new ItemContainer(i.getString("name_item_9"), i.getString("descr_item_9"), null);
 		chest.setHandler(new CommandHandler() {
 			@Override
 			public EventHandler apply(CommandType t) {
@@ -723,7 +728,7 @@ public class Asylum extends GameDescription implements Serializable {
 							if(!chest.isOpened()) {
 								System.out.println(chest.getDescription());
 							}else {
-								System.out.println("Questa cassa contiene: ");
+								System.out.println(i.getString("look_item_9"));
 								for(Item i: chest.getContent()) {
 									System.out.println(i.getName());
 								}
@@ -739,12 +744,12 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							if(chest.isOpened()) {
-								System.out.println("Cassa gia' aperta");
+								System.out.println(i.getString("opened_chest"));
 							}else if(!chest.isOpened() && !chest.isLocked()) {
-									System.out.println("Hai aperto la cassa!");
+									System.out.println(i.getString("open_chest"));
 									chest.setOpened(true);
 								  }else if(chest.isLocked()) {
-									System.out.println("E' bloccata! Probabilmente hai bisogno di una chiave...");
+									System.out.println(i.getString("locked_chest"));
 								  }
 						}
 					};
@@ -754,9 +759,9 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 								if (!chest.isOpened()) {
-									System.out.println("La cassa e' gia' chiusa!");}
+									System.out.println(i.getString("closed_chest"));}
 									else {
-										System.out.println("Hai chiuso la cassa!");
+										System.out.println(i.getString("close_chest"));
 										for(Item i: chest.getContent()) t.getCurrentRoom().getObjects().remove(i);
 										chest.setOpened(false);
 									}
@@ -769,7 +774,7 @@ public class Asylum extends GameDescription implements Serializable {
 			}
 		});
 
-		final Item pc = new Item("pc", "Un computer utilizzato per interagire con i sistemi di sicurezza.", null);
+		final Item pc = new Item(i.getString("name_item_10"), i.getString("descr_item_10"), null);
 		pc.setHandler(new CommandHandler() {
 			@Override
 			public EventHandler apply(CommandType t) {
@@ -780,7 +785,7 @@ public class Asylum extends GameDescription implements Serializable {
 						@Override
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
-							System.out.println("Accendi il PC: vengono mostrati i video degli esperimenti sui pazienti. Ora ricordi: stavi indagando sulla scomparsa di un paziente all'interno del manicomio quando qualcuno ti ha colpito alla testa! Dai video emerge che questi esperimenti causano delle mutazioni nei pazienti!");						}
+							System.out.println(i.getString("look_item_10"));						}
 					};
 				case LOOK_AT:
 					return new EventHandler() {
@@ -796,7 +801,7 @@ public class Asylum extends GameDescription implements Serializable {
 			}
 		});
 
-		final Weapon scalpel = new Weapon("bisturi", "Un bisturi utilizzato negli esperimenti.", null, 5, 10, 30);
+		final Weapon scalpel = new Weapon(i.getString("name_item_11"), i.getString("descr_item_11"), null, 5, 10, 30);
 		scalpel.setHandler(new CommandHandler() {
 			@Override
 			public EventHandler apply(CommandType t) {
@@ -821,17 +826,17 @@ public class Asylum extends GameDescription implements Serializable {
 									scalpel.setShots(scalpel.getShots() - 1);
 									switch(scalpel.getShots()) {
 									case 0:
-										System.out.println("Noo! la lama del bisturi si e' rotta");
+										System.out.println(i.getString("case_0_item_11"));
 										break;
 									case 1:
-										System.out.println("La lama se ne sta venendo");
+										System.out.println(i.getString("case_1_item_11"));
 										break;
 									case 4:
-										System.out.println("Il bisturi e' molto fragile si danneggia molto facilmente");
+										System.out.println(i.getString("case_4_item_11"));
 										break;
 									}
-								} else System.out.println("Questo bisturi ha perso la lama, non ti potra' piu' essere d'aiuto");
-							}else System.out.println("Non sembra esserci nessuno da colpire!");
+								} else System.out.println(i.getString("unusable_item_11"));
+							}else System.out.println(i.getString("no_target"));
 						}
 					};
 				case DROP:
@@ -840,7 +845,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							EventHandler.drop(scalpel, t);
-							System.out.println("Hai lasciato il bisturi!");
+							System.out.println(i.getString("drop_item_11"));
 						}
 					};
 				case PICK_UP:
@@ -850,10 +855,10 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(scalpel, t);
-								System.out.println("Hai preso il bisturi!");
+								System.out.println(i.getString("pick_item_11"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println("Oggetto non presente nella stanza");
+								System.out.println(i.getString("no_item_room"));
 							}
 						}
 					};
@@ -864,7 +869,7 @@ public class Asylum extends GameDescription implements Serializable {
 		});
 
 
-		final Weapon gun = new Weapon("pistola", "Una pistola probabilmente utilizzata contro i pazienti piu' inquieti e difficili da controllare.", null, 7, 30, 70);
+		final Weapon gun = new Weapon(i.getString("name_item_12"), i.getString("descr_item_12"), null, 7, 30, 70);
 		gun.setHandler(new CommandHandler() {
 			@Override
 			public EventHandler apply(CommandType t) {
@@ -889,17 +894,17 @@ public class Asylum extends GameDescription implements Serializable {
 									gun.setShots(gun.getShots() - 1);
 									switch(gun.getShots()) {
 									case 0:
-										System.out.println("Il caricatore e' finito, munizioni esaurite");
+										System.out.println(i.getString("case_0_item_12"));
 										break;
 									case 1:
-										System.out.println("Ultimo colpo usalo bene");
+										System.out.println(i.getString("case_1_item_12"));
 										break;
 									case 5:
-										System.out.println("Hai solo un caricatore ti restano quindi 5 colpi");
+										System.out.println(i.getString("case_5_item_12"));
 										break;
 									}
-								} else System.out.println("Ops... hai finito le munizioni");
-							}else System.out.println("Non sembra esserci nessuno da colpire!");
+								} else System.out.println(i.getString("unusable_item_12"));
+							}else System.out.println(i.getString("no_target"));
 						}
 					};
 				case DROP:
@@ -908,7 +913,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							EventHandler.drop(gun, t);
-							System.out.println("Hai lasciato la pistola!");
+							System.out.println(i.getString("drop_item_12"));
 						}
 					};
 				case PICK_UP:
@@ -918,10 +923,10 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(gun, t);
-								System.out.println("Hai preso la pistola!");
+								System.out.println(i.getString("pick_item_12"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println("Oggetto non presente nella stanza");
+								System.out.println(i.getString("no_item_room"));
 							}
 						}
 					};
@@ -931,7 +936,7 @@ public class Asylum extends GameDescription implements Serializable {
 			}
 		});
 
-		final Item mirrorCell = new Item("specchio", "Uno specchio in cui viene riflessa la tua immagine. Mmm, non sei poi cosi' male.", null);
+		final Item mirrorCell = new Item(i.getString("name_item_13"), i.getString("descr_item_13"), null);
 		mirrorCell.setHandler(new CommandHandler() {
 			@Override
 			public EventHandler apply(CommandType t) {
@@ -955,7 +960,7 @@ public class Asylum extends GameDescription implements Serializable {
 								//inserire l'arco
 								m.insArc(paddedCell, office, new Gateway(Direction.SOUTH));
 								mirrorCell.setPushed(true);
-								System.out.println("La rottura dello specchio ti rivela un passaggio segreto a sud nell'ufficio del direttore!");
+								System.out.println(i.getString("break_item_13"));
 							}
 						}
 					};
@@ -1091,9 +1096,12 @@ public class Asylum extends GameDescription implements Serializable {
 
 
 		Inventory corpseInv = new Inventory();
+		
+        ResourceBundle e = ResourceBundle.getBundle("enemy", lang);
 
-		final AdventureCharacter corpse = new AdventureCharacter(0, "cadavere", "Un corpo esanime dall'odore stomachevole. Deve essere li' da tanto tempo. Dalla tasca della sua giacca sembra spuntare una chiave.", null, corpseInv, null);
-		final Enemy mutant = new Enemy(55, "mutante", "Un mutante dal viso fortemente sfigurato. Sara' mica Deadpool?", "Anche tu sei uno di loro?! Non ti lascero' farmi del male!", null, codePaper,5,20);
+
+		final AdventureCharacter corpse = new AdventureCharacter(0, e.getString("name_enemy_1"), e.getString("descr_enemy_1"), null, corpseInv, null);
+		final Enemy mutant = new Enemy(55, e.getString("name_enemy_2"), e.getString("descr_enemy_2"), e.getString("talk_to_enemy_2"), null, codePaper,5,20);
 		mutant.setInv(new Inventory());
 
 		final Item key = new Item(i.getString("name_item_17"), i.getString("descr_item_17"), null);
@@ -1307,14 +1315,15 @@ public class Asylum extends GameDescription implements Serializable {
 					return invalidCommand;
 				}};
 		});
+		
 
 
-		final Enemy assistant = new Enemy(100, "assistente", "E' l'assistente del direttore, o per lo meno cio' che rimane di lui, visto il suo corpo sensibilmente ingigantito dopo le mutazioni a cui si e' sottoposto. Deve aver aiutato il direttore nel portare avanti questi folli esperimenti.",
-				"Ancora tu? Pensavo che dopo quel forte colpo alla testa non ti saresti svegliato per un po'. Beh, il prossimo paziente sei proprio tu, quindi ti ringrazio per avermi risparmiato la fatica di salire al pieno superiore per prenderti. Non opporre resistenza e preparati ad accogliere nel tuo corpo i poteri del virus!",
+		final Enemy assistant = new Enemy(100, e.getString("name_enemy_3"), e.getString("descr_enemy_3"),
+				e.getString("talk_to_enemy_3"),
 				new Inventory(),key_1,5,20);
 
-		final Enemy director = new Enemy(100, "direttore", "E' il direttore, nonche' la mente contorta dietro tutto questo. I segni del virus sembrano meno evidenti su di lui. Avra' furbamente aspettato piu' miglioramenti possibili nei test del virus prima di sottoporsi lui stesso ad esso. Eppure ti e' sempre sembrato un tipo perbene...",
-				"Muahahah! Eccoti qua agente. Dopo aver sentito gli spari dalla cella, ti aspettavo. Sei sopreso dopo aver scoperto i miei piani? Lo sarai di piu' dopo aver visto i poteri che acquisirai tramite il virus! Non prendermi per pazzo, grazie a questo virus non esisteranno mai piu' deboli in questo mondo. Io rendero' l'essere umano la creatura piu' potente che sia mai esistita sulla Terra! Si parlera' di me per milioni e milioni di anni! Ma se non vuoi aiutarmi, non preoccuparti. Ci servono delle vittime sacrificali in onore della Santa Muerte che ci supporta in tutto questo. Dunque, preparati a morire!",
+		final Enemy director = new Enemy(100, e.getString("name_enemy_4"), e.getString("descr_enemy_4"),
+				e.getString("talk_to_enemy_4"),
 				new Inventory(), key_2,5,20);
 
 
@@ -1402,6 +1411,9 @@ public class Asylum extends GameDescription implements Serializable {
 
 
 		//traps
+		
+        ResourceBundle tr = ResourceBundle.getBundle("trap", lang);
+
 
 		hallway2.setTrap(new EventHandler() {
 
@@ -1409,7 +1421,7 @@ public class Asylum extends GameDescription implements Serializable {
 			public void accept(GameDescription t) {
 				// TODO Auto-generated method stub
 				if(getCurrentEnemy()!=null) {
-					System.out.println(i.getString("descr_room_10"));
+					System.out.println(tr.getString("descr_room_10"));
 				}
 			}
 		});
@@ -1422,7 +1434,7 @@ public class Asylum extends GameDescription implements Serializable {
 				if(g.gasVuln && !g.breathedGas) {
 					g.breathedGas = true;
 					g.maxMoves = 4;
-					System.out.println(i.getString("gas_breathing"));
+					System.out.println(tr.getString("gas_breathing"));
 				}
 			}
 		};
@@ -1436,7 +1448,7 @@ public class Asylum extends GameDescription implements Serializable {
 				// TODO Auto-generated method stub
 				Asylum g = (Asylum) t;
 				g.health = 0;
-				System.out.println(i.getString("trap_death"));
+				System.out.println(tr.getString("trap_death"));
 				Thread.currentThread().interrupt();
 			}
 		});
@@ -1453,7 +1465,7 @@ public class Asylum extends GameDescription implements Serializable {
 
 		//stanza iniziale
 		setCurrentRoom(room1);
-		System.out.println(i.getString("intro"));
+		System.out.println(tr.getString("intro"));
 
 		paddedCell.setTrap(new EventHandler() {
 
@@ -1464,14 +1476,14 @@ public class Asylum extends GameDescription implements Serializable {
 					try {
 						t.getMap().readArc(paddedCell, surveillance).setLockedBy(key_1.getId());
 						t.getMap().readArc(paddedCell, surveillance).setLocked(true);
-						paddedCell.setDescription(i.getString("descr_room_17_light"));
-						paddedCell.setLook(i.getString("look_room_17_light"));
-						System.out.println(i.getString("trapped"));
+						paddedCell.setDescription(tr.getString("descr_room_17_light"));
+						paddedCell.setLook(tr.getString("look_room_17_light"));
+						System.out.println(tr.getString("trapped"));
 					} catch (Exception e) {}
 				}
 				if (t.getCurrentRoom().hasLight() && getCurrentEnemy()==null) {
 					try {
-					paddedCell.setDescription(i.getString("descr_room_17_no_enemy"));
+					paddedCell.setDescription(tr.getString("descr_room_17_no_enemy"));
 				}
 			 catch (Exception e) {}
 		}
@@ -1485,14 +1497,14 @@ public class Asylum extends GameDescription implements Serializable {
 				// TODO Auto-generated method stub
 				if (getCurrentEnemy()!=null) {
 					try {
-						System.out.println(i.getString("office_enemy"));
+						System.out.println(tr.getString("office_enemy"));
 
 				}
 			 catch (Exception e) {}
 		}
 				if (getCurrentEnemy()==null) {
 
-					office.setLook(i.getString("look_room_17_no_enemy"));
+					office.setLook(tr.getString("look_room_17_no_enemy"));
 					}
 
 			}
