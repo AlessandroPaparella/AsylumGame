@@ -32,7 +32,7 @@ import hashedGraph.WeightedHashedGraph;
 
 public class Asylum extends GameDescription implements Serializable {
 	private static final long serialVersionUID = -78135229798072209L;
-	private transient Locale lang= Locale.getDefault();
+	private Locale lang= Manager.locale;
 	private static Object lock = new Object();
 	private static Manager frame;
 	private String player;
@@ -103,18 +103,18 @@ public class Asylum extends GameDescription implements Serializable {
 			db.closeConnection();
 			return;
 		}
-		if(Manager.locale.equals(Locale.ITALIAN) || Manager.locale.equals(Locale.ITALY)) {
-			Engine.parser = new ParserIT();
-		}else {
-			Engine.parser = new ParserEN();
-		}
 		if(frame.getSave()==null) {
 			initNew();
 			//inserimento in db
 	        this.db.insertionTuple(this.player, this);
 		}else {
 			initFromSave((Asylum) frame.getSave());
-			loadLocales();
+			if(!this.lang.equals(Manager.locale)) loadLocales();
+		}
+		if(lang.equals(Locale.ITALIAN) || lang.equals(Locale.ITALY)) {
+			Engine.parser = new ParserIT();
+		}else {
+			Engine.parser = new ParserEN();
 		}
 		db.closeConnection();
 	}
@@ -1547,6 +1547,7 @@ public class Asylum extends GameDescription implements Serializable {
 		this.setCurrentEnemy(save.getCurrentEnemy());
 		this.setCommandTarget(save.getCommandTarget());
 		this.setCommands(save.getCommands());
+		this.lang = save.lang;
 		System.out.println(this.health);
 	}
 
@@ -1604,13 +1605,14 @@ public class Asylum extends GameDescription implements Serializable {
 	}
 
 	private void changeRoom(CommandType c, PrintStream out) {
+		ResourceBundle b = ResourceBundle.getBundle("function", lang);
 		if(compassUsed || c==CommandType.UP || c==CommandType.DOWN) {
 			try {
 				Room next = searchDirection(commandToDirection(c));
 				if (next == null) {
-					out.println("Non esiste nessuna stanza adiacente in quella direzione!");
+					out.println(b.getString("adjacent_direction_room"));
 				} else if(getMap().readArc(getCurrentRoom(), next).isLocked()) {
-					out.println("La porta sembra esser bloccata...");
+					out.println(b.getString("door_blocked"));
 				} else {
 					setCurrentRoom(next);
 					setCurrentEnemy(null);
@@ -1630,13 +1632,15 @@ public class Asylum extends GameDescription implements Serializable {
 				out.println(e.getMessage());
 			}
 		}else {
-			out.println("Se solo avessi una bussola...");
+			out.println(b.getString("without_compass"));
 		}
 	}
 
 	@Override
 	public void nextMove(ParserOutput p, PrintStream out) {
 		// TODO Auto-generated method stub
+
+		ResourceBundle b = ResourceBundle.getBundle("function", lang);
 
 		if (p.getObject()==null && p.getEnemy()==null && p.getTarget()==null) {
 			switch (p.getCommand().getType()) {
@@ -1645,13 +1649,13 @@ public class Asylum extends GameDescription implements Serializable {
 					out.println(i.getName());
 				}
 				if(getInventory().getList().isEmpty())
-					out.println("Inventario vuoto!");
+					out.println(b.getString("empty_inv"));
 				break;
 			case LOOK_AT:
 				out.println(getCurrentRoom().getLook());
 				if(!getCurrentRoom().getObjects().isEmpty()) {
 					if(getCurrentRoom().hasLight()) {
-						out.println("La stanza contiene anche: ");
+						out.println(b.getString("room_contain"));
 						for(Item i : getCurrentRoom().getObjects()) {
 							out.println(i.getName());
 						}
@@ -1694,7 +1698,7 @@ public class Asylum extends GameDescription implements Serializable {
 					for(Room a : getMap().getAdjacents(getCurrentRoom())) {
 						if(a.getName().equals(p.getNextRoom())) {
 							 if(getMap().readArc(getCurrentRoom(), a).isLocked()) {
-								out.println("La porta sembra esser bloccata...");
+								out.println(b.getString("door_blocked"));
 								break outer;
 							} else {
 							setCurrentRoom(a);
@@ -1717,7 +1721,7 @@ public class Asylum extends GameDescription implements Serializable {
 					}
 					}
 					if(!getCurrentRoom().getName().equals(p.getNextRoom())) {
-						out.println("Nessuna stanza adiacente ha questo nome!");
+						out.println(b.getString("adjacent_name_room"));
 					}
 
 				}catch (Exception e) {
@@ -1737,7 +1741,7 @@ public class Asylum extends GameDescription implements Serializable {
 				out.println(p.getEnemy().getTalk());
 				}
 				else {
-					out.println("Il nemico e' ormai deceduto, potrai parlargli con calma al cimitero...");
+					out.println(b.getString("enemy_killed"));
 				}
 				break;
 			case BREAK:
@@ -1745,7 +1749,7 @@ public class Asylum extends GameDescription implements Serializable {
 					setCurrentEnemy((Enemy)p.getEnemy());
 					p.getEnemy().setHealth(p.getEnemy().getHealth()-5);
 				}else {
-					out.println("Non dovresti... Non sembra essere minaccioso!");
+					out.println(b.getString("speak_dead"));
 				}
 				break;
 			case LOOK_AT:
@@ -1791,19 +1795,19 @@ public class Asylum extends GameDescription implements Serializable {
 		if(this.breathedGas) {
 			switch(maxMoves) {
 				case 4:
-					out.println("Il gas inizia ad entrare in circolo nell'organismo");
+					out.println(b.getString("gas_moves_1"));
 					break;
 				case 3:
-					out.println("Il gas sta iniziando a fere il suo effetto, sintomi indolenzimento e debolezza");
+					out.println(b.getString("gas_moves_2"));
 					break;
 				case 2:
-					out.println("Il gas sta iniziando a ofuscarti le idee e non riesci piu' a ragionare, devi fare in fretta");
+					out.println(b.getString("gas_moves_3"));
 					break;
 				case 1:
-					out.println("La vista si offusca, la tua fine e' vicina ");
+					out.println(b.getString("gas_moves_4"));
 					break;
 				case 0:
-					out.println("Sei morto per asfissia");
+					out.println(b.getString("died_gas"));
 					System.exit(0);
 					break;
 				}
@@ -1813,22 +1817,21 @@ public class Asylum extends GameDescription implements Serializable {
 		if(getCurrentEnemy()!=null && getCurrentEnemy().getHealth()>0 && getCurrentRoom().hasLight()) {
 			health = health - getCurrentEnemy().getDamage();
 			if(health<0) health=0;
-			out.println(getCurrentEnemy().getName()+" ti ha attaccato! Salute: "+ health);
-			out.println(getCurrentEnemy().getName()+" ha salute: "+getCurrentEnemy().getHealth());
+			out.println(getCurrentEnemy().getName()+" "+b.getString("attacked")+" "+health);
+			out.println(getCurrentEnemy().getName()+" "+b.getString("has_health")+" "+getCurrentEnemy().getHealth());
 		}
 		if(getCurrentEnemy()!=null && getCurrentEnemy().getHealth()<=0) {
-			out.println("Hai ucciso "+getCurrentEnemy().getName()+"!");
+			out.println(b.getString("killed")+" "+getCurrentEnemy().getName()+"!");
 			if(getCurrentEnemy().getDroppable()!=null) {
 				getCurrentRoom().getObjects().add(getCurrentEnemy().getDroppable());
-				out.println(getCurrentEnemy().getName()+" ha rilasciato "+getCurrentEnemy().getDroppable().getName());
+				out.println(getCurrentEnemy().getName()+" "+b.getString("released")+" "+getCurrentEnemy().getDroppable().getName());
 				getCurrentEnemy().setDroppable(null);
 			}
 			setCurrentEnemy(null);
 		}
 
 		if(health==0) {
-			out.println("Sei morto! GAME OVER!");
-			Thread.currentThread().interrupt();
+			out.println(b.getString("game_over"));
 			return;
 		}
 
@@ -1906,6 +1909,17 @@ public class Asylum extends GameDescription implements Serializable {
 				it.getHandler().apply(CommandType.USE).accept(this);
 			}
 		}
+		/*
+		for(Command c : this.getCommands()) {
+			switch (c.getType()) {
+			case WALK_TO:
+
+				break;
+
+			default:
+				break;
+			}
+		}*/
 	}
 
 
