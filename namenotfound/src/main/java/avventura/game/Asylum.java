@@ -1094,7 +1094,7 @@ public class Asylum extends GameDescription implements Serializable {
 
 		final AdventureCharacter corpse = new AdventureCharacter(0, "cadavere", "Un corpo esanime dall'odore stomachevole. Deve essere li' da tanto tempo. Dalla tasca della sua giacca sembra spuntare una chiave.", null, corpseInv, null);
 		final Enemy mutant = new Enemy(55, "mutante", "Un mutante dal viso fortemente sfigurato. Sara' mica Deadpool?", "Anche tu sei uno di loro?! Non ti lascero' farmi del male!", null, codePaper,5,20);
-
+		mutant.setInv(new Inventory());
 
 		final Item key = new Item("chiave", "Una chiave che potrebbe tornare utile per aprire qualcosa.", null);
 		key.setHandler(new CommandHandler() {
@@ -1813,14 +1813,13 @@ public class Asylum extends GameDescription implements Serializable {
 			@Override
 			public void accept(Room t) {
 				// TODO Auto-generated method stub
-
 				//loading bundles for room, items, trap and adventurecharacter
 				ResourceBundle r = ResourceBundle.getBundle("room", Manager.locale);
 				ResourceBundle i = ResourceBundle.getBundle("item", Manager.locale);
 				ResourceBundle tr = ResourceBundle.getBundle("trap", Manager.locale);
 				ResourceBundle e = ResourceBundle.getBundle("enemy", Manager.locale);
 				//edit room info
-				t.setDescription(r.getString("descr_room_".concat(t.getId().toString())));
+				t.setDescription(r.getString("descr_room_".concat((t.getId()).toString())));
 				t.setLook(r.getString("look_room_".concat(t.getId().toString())));
 				t.setName(r.getString("name_room_".concat(t.getId().toString())));
 				//edit items info of current room
@@ -1881,8 +1880,8 @@ public class Asylum extends GameDescription implements Serializable {
 		List<Command> newCommands = new ArrayList<Command>();
 		ResourceBundle commBundle = ResourceBundle.getBundle("command", lang);
 		for(Command com : this.getCommands()) {
-			Command nc = new Command(com.getType(), commBundle.getString("name_command_"+com.getType().name()));
-			nc.setAlias(commBundle.getString("alias_command_"+com.getType().name()).split(" "));
+			Command nc = new Command(com.getType(), commBundle.getString("name_command_"+com.getType().name().toLowerCase()));
+			nc.setAlias(commBundle.getString("alias_command_"+com.getType().name().toLowerCase()).split(" "));
 			newCommands.add(nc);
 		}
 		this.setCommands(newCommands);

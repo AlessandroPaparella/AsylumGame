@@ -21,7 +21,7 @@ public class Item implements Serializable {
 		super();
 		this.name = name;
 		this.description = description;
-		id = istances;
+		id = istances+1;
 		istances++;
 		pushed=false;
 		opened=false;
