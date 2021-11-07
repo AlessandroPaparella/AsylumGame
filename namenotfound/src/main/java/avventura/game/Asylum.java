@@ -282,7 +282,7 @@ public class Asylum extends GameDescription implements Serializable {
 			}
 		});
 
-		final Weapon screwdriver = new Weapon(i.getString("item_2"), i.getString("item_2"), null, 10, 5, 15);
+		final Weapon screwdriver = new Weapon(i.getString("name_item_2"), i.getString("descr_item_2"), null, 10, 5, 15);
 		screwdriver.setHandler(new CommandHandler() {
 			@Override
 			public EventHandler apply(CommandType t) {
@@ -307,20 +307,20 @@ public class Asylum extends GameDescription implements Serializable {
 									screwdriver.setShots(screwdriver.getShots() - 1);
 									switch(screwdriver.getShots()) {
 									case 0:
-										System.out.println(i.getString("case_0_item_2"));
+										System.out.println(ResourceBundle.getBundle("item", lang).getString("case_0_item_2"));
 										break;
 									case 1:
-										System.out.println(i.getString("case_1_item_2"));
+										System.out.println(ResourceBundle.getBundle("item", lang).getString("case_1_item_2"));
 										break;
 									case 4:
-										System.out.println(i.getString("case_4_item_2"));
+										System.out.println(ResourceBundle.getBundle("item", lang).getString("case_4_item_2"));
 										break;
 									case 7:
-										System.out.println(i.getString("case_7_item_2"));
+										System.out.println(ResourceBundle.getBundle("item", lang).getString("case_7_item_2"));
 										break;
 									}
-								} else System.out.println(i.getString("unusable_item_2"));
-							} else System.out.println(i.getString("no_target"));
+								} else System.out.println(ResourceBundle.getBundle("item", lang).getString("unusable_item_2"));
+							} else System.out.println(ResourceBundle.getBundle("item", lang).getString("no_target"));
 						}
 					};
 				case DROP:
@@ -329,7 +329,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							EventHandler.drop(screwdriver, t);
-							System.out.println(i.getString("drop_item_2"));
+							System.out.println(ResourceBundle.getBundle("item", lang).getString("drop_item_2"));
 						}
 					};
 				case PICK_UP:
@@ -339,10 +339,10 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(screwdriver, t);
-								System.out.println(i.getString("pick_item_2"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("pick_item_2"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println(i.getString("no_item_room"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("no_item_room"));
 							}
 						}
 					};
@@ -370,18 +370,18 @@ public class Asylum extends GameDescription implements Serializable {
 						@Override
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
-							System.out.println(i.getString("use_item_3"));
+							System.out.println(ResourceBundle.getBundle("item", lang).getString("use_item_3"));
 							((Asylum) t).gasVuln = false;
-							bathroom.setDescription(i.getString("descr_bathroom_mask"));
-					     	surgery.setDescription(i.getString("descr_surgery_mask"));
+							bathroom.setDescription(ResourceBundle.getBundle("item", lang).getString("descr_bathroom_mask"));
+					     	surgery.setDescription(ResourceBundle.getBundle("item", lang).getString("descr_surgery_mask"));
 					     	if(!compassUsed) {
-					     		bathroom.setLook(i.getString("look_bathroom_mask_compass"));
-							 	surgery.setLook(i.getString("look_surgery_mask_compass"));
+					     		bathroom.setLook(ResourceBundle.getBundle("item", lang).getString("look_bathroom_mask_compass"));
+							 	surgery.setLook(ResourceBundle.getBundle("item", lang).getString("look_surgery_mask_compass"));
 
 					     	}
 					     	else {
-					     		bathroom.setLook(i.getString("look_bathroom_mask"));
-							 	surgery.setLook(i.getString("look_surgery_mask"));
+					     		bathroom.setLook(ResourceBundle.getBundle("item", lang).getString("look_bathroom_mask"));
+							 	surgery.setLook(ResourceBundle.getBundle("item", lang).getString("look_surgery_mask"));
 						}
 						}
 					};
@@ -392,10 +392,10 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(gasmask, t);
-								System.out.println(i.getString("pick_item_3"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("pick_item_3"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println(i.getString("no_item_room"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("no_item_room"));
 							}
 						}
 					};
@@ -406,16 +406,16 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							EventHandler.drop(gasmask, t);
 							((Asylum) t).gasVuln = true;
-							System.out.println(i.getString("drop_item_3"));
-							bathroom.setDescription(i.getString("descr_bathroom_drop_mask"));
-					        surgery.setDescription(i.getString("descr_surgery_drop_mask"));
+							System.out.println(ResourceBundle.getBundle("item", lang).getString("drop_item_3"));
+							bathroom.setDescription(ResourceBundle.getBundle("item", lang).getString("descr_bathroom_drop_mask"));
+					        surgery.setDescription(ResourceBundle.getBundle("item", lang).getString("descr_surgery_drop_mask"));
 							if(compassUsed) {
-								bathroom.setLook(i.getString("look_bathroom_drop_mask_compass"));
-						        surgery.setLook(i.getString("look_surgery_drop_mask_compass"));
+								bathroom.setLook(ResourceBundle.getBundle("item", lang).getString("look_bathroom_drop_mask_compass"));
+						        surgery.setLook(ResourceBundle.getBundle("item", lang).getString("look_surgery_drop_mask_compass"));
 						        }
 							else {
-								bathroom.setLook(i.getString("look_bathroom_drop_mask"));
-						        surgery.setLook(i.getString("look_surgery_drop_mask"));
+								bathroom.setLook(ResourceBundle.getBundle("item", lang).getString("look_bathroom_drop_mask"));
+						        surgery.setLook(ResourceBundle.getBundle("item", lang).getString("look_surgery_drop_mask"));
 						}
 						}
 					};
@@ -437,7 +437,7 @@ public class Asylum extends GameDescription implements Serializable {
 						@Override
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
-							System.out.println(i.getString("turn_on_item_4"));
+							System.out.println(ResourceBundle.getBundle("item", lang).getString("turn_on_item_4"));
 							t.getCurrentRoom().setLight(true);
 							if (t.getCurrentRoom().equals(paddedCell) && t.getCurrentRoom().getTrap()!= null) {
 								t.getCurrentRoom().getTrap().accept(t);
@@ -450,7 +450,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							t.getCurrentRoom().setVisible(t.getCurrentRoom().hasLight());
-							System.out.println(i.getString("turn_off_item_4"));
+							System.out.println(ResourceBundle.getBundle("item", lang).getString("turn_off_item_4"));
 						}
 					};
 				case LOOK_AT:
@@ -467,7 +467,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							EventHandler.drop(torch, t);
-							System.out.println(i.getString("drop_item_4"));
+							System.out.println(ResourceBundle.getBundle("item", lang).getString("drop_item_4"));
 						}
 					};
 				case PICK_UP:
@@ -477,10 +477,10 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(torch, t);
-								System.out.println(i.getString("pick_item_4"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("pick_item_4"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println(i.getString("no_item_room"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("no_item_room"));
 							}
 						}
 					};
@@ -502,10 +502,10 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							if(t.getInventory().getList().contains(pills)) {
-								System.out.println(i.getString("use_item_5"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("use_item_5"));
 								((Asylum) t).breathedGas = false;
 								t.getInventory().remove(pills);
-							} else System.out.println(i.getString("no_item_inventory"));
+							} else System.out.println(ResourceBundle.getBundle("item", lang).getString("no_item_inventory"));
 						}
 					};
 				case LOOK_AT:
@@ -522,7 +522,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							EventHandler.drop(pills, t);
-							System.out.println(i.getString("drop_item_5"));
+							System.out.println(ResourceBundle.getBundle("item", lang).getString("drop_item_5"));
 						}
 					};
 				case PICK_UP:
@@ -532,10 +532,10 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(pills, t);
-								System.out.println(i.getString("pick_item_5"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("pick_item_5"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println(i.getString("no_item_room"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("no_item_room"));
 							}
 						}
 					};
@@ -557,11 +557,11 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							if(t.getInventory().getList().contains(adrenaline)) {
-								System.out.println(i.getString("use_item_6"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("use_item_6"));
 								((Asylum) t).health += 20;
-								System.out.println(i.getString("show_health"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("show_health"));
 								t.getInventory().remove(adrenaline);
-							} else System.out.println(i.getString("no_item_inventory"));
+							} else System.out.println(ResourceBundle.getBundle("item", lang).getString("no_item_inventory"));
 						}
 					};
 				case LOOK_AT:
@@ -578,7 +578,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							EventHandler.drop(adrenaline, t);
-							System.out.println(i.getString("drop_item_6"));
+							System.out.println(ResourceBundle.getBundle("item", lang).getString("drop_item_6"));
 						}
 					};
 				case PICK_UP:
@@ -588,10 +588,10 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(adrenaline, t);
-								System.out.println(i.getString("pick_item_6"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("pick_item_6"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println(i.getString("no_item_room"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("no_item_room"));
 							}
 						}
 					};
@@ -623,7 +623,7 @@ public class Asylum extends GameDescription implements Serializable {
 							if(!mirrorBathroom.isPushed()) {
 								t.getCurrentRoom().getObjects().add(pills);
 								mirrorBathroom.setPushed(true);
-								System.out.println(i.getString("break_item_7"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("break_item_7"));
 							}
 						}
 					};
@@ -651,35 +651,35 @@ public class Asylum extends GameDescription implements Serializable {
 					return new EventHandler() {
 						@Override
 						public void accept(GameDescription t) {
-							System.out.println(i.getString("use_item_8"));
-							room1.setLook(i.getString("look_room_1_compass"));
-							room2.setLook(i.getString("look_room_2_compass"));
-							room3.setLook(i.getString("look_room_3_compass"));
-							room4.setLook(i.getString("look_room_4_compass"));
-							room5.setLook(i.getString("look_room_5_compass"));
-							room6.setLook(i.getString("look_room_6_compass"));
-							room7.setLook(i.getString("look_room_7_compass"));
-							room8.setLook(i.getString("look_room_8_compass"));
-							hallway.setLook(i.getString("look_room_9_compass"));
-							hallway2.setLook(i.getString("look_room_10_compass"));
-							hallway3.setLook(i.getString("look_room_11_compass"));
+							System.out.println(ResourceBundle.getBundle("item", lang).getString("use_item_8"));
+							room1.setLook(ResourceBundle.getBundle("item", lang).getString("look_room_1_compass"));
+							room2.setLook(ResourceBundle.getBundle("item", lang).getString("look_room_2_compass"));
+							room3.setLook(ResourceBundle.getBundle("item", lang).getString("look_room_3_compass"));
+							room4.setLook(ResourceBundle.getBundle("item", lang).getString("look_room_4_compass"));
+							room5.setLook(ResourceBundle.getBundle("item", lang).getString("look_room_5_compass"));
+							room6.setLook(ResourceBundle.getBundle("item", lang).getString("look_room_6_compass"));
+							room7.setLook(ResourceBundle.getBundle("item", lang).getString("look_room_7_compass"));
+							room8.setLook(ResourceBundle.getBundle("item", lang).getString("look_room_8_compass"));
+							hallway.setLook(ResourceBundle.getBundle("item", lang).getString("look_room_9_compass"));
+							hallway2.setLook(ResourceBundle.getBundle("item", lang).getString("look_room_10_compass"));
+							hallway3.setLook(ResourceBundle.getBundle("item", lang).getString("look_room_11_compass"));
 							if (((Asylum) t).gasVuln == true) {
-								bathroom.setLook(i.getString("look_room_12_compass_no_mask"));
+								bathroom.setLook(ResourceBundle.getBundle("item", lang).getString("look_room_12_compass_no_mask"));
 									}
 							else {
-								bathroom.setLook(i.getString("look_room_12_compass"));
+								bathroom.setLook(ResourceBundle.getBundle("item", lang).getString("look_room_12_compass"));
 									}
-							hallway4.setLook(i.getString("look_room_13_compass"));
-							infirmary.setLook(i.getString("look_room_14_compass"));
+							hallway4.setLook(ResourceBundle.getBundle("item", lang).getString("look_room_13_compass"));
+							infirmary.setLook(ResourceBundle.getBundle("item", lang).getString("look_room_14_compass"));
 							if (((Asylum) t).gasVuln == true) {
-								surgery.setLook(i.getString("look_room_15_compass_no_mask"));
+								surgery.setLook(ResourceBundle.getBundle("item", lang).getString("look_room_15_compass_no_mask"));
 									}
 							else {
-								surgery.setLook(i.getString("look_room_15_compass"));
+								surgery.setLook(ResourceBundle.getBundle("item", lang).getString("look_room_15_compass"));
 									}
-							surveillance.setLook(i.getString("look_room_16_compass"));
-							paddedCell.setLook(i.getString("look_room_17_compass"));
-							office.setLook(i.getString("look_room_18_compass"));
+							surveillance.setLook(ResourceBundle.getBundle("item", lang).getString("look_room_16_compass"));
+							paddedCell.setLook(ResourceBundle.getBundle("item", lang).getString("look_room_17_compass"));
+							office.setLook(ResourceBundle.getBundle("item", lang).getString("look_room_18_compass"));
 							((Asylum) t).compassUsed = true;
 
 						}
@@ -690,7 +690,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							EventHandler.drop(compass, t);
-							System.out.println(i.getString("drop_item_8"));
+							System.out.println(ResourceBundle.getBundle("item", lang).getString("drop_item_8"));
 							((Asylum) t).compassUsed = false;
 						}
 					};
@@ -701,10 +701,10 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(compass, t);
-								System.out.println(i.getString("pick_item_8"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("pick_item_8"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println(i.getString("no_item_room"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("no_item_room"));
 							}
 						}
 					};
@@ -728,7 +728,7 @@ public class Asylum extends GameDescription implements Serializable {
 							if(!chest.isOpened()) {
 								System.out.println(chest.getDescription());
 							}else {
-								System.out.println(i.getString("look_item_9"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("look_item_9"));
 								for(Item i: chest.getContent()) {
 									System.out.println(i.getName());
 								}
@@ -744,12 +744,12 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							if(chest.isOpened()) {
-								System.out.println(i.getString("opened_chest"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("opened_chest"));
 							}else if(!chest.isOpened() && !chest.isLocked()) {
-									System.out.println(i.getString("open_chest"));
+									System.out.println(ResourceBundle.getBundle("item", lang).getString("open_chest"));
 									chest.setOpened(true);
 								  }else if(chest.isLocked()) {
-									System.out.println(i.getString("locked_chest"));
+									System.out.println(ResourceBundle.getBundle("item", lang).getString("locked_chest"));
 								  }
 						}
 					};
@@ -759,9 +759,9 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 								if (!chest.isOpened()) {
-									System.out.println(i.getString("closed_chest"));}
+									System.out.println(ResourceBundle.getBundle("item", lang).getString("closed_chest"));}
 									else {
-										System.out.println(i.getString("close_chest"));
+										System.out.println(ResourceBundle.getBundle("item", lang).getString("close_chest"));
 										for(Item i: chest.getContent()) t.getCurrentRoom().getObjects().remove(i);
 										chest.setOpened(false);
 									}
@@ -785,7 +785,7 @@ public class Asylum extends GameDescription implements Serializable {
 						@Override
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
-							System.out.println(i.getString("look_item_10"));						}
+							System.out.println(ResourceBundle.getBundle("item", lang).getString("look_item_10"));						}
 					};
 				case LOOK_AT:
 					return new EventHandler() {
@@ -826,17 +826,17 @@ public class Asylum extends GameDescription implements Serializable {
 									scalpel.setShots(scalpel.getShots() - 1);
 									switch(scalpel.getShots()) {
 									case 0:
-										System.out.println(i.getString("case_0_item_11"));
+										System.out.println(ResourceBundle.getBundle("item", lang).getString("case_0_item_11"));
 										break;
 									case 1:
-										System.out.println(i.getString("case_1_item_11"));
+										System.out.println(ResourceBundle.getBundle("item", lang).getString("case_1_item_11"));
 										break;
 									case 4:
-										System.out.println(i.getString("case_4_item_11"));
+										System.out.println(ResourceBundle.getBundle("item", lang).getString("case_4_item_11"));
 										break;
 									}
-								} else System.out.println(i.getString("unusable_item_11"));
-							}else System.out.println(i.getString("no_target"));
+								} else System.out.println(ResourceBundle.getBundle("item", lang).getString("unusable_item_11"));
+							}else System.out.println(ResourceBundle.getBundle("item", lang).getString("no_target"));
 						}
 					};
 				case DROP:
@@ -845,7 +845,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							EventHandler.drop(scalpel, t);
-							System.out.println(i.getString("drop_item_11"));
+							System.out.println(ResourceBundle.getBundle("item", lang).getString("drop_item_11"));
 						}
 					};
 				case PICK_UP:
@@ -855,10 +855,10 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(scalpel, t);
-								System.out.println(i.getString("pick_item_11"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("pick_item_11"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println(i.getString("no_item_room"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("no_item_room"));
 							}
 						}
 					};
@@ -894,17 +894,17 @@ public class Asylum extends GameDescription implements Serializable {
 									gun.setShots(gun.getShots() - 1);
 									switch(gun.getShots()) {
 									case 0:
-										System.out.println(i.getString("case_0_item_12"));
+										System.out.println(ResourceBundle.getBundle("item", lang).getString("case_0_item_12"));
 										break;
 									case 1:
-										System.out.println(i.getString("case_1_item_12"));
+										System.out.println(ResourceBundle.getBundle("item", lang).getString("case_1_item_12"));
 										break;
 									case 5:
-										System.out.println(i.getString("case_5_item_12"));
+										System.out.println(ResourceBundle.getBundle("item", lang).getString("case_5_item_12"));
 										break;
 									}
-								} else System.out.println(i.getString("unusable_item_12"));
-							}else System.out.println(i.getString("no_target"));
+								} else System.out.println(ResourceBundle.getBundle("item", lang).getString("unusable_item_12"));
+							}else System.out.println(ResourceBundle.getBundle("item", lang).getString("no_target"));
 						}
 					};
 				case DROP:
@@ -913,7 +913,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							EventHandler.drop(gun, t);
-							System.out.println(i.getString("drop_item_12"));
+							System.out.println(ResourceBundle.getBundle("item", lang).getString("drop_item_12"));
 						}
 					};
 				case PICK_UP:
@@ -923,10 +923,10 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(gun, t);
-								System.out.println(i.getString("pick_item_12"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("pick_item_12"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println(i.getString("no_item_room"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("no_item_room"));
 							}
 						}
 					};
@@ -960,7 +960,7 @@ public class Asylum extends GameDescription implements Serializable {
 								//inserire l'arco
 								m.insArc(paddedCell, office, new Gateway(Direction.SOUTH));
 								mirrorCell.setPushed(true);
-								System.out.println(i.getString("break_item_13"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("break_item_13"));
 							}
 						}
 					};
@@ -991,10 +991,10 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(codePaper, t);
-								System.out.println(i.getString("pick_item_14"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("pick_item_14"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println(i.getString("no_item_room"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("no_item_room"));
 							}
 						}
 					};
@@ -1004,7 +1004,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							EventHandler.drop(codePaper, t);
-							System.out.println(i.getString("drop_item_14"));
+							System.out.println(ResourceBundle.getBundle("item", lang).getString("drop_item_14"));
 						}
 					};
 				default:
@@ -1033,10 +1033,10 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(blockNotes, t);
-								System.out.println(i.getString("pick_item_15"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("pick_item_15"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println(i.getString("no_item_room"));	
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("no_item_room"));
 							}
 						}
 					};
@@ -1046,7 +1046,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							EventHandler.drop(blockNotes, t);
-							System.out.println(i.getString("drop_item_15"));
+							System.out.println(ResourceBundle.getBundle("item", lang).getString("drop_item_15"));
 						}
 					};
 				default:
@@ -1081,11 +1081,11 @@ public class Asylum extends GameDescription implements Serializable {
 									String[] tokens = codePaper.getDescription().split("\\s+");
 									if(codEntered.equals(tokens[3])) {
 										hallway3.setTrap(null);
-										System.out.println(i.getString("accepted_item_16"));
+										System.out.println(ResourceBundle.getBundle("item", lang).getString("accepted_item_16"));
 										keypad.setPushed(true);
-									} else System.out.println(i.getString("error_item_16"));
-								} else System.out.println(i.getString("trap_off"));
-							}else System.out.println(i.getString("trap_off"));
+									} else System.out.println(ResourceBundle.getBundle("item", lang).getString("error_item_16"));
+								} else System.out.println(ResourceBundle.getBundle("item", lang).getString("trap_off"));
+							}else System.out.println(ResourceBundle.getBundle("item", lang).getString("trap_off"));
 
 						}
 					};
@@ -1096,7 +1096,7 @@ public class Asylum extends GameDescription implements Serializable {
 
 
 		Inventory corpseInv = new Inventory();
-		
+
         ResourceBundle e = ResourceBundle.getBundle("enemy", lang);
 
 
@@ -1129,10 +1129,10 @@ public class Asylum extends GameDescription implements Serializable {
 									try {
 										for(Room a : m.getAdjacents(t.getCurrentRoom())) {
 											if(m.readArc(t.getCurrentRoom(), a).getLockedBy()==key.getId()) {
-												if (!m.readArc(t.getCurrentRoom(), a).isLocked()) System.out.println(i.getString("opened_door"));
+												if (!m.readArc(t.getCurrentRoom(), a).isLocked()) System.out.println(ResourceBundle.getBundle("item", lang).getString("opened_door"));
 												else {
 													m.readArc(t.getCurrentRoom(), a).setLocked(false);
-													System.out.println(i.getString("use_item_17"));		
+													System.out.println(ResourceBundle.getBundle("item", lang).getString("use_item_17"));
 													EventHandler.drop(key, t);
 													break;
 												}
@@ -1141,8 +1141,8 @@ public class Asylum extends GameDescription implements Serializable {
 									} catch (Exception e) {
 										System.out.println(e.getMessage());
 									}
-								}else System.out.println(i.getString("no_room_key"));
-							} else System.out.println(i.getString("pick_key_to_use"));
+								}else System.out.println(ResourceBundle.getBundle("item", lang).getString("no_room_key"));
+							} else System.out.println(ResourceBundle.getBundle("item", lang).getString("pick_key_to_use"));
 						}
 					};
 				case PICK_UP:
@@ -1152,11 +1152,11 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(key, t);
-								corpse.setDescription(i.getString("descr_corpse_key"));
-								System.out.println(i.getString("pick_item_17"));
+								corpse.setDescription(ResourceBundle.getBundle("item", lang).getString("descr_corpse_key"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("pick_item_17"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println(i.getString("no_item_room"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("no_item_room"));
 							}
 
 						}
@@ -1167,7 +1167,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							EventHandler.drop(key, t);
-							System.out.println(i.getString("drop_item_17"));
+							System.out.println(ResourceBundle.getBundle("item", lang).getString("drop_item_17"));
 						}
 					};
 				default:
@@ -1203,20 +1203,20 @@ public class Asylum extends GameDescription implements Serializable {
 									try {
 										for(Room a : m.getAdjacents(t.getCurrentRoom())) {
 											if(m.readArc(t.getCurrentRoom(), a).getLockedBy()==key_1.getId()) {
-												if (!m.readArc(t.getCurrentRoom(), a).isLocked()) System.out.println(i.getString("opened_door"));
+												if (!m.readArc(t.getCurrentRoom(), a).isLocked()) System.out.println(ResourceBundle.getBundle("item", lang).getString("opened_door"));
 												else {
 													m.readArc(t.getCurrentRoom(), a).setLocked(false);
-													System.out.println(i.getString("use_item_18"));
+													System.out.println(ResourceBundle.getBundle("item", lang).getString("use_item_18"));
 													EventHandler.drop(key_1, t);
 													break;
 												}
 											}
 										}
 									} catch (Exception e) {
-										System.out.println(i.getString("no_item_room"));
+										System.out.println(ResourceBundle.getBundle("item", lang).getString("no_item_room"));
 									}
-								}else System.out.println(i.getString("no_room_key"));
-							} else System.out.println(i.getString("pick_key_to_use"));
+								}else System.out.println(ResourceBundle.getBundle("item", lang).getString("no_room_key"));
+							} else System.out.println(ResourceBundle.getBundle("item", lang).getString("pick_key_to_use"));
 						}
 					};
 				case PICK_UP:
@@ -1226,10 +1226,10 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(key_1, t);
-								System.out.println(i.getString("pick_item_18"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("pick_item_18"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println(i.getString("no_item_room"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("no_item_room"));
 							}
 						}
 					};
@@ -1239,7 +1239,7 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							EventHandler.drop(key_1, t);
-							System.out.println(i.getString("drop_item_18"));
+							System.out.println(ResourceBundle.getBundle("item", lang).getString("drop_item_18"));
 						}
 					};
 				default:
@@ -1272,20 +1272,20 @@ public class Asylum extends GameDescription implements Serializable {
 									try {
 										for(Room a : m.getAdjacents(t.getCurrentRoom())) {
 											if(m.readArc(t.getCurrentRoom(), a).getLockedBy()==key_2.getId()) {
-												if (!m.readArc(t.getCurrentRoom(), a).isLocked()) System.out.println(i.getString("opened_door"));
+												if (!m.readArc(t.getCurrentRoom(), a).isLocked()) System.out.println(ResourceBundle.getBundle("item", lang).getString("opened_door"));
 												else {
 													m.readArc(t.getCurrentRoom(), a).setLocked(false);
-													System.out.println(i.getString("use_item_19"));
+													System.out.println(ResourceBundle.getBundle("item", lang).getString("use_item_19"));
 													EventHandler.drop(key_2, t);
 													break;
 												}
 											}
 										}
 									} catch (Exception e) {
-										System.out.println(i.getString("no_item_room"));
+										System.out.println(ResourceBundle.getBundle("item", lang).getString("no_item_room"));
 									}
-								}else System.out.println(i.getString("no_room_key"));
-							} else System.out.println(i.getString("pick_key_to_use"));
+								}else System.out.println(ResourceBundle.getBundle("item", lang).getString("no_room_key"));
+							} else System.out.println(ResourceBundle.getBundle("item", lang).getString("pick_key_to_use"));
 						}
 					};
 				case PICK_UP:
@@ -1295,10 +1295,10 @@ public class Asylum extends GameDescription implements Serializable {
 							// TODO Auto-generated method stub
 							try {
 								EventHandler.pickUp(key_2, t);
-								System.out.println(i.getString("pick_item_19"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("pick_item_19"));
 							} catch (InvalidCommandException e) {
 								// TODO Auto-generated catch block
-								System.out.println(i.getString("no_item_room"));
+								System.out.println(ResourceBundle.getBundle("item", lang).getString("no_item_room"));
 							}
 						}
 					};
@@ -1308,14 +1308,14 @@ public class Asylum extends GameDescription implements Serializable {
 						public void accept(GameDescription t) {
 							// TODO Auto-generated method stub
 							EventHandler.drop(key_2, t);
-							System.out.println(i.getString("drop_item_19"));
+							System.out.println(ResourceBundle.getBundle("item", lang).getString("drop_item_19"));
 						}
 					};
 				default:
 					return invalidCommand;
 				}};
 		});
-		
+
 
 
 		final Enemy assistant = new Enemy(100, e.getString("name_enemy_3"), e.getString("descr_enemy_3"),
@@ -1411,7 +1411,7 @@ public class Asylum extends GameDescription implements Serializable {
 
 
 		//traps
-		
+
         ResourceBundle tr = ResourceBundle.getBundle("trap", lang);
 
 
@@ -1421,7 +1421,7 @@ public class Asylum extends GameDescription implements Serializable {
 			public void accept(GameDescription t) {
 				// TODO Auto-generated method stub
 				if(getCurrentEnemy()!=null) {
-					System.out.println(tr.getString("descr_room_10"));
+					System.out.println(ResourceBundle.getBundle("trap", lang).getString("descr_room_10"));
 				}
 			}
 		});
@@ -1434,7 +1434,7 @@ public class Asylum extends GameDescription implements Serializable {
 				if(g.gasVuln && !g.breathedGas) {
 					g.breathedGas = true;
 					g.maxMoves = 4;
-					System.out.println(tr.getString("gas_breathing"));
+					System.out.println(ResourceBundle.getBundle("trap", lang).getString("gas_breathing"));
 				}
 			}
 		};
@@ -1448,7 +1448,7 @@ public class Asylum extends GameDescription implements Serializable {
 				// TODO Auto-generated method stub
 				Asylum g = (Asylum) t;
 				g.health = 0;
-				System.out.println(tr.getString("trap_death"));
+				System.out.println(ResourceBundle.getBundle("trap", lang).getString("trap_death"));
 				Thread.currentThread().interrupt();
 			}
 		});
@@ -1476,14 +1476,14 @@ public class Asylum extends GameDescription implements Serializable {
 					try {
 						t.getMap().readArc(paddedCell, surveillance).setLockedBy(key_1.getId());
 						t.getMap().readArc(paddedCell, surveillance).setLocked(true);
-						paddedCell.setDescription(tr.getString("descr_room_17_light"));
-						paddedCell.setLook(tr.getString("look_room_17_light"));
-						System.out.println(tr.getString("trapped"));
+						paddedCell.setDescription(ResourceBundle.getBundle("trap", lang).getString("descr_room_17_light"));
+						paddedCell.setLook(ResourceBundle.getBundle("trap", lang).getString("look_room_17_light"));
+						System.out.println(ResourceBundle.getBundle("trap", lang).getString("trapped"));
 					} catch (Exception e) {}
 				}
 				if (t.getCurrentRoom().hasLight() && getCurrentEnemy()==null) {
 					try {
-					paddedCell.setDescription(tr.getString("descr_room_17_no_enemy"));
+					paddedCell.setDescription(ResourceBundle.getBundle("trap", lang).getString("descr_room_17_no_enemy"));
 				}
 			 catch (Exception e) {}
 		}
@@ -1497,14 +1497,14 @@ public class Asylum extends GameDescription implements Serializable {
 				// TODO Auto-generated method stub
 				if (getCurrentEnemy()!=null) {
 					try {
-						System.out.println(tr.getString("office_enemy"));
+						System.out.println(ResourceBundle.getBundle("trap", lang).getString("office_enemy"));
 
 				}
 			 catch (Exception e) {}
 		}
 				if (getCurrentEnemy()==null) {
 
-					office.setLook(tr.getString("look_room_17_no_enemy"));
+					office.setLook(ResourceBundle.getBundle("trap", lang).getString("look_room_17_no_enemy"));
 					}
 
 			}

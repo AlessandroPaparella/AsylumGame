@@ -19,13 +19,13 @@ public class HandleDB {
 	public HandleDB() throws SQLException, Exception {
 		Class.forName("org.h2.Driver");
 		conn = DriverManager.getConnection("jdbc:h2:~/saves");
-		//final String elimina = "DROP TABLE saves";
+		final String elimina = "DROP TABLE saves";
 
 		final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS saves (player VARCHAR(30) PRIMARY KEY,"
 				+ " day VARCHAR(11),"
 				+ " game OBJECT )";
 		Statement stm = conn.createStatement();
-		//stm.executeUpdate(elimina);
+		stm.executeUpdate(elimina);
 		stm.executeUpdate(CREATE_TABLE);
 		stm.close();
 	}
