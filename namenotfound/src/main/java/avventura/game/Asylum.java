@@ -65,7 +65,7 @@ public class Asylum extends GameDescription implements Serializable {
 	                    try {
 	                        lock.wait();
 	                    } catch (InterruptedException e) {
-	                        System.out.println("Oggetto non presente nella stanza");
+	                        System.out.println(e.getMessage());
 	                    }
 	            }
 	        }
