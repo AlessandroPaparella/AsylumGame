@@ -5,7 +5,9 @@ import java.awt.event.WindowEvent;
 import java.io.PrintStream;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -1909,17 +1911,16 @@ public class Asylum extends GameDescription implements Serializable {
 				it.getHandler().apply(CommandType.USE).accept(this);
 			}
 		}
-		/*
-		for(Command c : this.getCommands()) {
-			switch (c.getType()) {
-			case WALK_TO:
 
-				break;
+		List<Command> newCommands = new ArrayList<Command>();
+		ResourceBundle commBundle = ResourceBundle.getBundle("command", lang);
+		for(Command com : this.getCommands()) {
+			Command nc = new Command(com.getType(), commBundle.getString("name_command_"+com.getType().name()));
+			nc.setAlias(commBundle.getString("alias_command_"+com.getType().name()).split(" "));
+			newCommands.add(nc);
+		}
+		this.setCommands(newCommands);
 
-			default:
-				break;
-			}
-		}*/
 	}
 
 
