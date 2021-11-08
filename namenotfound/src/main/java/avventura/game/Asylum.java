@@ -133,8 +133,8 @@ public class Asylum extends GameDescription implements Serializable {
 
 
 		ResourceBundle com = ResourceBundle.getBundle("command", lang);
-		Command nord = new Command(CommandType.NORD, com.getString("name_command_north"));
-        nord.setAlias(com.getString("alias_command_north").split(" "));
+		Command nord = new Command(CommandType.NORD, com.getString("name_command_nord"));
+        nord.setAlias(com.getString("alias_command_nord").split(" "));
         getCommands().add(nord);
         Command inventory = new Command(CommandType.INVENTORY, com.getString("name_command_inventory"));
         inventory.setAlias(com.getString("alias_command_inventory").split(" "));
@@ -1532,7 +1532,6 @@ public class Asylum extends GameDescription implements Serializable {
 		this.setCommandTarget(save.getCommandTarget());
 		this.setCommands(save.getCommands());
 		this.lang = save.lang;
-		System.out.println(this.health);
 	}
 
 	private Room searchDirection(Direction d) throws Exception {
@@ -1623,7 +1622,6 @@ public class Asylum extends GameDescription implements Serializable {
 	@Override
 	public void nextMove(ParserOutput p, PrintStream out) {
 		// TODO Auto-generated method stub
-
 		ResourceBundle b = ResourceBundle.getBundle("function", lang);
 
 		if (p.getObject()==null && p.getEnemy()==null && p.getTarget()==null) {
