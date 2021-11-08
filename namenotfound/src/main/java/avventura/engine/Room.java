@@ -28,7 +28,7 @@ public class Room implements Serializable {
 		visible = hasLight;
 		this.enemies.addAll(enemies);
 		this.objects.addAll(objects);
-		id = istances;
+		id = istances+1;
 		istances++;
 		trap = null;
 	}
@@ -39,7 +39,7 @@ public class Room implements Serializable {
 		this.look = look;
 		this.name = name;
 		this.hasLight = true;
-		id = istances;
+		id = istances+1;
 		istances++;
 		trap = null;
 		visible = hasLight;

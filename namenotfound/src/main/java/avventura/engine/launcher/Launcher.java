@@ -30,7 +30,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import engine.Engine;
 import engine.GameDescription;
-import engine.Parser;
 
 public class Launcher extends JFrame {
 
@@ -154,15 +153,12 @@ public class Launcher extends JFrame {
 				throw new LoaderException(bundle.getString("nogamefound"));
 			}
 			final GameDescription g = (GameDescription) c.getConstructor().newInstance();
-			Class cp = loader.loadClass("game.ParserIT");
-			Parser parser = (Parser) cp.getConstructor().newInstance();
 			Thread t = new Thread( new Runnable() {
 
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
 					Engine engine = new Engine(g);
-					engine.parser = parser;
 					try {
 						engine.run();
 					} catch (Exception e) {

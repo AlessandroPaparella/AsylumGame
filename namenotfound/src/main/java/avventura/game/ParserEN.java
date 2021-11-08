@@ -38,6 +38,14 @@ public class ParserEN implements Parser{
 	        return -1;
 	}
 
+	private Command searchWalkto(List<Command> commands) {
+		for(Command c: commands) {
+			if(c.getType()==CommandType.WALK_TO) {
+				return c;
+			}
+		}
+		return null;
+	}
 	@Override
 	public int checkForSingleCommand(String token, Command commands) {
 	       if (commands.getName().equals(token) || commands.getAlias().contains(token)) {
@@ -63,7 +71,7 @@ public class ParserEN implements Parser{
 		// TODO Auto-generated method stub
 		String cmd = command.toLowerCase().trim();
         String[] tokens = cmd.split("\\s+");
-        Command walk = new Command(CommandType.WALK_TO, "walk_to");
+        Command walk = searchWalkto(commands);
         switch(tokens.length) {
         case 1 :
         	//Verb
@@ -79,15 +87,15 @@ public class ParserEN implements Parser{
         	}
 			int com2 = checkForCommand(tokens[0], commands);
 			if(com2 > -1) {
-			int obj2 = checkForObject(tokens[1], objects);
-			if(obj2 != -1) return new ParserOutput(commands.get(com2), objects.get(obj2));
-			int inv2= checkForObject(tokens[1], inv.getList());
-			if(inv2 != -1) return new ParserOutput(commands.get(com2), inv.getList().get(inv2));
-			for(AdventureCharacter a : enemies) {
-				if(a.getName().equals(tokens[1])) {
-					return new ParserOutput(commands.get(com2), a);
+				int obj2 = checkForObject(tokens[1], objects);
+				if(obj2 != -1) return new ParserOutput(commands.get(com2), objects.get(obj2));
+				int inv2= checkForObject(tokens[1], inv.getList());
+				if(inv2 != -1) return new ParserOutput(commands.get(com2), inv.getList().get(inv2));
+				for(AdventureCharacter a : enemies) {
+					if(a.getName().equals(tokens[1])) {
+						return new ParserOutput(commands.get(com2), a);
+						}
 					}
-				}
 				throw new InvalidCommandException();
 			} else throw new InvalidCommandException();
 
