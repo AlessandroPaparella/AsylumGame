@@ -111,7 +111,10 @@ public class Asylum extends GameDescription implements Serializable {
 	        this.db.insertionTuple(this.player, this);
 		}else {
 			initFromSave((Asylum) frame.getSave());
-			if(!this.lang.equals(Manager.locale)) loadLocales();
+			if(!this.lang.equals(Manager.locale)) {
+				this.lang=Manager.locale;
+				loadLocales();
+			}
 		}
 		if(lang.equals(Locale.ITALIAN) || lang.equals(Locale.ITALY)) {
 			Engine.parser = new ParserIT();
@@ -1891,7 +1894,7 @@ public class Asylum extends GameDescription implements Serializable {
 		}
 
 		List<Command> newCommands = new ArrayList<Command>();
-		ResourceBundle commBundle = ResourceBundle.getBundle("command", lang);
+		ResourceBundle commBundle = ResourceBundle.getBundle("command", Manager.locale);
 		for(Command com : this.getCommands()) {
 			Command nc = new Command(com.getType(), commBundle.getString("name_command_"+com.getType().name().toLowerCase()));
 			nc.setAlias(commBundle.getString("alias_command_"+com.getType().name().toLowerCase()).split(" "));
