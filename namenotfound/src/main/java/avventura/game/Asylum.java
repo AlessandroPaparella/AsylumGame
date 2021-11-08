@@ -175,12 +175,6 @@ public class Asylum extends GameDescription implements Serializable {
         Command close = new Command(CommandType.CLOSE, com.getString("name_command_close"));
         close.setAlias(new String[]{});
         getCommands().add(close);
-        Command push = new Command(CommandType.PUSH, com.getString("name_command_push"));
-        push.setAlias(com.getString("alias_command_push").split(" "));
-        getCommands().add(push);
-        Command pull = new Command(CommandType.PULL, com.getString("name_command_pull"));
-        pull.setAlias(new String[]{});
-        getCommands().add(pull);
         Command _break = new Command(CommandType.BREAK, com.getString("name_command_break"));
         _break.setAlias(com.getString("alias_command_break").split(" "));
         getCommands().add(_break);
@@ -196,9 +190,6 @@ public class Asylum extends GameDescription implements Serializable {
         Command down = new Command(CommandType.DOWN, com.getString("name_command_down"));
         down.setAlias(com.getString("alias_command_down").split(" "));
         getCommands().add(down);
-        Command give = new Command(CommandType.GIVE, com.getString("name_command_give"));
-        give.setAlias(new String[]{});
-        getCommands().add(give);
         Command use = new Command(CommandType.USE, com.getString("name_command_use"));
         use.setAlias(com.getString("alias_command_use").split(" "));
         getCommands().add(use);
@@ -1509,7 +1500,6 @@ public class Asylum extends GameDescription implements Serializable {
         setMap(m);
 	}
 
-	// CLOSE, PULL, WALK_TO,  TALK_TO, GIVE, USE, TURN_ON, TURN_OFF
 	private void initFromSave(Asylum save) throws SQLException, Exception {
 		this.breathedGas = save.breathedGas;
 		this.gasVuln = save.gasVuln;
