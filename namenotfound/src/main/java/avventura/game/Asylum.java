@@ -871,8 +871,7 @@ public class Asylum extends GameDescription implements Serializable {
 			}
 		});
 
-		final Weapon gun = new Weapon("pistola", "Una pistola probabilmente utilizzata contro i pazienti piu' inquieti e difficili da controllare.", null, 7, 20, 40);
-		final Weapon gun = new Weapon(i.getString("name_item_12"), i.getString("descr_item_12"), null, 7, 30, 70);
+		final Weapon gun = new Weapon(i.getString("name_item_12"), i.getString("descr_item_12"), null, 7, 20, 40);
 		gun.setHandler(new CommandHandler() {
 			@Override
 			public EventHandler apply(CommandType t) {
