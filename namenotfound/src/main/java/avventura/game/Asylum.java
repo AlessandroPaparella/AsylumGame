@@ -1452,7 +1452,7 @@ public class Asylum extends GameDescription implements Serializable {
 		//stanza iniziale
 		setCurrentRoom(room1);
 		System.out.println(tr.getString("intro"));
-
+		
 		paddedCell.setTrap(new EventHandler() {
 
 			@Override
@@ -1553,6 +1553,7 @@ public class Asylum extends GameDescription implements Serializable {
 	}
 
 	private void checkpoint(Asylum t) {
+		ResourceBundle b = ResourceBundle.getBundle("function", lang);
 		try {
 			db = new HandleDB();
 			this.setCurrentRoom(t.getCurrentRoom());
@@ -1563,7 +1564,7 @@ public class Asylum extends GameDescription implements Serializable {
 			this.maxMoves=t.maxMoves;
 			db.updateTuple(player, this);
 			db.closeConnection();
-			System.out.println("Partita salvata!");
+			System.out.println(b.getString("saved_game"));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
