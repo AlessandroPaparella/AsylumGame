@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import engine.AdventureCharacter;
@@ -13,20 +14,23 @@ import engine.ParserOutput;
 
 public class ParserIT implements Parser{
 
+	List<String> articles = new ArrayList<String>();
+	List<String> prepositions = new ArrayList<String>();
+	List<String> whitespace = new ArrayList<String>();
+
+
 	public ParserIT() {
 		this.loadArticles();
 		this.loadPrepositions();
 		this.loadWhitespace();
 	}
 
-	@Override
 	public boolean checkInDictionary(String token, List<String> dictionary) throws Exception {
 		// TODO Auto-generated method stub
 		if(dictionary.contains(token)) return true;
 		else return false;
 	}
 
-	@Override
 	public int checkForCommand(String token, List<Command> commands) {
 	        for (int i = 0; i < commands.size(); i++) {
 	            if (commands.get(i).getName().equals(token) || commands.get(i).getAlias().contains(token)) {
@@ -36,14 +40,13 @@ public class ParserIT implements Parser{
 	        return -1;
 	}
 
-	@Override
 	public int checkForSingleCommand(String token, Command commands) {
 	       if (commands.getName().equals(token) || commands.getAlias().contains(token)) {
 	                return 0;
 	          }
 	        return -1;
 	}
-	@Override
+
 	public int checkForObject(String token, List<Item> obejcts) {
         for (int i = 0; i < obejcts.size(); i++) {
             if (obejcts.get(i).getName().equals(token) || obejcts.get(i).getAlias().contains(token)) {
@@ -172,7 +175,6 @@ public class ParserIT implements Parser{
         }
 	}
 
-	@Override
 	public void loadArticles() {
 		// TODO Auto-generated method stub
 		articles.add("il");
@@ -183,7 +185,6 @@ public class ParserIT implements Parser{
 		articles.add("gle");
 	}
 
-	@Override
 	public void loadWhitespace() {
 		whitespace.add("operatoria");
 		whitespace.add("imbottita");
@@ -195,13 +196,8 @@ public class ParserIT implements Parser{
 		whitespace.add("6");
 		whitespace.add("7");
 		whitespace.add("8");
-
-
 	}
 
-
-
-	@Override
 	public void loadPrepositions() {
 		// TODO Auto-generated method stub
 		prepositions.add("di");
@@ -226,9 +222,6 @@ public class ParserIT implements Parser{
 		prepositions.add("nei");
 		prepositions.add("degli");
 		prepositions.add("con");
-
-
-
 
 		prepositions.add("del");
 		prepositions.add("al");

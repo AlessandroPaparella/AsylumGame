@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import engine.AdventureCharacter;
@@ -13,22 +14,23 @@ import engine.ParserOutput;
 
 public class ParserEN implements Parser{
 
+	List<String> articles = new ArrayList<String>();
+	List<String> prepositions = new ArrayList<String>();
+	List<String> whitespace = new ArrayList<String>();
+
 	public ParserEN() {
 		this.loadArticles();
 		this.loadPrepositions();
 		this.loadWhitespace();
 
 	}
-
-
-	@Override
+	 
 	public boolean checkInDictionary(String token, List<String> dictionary) throws Exception {
 		// TODO Auto-generated method stub
 		if(dictionary.contains(token)) return true;
 		else return false;
 	}
-
-	@Override
+	 
 	public int checkForCommand(String token, List<Command> commands) {
 	        for (int i = 0; i < commands.size(); i++) {
 	            if (commands.get(i).getName().equals(token) || commands.get(i).getAlias().contains(token)) {
@@ -46,7 +48,7 @@ public class ParserEN implements Parser{
 		}
 		return null;
 	}
-	@Override
+	 
 	public int checkForSingleCommand(String token, Command commands) {
 	       if (commands.getName().equals(token) || commands.getAlias().contains(token)) {
 	                return 0;
@@ -54,7 +56,6 @@ public class ParserEN implements Parser{
 	        return -1;
 	}
 
-	@Override
 	public int checkForObject(String token, List<Item> obejcts) {
         for (int i = 0; i < obejcts.size(); i++) {
             if (obejcts.get(i).getName().equals(token) || obejcts.get(i).getAlias().contains(token)) {
@@ -65,7 +66,7 @@ public class ParserEN implements Parser{
     }
 
 
-	@Override
+	 
 	public ParserOutput parse(String command, List<Command> commands, List<Item> objects, Inventory inv,
 			List<AdventureCharacter> enemies) throws Exception {
 		// TODO Auto-generated method stub
@@ -210,9 +211,7 @@ public class ParserEN implements Parser{
         	throw new InvalidCommandException();
         }
 	}
-
-
-	@Override
+	 
 	public void loadArticles() {
 		// TODO Auto-generated method stub
 		articles.add("the");
@@ -232,8 +231,6 @@ public class ParserEN implements Parser{
 
 	}
 
-
-	@Override
 	public void loadPrepositions() {
 		// TODO Auto-generated method stub
 		prepositions.add("with");
