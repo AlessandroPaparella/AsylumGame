@@ -1493,7 +1493,7 @@ public class Asylum extends GameDescription implements Serializable {
 		}
 				if (getCurrentEnemy()==null) {
 
-					office.setLook(ResourceBundle.getBundle("trap", ((Asylum)t).lang).getString("look_room_17_no_enemy"));
+					office.setLook(ResourceBundle.getBundle("trap", ((Asylum)t).lang).getString("look_room_18_no_enemy"));
 					}
 
 			}
