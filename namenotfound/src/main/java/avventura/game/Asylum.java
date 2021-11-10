@@ -1317,8 +1317,6 @@ public class Asylum extends GameDescription implements Serializable {
 				new Inventory(), key_2,5,20);
 
 
-		assistant.getInv().add(key_1);
-		director.getInv().add(key_2);;
 		chest.add(compass);
 		chest.add(torch);
 		chest.add(blockNotes);
