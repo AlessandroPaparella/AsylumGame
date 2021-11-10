@@ -56,6 +56,10 @@ public class Asylum extends GameDescription implements Serializable {
 
 	@Override
 	public void init() throws Exception {
+		Room.istances = 0;
+		Item.istances = 0;
+		AdventureCharacter.instances = 0;
+
 		// TODO Auto-generated method stub
 		frame = new Manager();
 		Thread t= new Thread( new Runnable() {
@@ -1458,21 +1462,20 @@ public class Asylum extends GameDescription implements Serializable {
 			@Override
 			public void accept(GameDescription t) {
 				// TODO Auto-generated method stub
-				if (t.getCurrentRoom().hasLight() && getCurrentEnemy()!=null) {
+				if (t.getCurrentRoom().hasLight() && t.getCurrentEnemy()!=null) {
 					try {
 						t.getMap().readArc(paddedCell, surveillance).setLockedBy(key_1.getId());
 						t.getMap().readArc(paddedCell, surveillance).setLocked(true);
 						paddedCell.setDescription(ResourceBundle.getBundle("trap", ((Asylum)t).lang).getString("descr_room_17_light"));
 						paddedCell.setLook(ResourceBundle.getBundle("trap", ((Asylum)t).lang).getString("look_room_17_light"));
 						System.out.println(ResourceBundle.getBundle("trap", ((Asylum)t).lang).getString("trapped"));
-					} catch (Exception e) {}
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
-				if (t.getCurrentRoom().hasLight() && getCurrentEnemy()==null) {
-					try {
+				if (t.getCurrentRoom().hasLight() && t.getCurrentEnemy()==null) {
 					paddedCell.setDescription(ResourceBundle.getBundle("trap", ((Asylum)t).lang).getString("descr_room_17_no_enemy"));
 				}
-			 catch (Exception e) {}
-		}
 			}
 		});
 

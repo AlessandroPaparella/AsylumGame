@@ -9,7 +9,7 @@ public class Room implements Serializable {
 	 *
 	 */
 	private static final long serialVersionUID = 6724461873712394218L;
-	private static Integer istances = 0;
+	public static Integer istances = 0;
 	private String description, look, name;
 	private Boolean hasLight, visible;
 	private Integer id;
