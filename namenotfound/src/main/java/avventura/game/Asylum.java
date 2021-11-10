@@ -1564,6 +1564,7 @@ public class Asylum extends GameDescription implements Serializable {
 			this.compassUsed=t.compassUsed;
 			this.gasVuln=t.gasVuln;
 			this.maxMoves=t.maxMoves;
+			this.lang = t.lang;
 			db.updateTuple(player, this);
 			db.closeConnection();
 		} catch (Exception e) {
