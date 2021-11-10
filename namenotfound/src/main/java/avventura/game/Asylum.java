@@ -1447,7 +1447,7 @@ public class Asylum extends GameDescription implements Serializable {
 			public void accept(GameDescription t) {
 				// TODO Auto-generated method stub
 				checkpoint((Asylum)t);
-				System.out.println(ResourceBundle.getBundle("function", ((Asylum)t).lang));
+				System.out.println(ResourceBundle.getBundle("function", ((Asylum)t).lang).getString("saved_game"));
 			}
 		});
 
